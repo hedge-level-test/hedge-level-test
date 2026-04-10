@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>헷지에듀 무료 영어 레벨 진단 테스트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--cream:#F7F4EE;--warm:#FEFCF8;--dark:#1C1A17;--mid:#4A4640;--muted:#8C8880;--light:#C5C0B8;--border:#E0DAD0;--sage:#6B8F71;--sage-l:#E8F0E9;--sage-d:#4A6B4F;--accent:#C17B3A;--accent-l:#F5EBE0;--err:#C0392B;--err-l:#FDEDEC;--r:12px;--rs:8px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--dark);min-height:100vh;line-height:1.7;}
+.hdr{background:var(--warm);border-bottom:1px solid var(--border);padding:.875rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--dark);}
+.logo span{color:var(--sage);}
+.hdr-sub{font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;}
+.prog-wrap{background:var(--warm);border-bottom:1px solid var(--border);padding:.6rem 1.5rem;display:none;align-items:center;gap:.75rem;}
+.prog-wrap.show{display:flex;}
+.prog-label{font-size:.7rem;color:var(--muted);white-space:nowrap;min-width:80px;}
+.prog-outer{flex:1;height:4px;background:var(--border);border-radius:2px;}
+.prog-inner{height:100%;background:var(--sage);border-radius:2px;transition:width .5s ease;}
+.prog-pct{font-size:.7rem;color:var(--sage);font-weight:500;min-width:28px;text-align:right;}
+.main{max-width:740px;margin:0 auto;padding:2rem 1.25rem 5rem;}
+.screen{display:none;animation:fu .4s ease;}
+.screen.active{display:block;}
+@keyframes fu{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.hero{text-align:center;padding:2.5rem 1rem 2rem;}
+.hedgehog{font-size:2.8rem;display:block;margin-bottom:1.25rem;}
+.hero-title{font-family:'Noto Serif KR',serif;font-size:1.5rem;font-weight:700;line-height:1.4;margin-bottom:.875rem;}
+.hero-title em{color:var(--sage);font-style:normal;}
+.hero-sub{font-size:.875rem;color:var(--mid);margin-bottom:2rem;line-height:1.8;}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.625rem;margin:1.5rem 0;}
+.stat-card{background:var(--warm);border:1px solid var(--border);border-radius:var(--r);padding:1.125rem .625rem;text-align:center;}
+.stat-num{font-size:1.35rem;font-weight:700;color:var(--sage);font-family:'DM Serif Display',serif;}
+.stat-lbl{font-size:.7rem;color:var(--muted);margin-top:.2rem;}
+.notice{background:var(--accent-l);border:1px solid #E8D4BC;border-radius:var(--rs);padding:.875rem 1rem;font-size:.8rem;color:var(--mid);line-height:1.7;margin-bottom:1.5rem;}
+.chip{display:inline-block;background:var(--sage-l);color:var(--sage-d);font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.275rem .7rem;border-radius:20px;margin-bottom:.875rem;}
+.sec-title{font-family:'Noto Serif KR',serif;font-size:1.3rem;font-weight:700;line-height:1.4;margin-bottom:.4rem;}
+.sec-desc{font-size:.84rem;color:var(--mid);margin-bottom:1.75rem;line-height:1.7;}
+.card{background:var(--warm);border:1px solid var(--border);border-radius:var(--r);padding:1.375rem;margin-bottom:1.125rem;}
+.q-num{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;}
+.q-label{font-size:.875rem;font-weight:500;color:var(--dark);margin-bottom:.625rem;}
+.q-sub{font-size:.775rem;color:var(--muted);margin-bottom:.625rem;}
+.q-en{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--dark);margin-bottom:.4rem;}
+.q-hint{font-size:.75rem;color:var(--muted);padding:.4rem .7rem;background:var(--accent-l);border-radius:var(--rs);border-left:2px solid var(--accent);margin-bottom:.875rem;}
+.required{color:var(--err);margin-left:2px;}
+.opts{display:flex;flex-direction:column;gap:.45rem;}
+.opt{display:flex;align-items:center;gap:.7rem;padding:.7rem .875rem;border:1.5px solid var(--border);border-radius:var(--rs);cursor:pointer;transition:all .2s;background:var(--warm);}
+.opt:hover,.opt.sel{border-color:var(--sage);background:var(--sage-l);}
+.opt input{accent-color:var(--sage);width:15px;height:15px;flex-shrink:0;}
+.opt label{font-size:.85rem;color:var(--dark);cursor:pointer;flex:1;}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;}
+.chip-opt{display:flex;align-items:center;padding:.4rem .8rem;border:1.5px solid var(--border);border-radius:20px;cursor:pointer;transition:all .2s;background:var(--warm);font-size:.78rem;color:var(--mid);}
+.chip-opt:hover{border-color:var(--sage);color:var(--sage-d);background:var(--sage-l);}
+.chip-opt input{display:none;}
+.chip-opt.sel{border-color:var(--sage);background:var(--sage);color:white;}
+.txt-input{width:100%;padding:.8rem .9rem;border:1.5px solid var(--border);border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.875rem;color:var(--dark);background:var(--cream);outline:none;transition:border-color .2s;resize:vertical;min-height:56px;}
+.txt-input:focus{border-color:var(--sage);background:var(--warm);}
+.txt-input.ok{border-color:var(--sage);background:var(--sage-l);}
+.fb{font-size:.75rem;margin-top:.35rem;display:none;}
+.fb.ok{color:var(--sage-d);display:block;}
+.fb.ng{color:var(--err);display:block;}
+.inline-input{border:none;border-bottom:2px solid var(--sage);background:transparent;font-size:.875rem;font-family:'Noto Sans KR',sans-serif;color:var(--dark);outline:none;width:90px;text-align:center;padding:.1rem 0;}
+.inline-input.ok{border-bottom-color:var(--sage-d);color:var(--sage-d);}
+.inline-input.ng{border-bottom-color:var(--err);color:var(--err);}
+.ei{width:100%;padding:.75rem .9rem;border:1.5px solid var(--border);border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.875rem;outline:none;background:var(--cream);height:44px;}
+.ei:focus{border-color:var(--sage);background:var(--warm);}
+.btn-row{display:flex;gap:.625rem;margin-top:1.75rem;flex-wrap:wrap;}
+.btn-row.center{justify-content:center;}
+.btn-p{display:inline-flex;align-items:center;gap:.45rem;background:var(--sage);color:white;border:none;padding:.8rem 1.75rem;border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;transition:background .2s,transform .1s;}
+.btn-p:hover{background:var(--sage-d);}
+.btn-p:active{transform:scale(.98);}
+.btn-p.full{width:100%;justify-content:center;max-width:320px;}
+.btn-s{display:inline-flex;align-items:center;background:transparent;color:var(--mid);border:1.5px solid var(--border);padding:.8rem 1.25rem;border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.85rem;cursor:pointer;transition:all .2s;}
+.btn-s:hover{border-color:var(--mid);color:var(--dark);}
+.passage{background:var(--warm);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:1.25rem;font-size:.875rem;line-height:2.2;}
+.blank-wrap{display:inline-block;margin:0 .25rem;}
+.listen-card{background:var(--warm);border:2px solid var(--sage);border-radius:var(--r);padding:1.375rem;text-align:center;margin-bottom:1.125rem;}
+.tts-btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--sage);color:white;border:none;padding:.75rem 1.5rem;border-radius:var(--rs);font-size:.875rem;font-weight:700;cursor:pointer;transition:background .2s;font-family:'Noto Sans KR',sans-serif;}
+.tts-btn:hover{background:var(--sage-d);}
+.tts-btn.playing{background:var(--accent);}
+.grade-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;}
+.grade-btn{padding:.7rem .5rem;border:1.5px solid var(--border);border-radius:var(--rs);background:var(--warm);font-family:'Noto Sans KR',sans-serif;font-size:.82rem;cursor:pointer;transition:all .2s;color:var(--dark);}
+.grade-btn:hover{border-color:var(--sage);background:var(--sage-l);}
+.grade-btn.sel{border-color:var(--sage);background:var(--sage);color:white;font-weight:700;}
+.result-hero{text-align:center;background:var(--warm);border:1px solid var(--border);border-radius:var(--r);padding:2rem 1rem;margin-bottom:1.25rem;}
+.level-badge{display:inline-block;background:var(--sage);color:white;font-family:'DM Serif Display',serif;font-size:1.05rem;padding:.45rem 1.4rem;border-radius:30px;margin-bottom:.875rem;}
+.result-title{font-family:'Noto Serif KR',serif;font-size:1.4rem;font-weight:700;margin-bottom:.625rem;}
+.result-desc{font-size:.85rem;color:var(--mid);line-height:1.8;}
+.radar-wrap{background:var(--warm);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin:1.25rem 0;text-align:center;}
+.radar-title{font-size:.875rem;font-weight:500;color:var(--dark);margin-bottom:1rem;}
+.chart-container{position:relative;max-width:300px;margin:0 auto;}
+.detail-card{background:var(--warm);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;margin-bottom:.875rem;}
+.detail-title{font-size:.875rem;font-weight:700;color:var(--dark);margin-bottom:.875rem;}
+.area-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:.5px solid var(--border);font-size:.82rem;gap:.5rem;}
+.area-row:last-child{border-bottom:none;}
+.area-name{color:var(--mid);min-width:40px;}
+.area-bar{flex:1;height:4px;background:var(--border);border-radius:2px;}
+.area-bar-inner{height:100%;background:var(--sage);border-radius:2px;transition:width .8s ease;}
+.area-score{font-weight:700;color:var(--sage);min-width:80px;text-align:right;}
+.writing-row{padding:.6rem 0;border-bottom:.5px solid var(--border);font-size:.8rem;}
+.writing-row:last-child{border-bottom:none;}
+.writing-en{font-family:'DM Serif Display',serif;font-size:.95rem;color:var(--dark);margin-bottom:.2rem;}
+.writing-ans{color:var(--mid);font-size:.8rem;}
+.writing-tag{display:inline-block;font-size:.65rem;padding:1px 6px;border-radius:4px;margin-left:.35rem;}
+.tag-ok{background:var(--sage-l);color:var(--sage-d);}
+.tag-ng{background:var(--err-l);color:var(--err);}
+.kakao-box{background:#FEE500;border-radius:var(--r);padding:1.375rem;text-align:center;margin:1rem 0;}
+.kakao-title{font-weight:700;color:#3A1D1D;font-size:.9rem;margin-bottom:.45rem;}
+.kakao-desc{font-size:.78rem;color:#5A3A2A;margin-bottom:.875rem;line-height:1.6;}
+.kakao-btn{display:inline-flex;align-items:center;gap:.45rem;background:#3A1D1D;color:#FEE500;border:none;padding:.7rem 1.625rem;border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.82rem;font-weight:700;cursor:pointer;}
+.email-confirm{background:var(--sage-l);border:1px solid var(--sage);border-radius:var(--r);padding:1.375rem;margin:1rem 0;text-align:center;}
+.ec-title{font-size:.9rem;font-weight:700;color:var(--sage-d);margin-bottom:.35rem;}
+.ec-desc{font-size:.78rem;color:var(--mid);line-height:1.7;}
+.ec-email{font-weight:700;color:var(--sage-d);}
+.cta-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.625rem;margin-top:1.25rem;}
+.cta-card{background:var(--warm);border:1px solid var(--border);border-radius:var(--r);padding:1rem;text-align:center;cursor:pointer;text-decoration:none;display:block;transition:border-color .2s;color:var(--dark);}
+.cta-card:hover{border-color:var(--sage);}
+.cc-icon{font-size:1.4rem;margin-bottom:.4rem;}
+.cc-title{font-size:.8rem;font-weight:700;margin-bottom:.2rem;}
+.cc-desc{font-size:.7rem;color:var(--muted);line-height:1.5;}
+.status-box{background:var(--warm);border:1px solid var(--border);border-radius:var(--rs);padding:.7rem 1rem;font-size:.78rem;color:var(--muted);display:flex;align-items:center;gap:.45rem;margin-top:.875rem;}
+.status-box.ok{color:var(--sage-d);border-color:var(--sage);background:var(--sage-l);}
+.status-box.ng{color:var(--err);border-color:var(--err);background:var(--err-l);}
+.spinner{width:16px;height:16px;border:2px solid rgba(107,143,113,.3);border-top-color:var(--sage);border-radius:50%;animation:spin .8s linear infinite;flex-shrink:0;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.divider{border:none;border-top:1px dashed var(--border);margin:1.75rem 0;}
+@media(max-width:580px){.cta-grid,.stat-grid,.grade-grid{grid-template-columns:1fr 1fr;}.hero-title{font-size:1.3rem;}}
+
+@media print {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  @page { margin: 1cm; size: A4 portrait; }
+
+  /* 불필요 요소 모두 숨기기 */
+  #printBtns, .hdr, .prog-wrap, .kakao-box, .cta-grid,
+  .divider, .status-box, .btn-row, .email-confirm, .chip,
+  #s0, #s1, #s2, #s3, #s4, #s5, #s6 { display:none !important; }
+
+  /* body/main */
+  body { background: white !important; margin: 0; font-size: 11px !important; }
+  .main { padding: 0 !important; max-width: 100% !important; }
+
+  /* 결과 화면만 표시 */
+  #s7 { display: block !important; animation: none !important; }
+
+  /* 전체 폰트 크기 축소 */
+  * { font-size: 11px !important; line-height: 1.4 !important; }
+  .result-title { font-size: 14px !important; }
+  .level-badge { font-size: 10px !important; padding: 2px 10px !important; }
+  .q-en, .writing-en { font-size: 12px !important; }
+
+  /* 카드 여백 최소화 */
+  .result-hero { padding: 10px !important; margin-bottom: 6px !important; }
+  .radar-wrap { padding: 8px !important; margin: 6px 0 !important; }
+  .detail-card { padding: 8px !important; margin-bottom: 6px !important; break-inside: avoid; }
+  .writing-row { padding: 3px 0 !important; }
+  .area-row { padding: 3px 0 !important; }
+
+  /* 레이더 차트 크기 축소 */
+  .chart-container { max-width: 200px !important; }
+
+  /* 색상 강제 적용 */
+  .area-bar-inner { background: #6B8F71 !important; print-color-adjust: exact; }
+  .level-badge { background: #6B8F71 !important; color: white !important; }
+  .tag-ok { background: #E8F0E9 !important; color: #4A6B4F !important; }
+  .tag-ng { background: #FDEDEC !important; color: #C0392B !important; }
+
+  /* 2단 레이아웃으로 영역별 점수 + 쓰기 상세 나란히 */
+  #s7 > .detail-card:nth-of-type(1),
+  #s7 > .detail-card:nth-of-type(2) {
+    width: 48% !important;
+    display: inline-block !important;
+    vertical-align: top !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="logo">HEDGE<span>·</span>EDU</div>
+  <div class="hdr-sub">무료 영어 레벨 진단</div>
+</header>
+<div class="prog-wrap" id="progWrap">
+  <span class="prog-label" id="progLabel"></span>
+  <div class="prog-outer"><div class="prog-inner" id="progBar" style="width:0%"></div></div>
+  <span class="prog-pct" id="progPct">0%</span>
+</div>
+
+<main class="main">
+
+<!-- SCREEN 0: 랜딩 -->
+<div class="screen active" id="s0">
+  <div class="hero">
+    <span class="hedgehog">🦔</span>
+    <h1 class="hero-title">영어 공부 안 하지 않았던 우리 아이,<br><em>지금 영어 잘 하나요?</em></h1>
+    <p class="hero-sub">헷지에듀 쓰기영어에서 제공하는 영어 무료 테스트를 먼저 받아보세요.<br>헷지에듀 윤이연 대표가 직접 설계한 레벨 테스트로<br>초등 학생의 단어·문법·읽기·듣기·쓰기 5개 영역 수준을<br>1차로 파악해볼 수 있습니다.</p>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-num">5영역</div><div class="stat-lbl">종합 진단</div></div>
+    <div class="stat-card"><div class="stat-num">초1~6</div><div class="stat-lbl">대상 학년</div></div>
+    <div class="stat-card"><div class="stat-num">무료</div><div class="stat-lbl">비용 없음</div></div>
+  </div>
+  <div class="notice">
+    📌 쓰기 문항은 헷지에듀 온라인 사이트에서 사용하는 테스트 내용을 그대로 적용했습니다.<br>
+    학습 이력 설문은 추후 윤이연 대표와의 1:1 유료 상담으로 이어질 경우에 자료로 활용됩니다.
+  </div>
+  <div style="background:var(--accent-l);border:1px solid #E8D4BC;border-radius:var(--r);padding:1rem 1.125rem;margin-bottom:1.125rem;">
+    <p style="font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">📋 학부모님께서 먼저 작성해 주세요</p>
+    <p style="font-size:.78rem;color:var(--mid);line-height:1.65;">아래 기본 정보와 학습 이력 설문은 <strong>학부모님이 직접</strong> 입력해 주세요.<br>학생이 직접 테스트를 시작하기 전에 완료해 주셔야 합니다.</p>
+  </div>
+
+  <div class="card">
+    <div class="q-num">시작 전 기본 정보</div>
+    <div class="q-label" style="margin-top:.5rem;">학생 이름<span class="required">*</span></div>
+    <input type="text" id="studentName" class="ei" placeholder="학생 이름">
+    <div class="q-label" style="margin-top:1rem;">학부모 이메일<span class="required">*</span></div>
+    <input type="email" id="parentEmail" class="ei" placeholder="example@email.com">
+    <div class="q-label" style="margin-top:1rem;">현재 학년<span class="required">*</span></div>
+    <div class="grade-grid" style="margin-top:.5rem;">
+      <button class="grade-btn" onclick="selGrade(this,'초1')">초등 1학년</button>
+      <button class="grade-btn" onclick="selGrade(this,'초2')">초등 2학년</button>
+      <button class="grade-btn" onclick="selGrade(this,'초3')">초등 3학년</button>
+      <button class="grade-btn" onclick="selGrade(this,'초4')">초등 4학년</button>
+      <button class="grade-btn" onclick="selGrade(this,'초5')">초등 5학년</button>
+      <button class="grade-btn" onclick="selGrade(this,'초6')">초등 6학년</button>
+    </div>
+  </div>
+
+  <!-- 학습 이력 설문 (학부모 작성) -->
+  <div style="background:var(--accent-l);border:1px solid #E8D4BC;border-radius:var(--r);padding:1rem 1.125rem;margin:1.25rem 0 .75rem;">
+    <p style="font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">📋 학부모님이 아래 설문을 먼저 작성해 주세요</p>
+    <p style="font-size:.78rem;color:var(--mid);line-height:1.65;">아래 항목은 추후 윤이연 대표와의 1:1 유료 상담을 진행하게 될 때 추가 자료로 활용됩니다.<br>오늘 학생이 진행하는 테스트 결과지에는 포함되지 않습니다.</p>
+  </div>
+
+  <div id="landingSurveyContainer"></div>
+
+  <!-- 테스트 시작 -->
+  <div style="text-align:center;margin-top:1.75rem;">
+    <button class="btn-p full" style="max-width:320px;margin:0 auto;" onclick="startTest()">테스트 시작하기 →</button>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem;">지금부터 학생이 진행합니다</p>
+  </div>
+</div>
+
+<!-- SCREEN 1: 단어 -->
+<div class="screen" id="s1">
+  <div class="chip">STEP 1 · 단어 (Vocabulary)</div>
+  <h2 class="sec-title">단어를 보고 알맞은 뜻을 선택하세요</h2>
+  <p class="sec-desc">각 단어의 정확한 우리말 뜻을 고르세요.</p>
+  <div id="vocabQs"></div>
+  <div class="btn-row">
+    <button class="btn-s" onclick="goScreen(0)">← 이전</button>
+    <button class="btn-p" onclick="submitVocab()">다음 →</button>
+  </div>
+</div>
+
+<!-- SCREEN 2: 문법 -->
+<div class="screen" id="s2">
+  <div class="chip">STEP 2 · 문법 (Grammar)</div>
+  <h2 class="sec-title">알맞은 형태를 선택하세요</h2>
+  <p class="sec-desc">동사의 유형과 시제를 구분하여 올바른 형태를 고르세요.</p>
+  <div id="grammarQs"></div>
+  <div class="btn-row">
+    <button class="btn-s" onclick="goScreen(1)">← 이전</button>
+    <button class="btn-p" onclick="submitGrammar()">다음 →</button>
+  </div>
+</div>
+
+<!-- SCREEN 3: 읽기 -->
+<div class="screen" id="s3">
+  <div class="chip">STEP 3 · 읽기 (Reading)</div>
+  <h2 class="sec-title">지문을 읽고 빈칸을 채우세요</h2>
+  <p class="sec-desc">이야기를 읽고 문맥에 맞는 단어를 빈칸에 입력하세요.</p>
+  <div class="passage" id="readingPassage"></div>
+  <div id="readingQs"></div>
+  <div class="btn-row">
+    <button class="btn-s" onclick="goScreen(2)">← 이전</button>
+    <button class="btn-p" onclick="submitReading()">다음 →</button>
+  </div>
+</div>
+
+<!-- SCREEN 4: 듣기 -->
+<div class="screen" id="s4">
+  <div class="chip">STEP 4 · 듣기 (Listening)</div>
+  <h2 class="sec-title">문장을 듣고 올바른 내용을 선택하세요</h2>
+  <p class="sec-desc">재생 버튼을 눌러 문장을 들은 후 알맞은 답을 고르세요.</p>
+  <div id="listeningQs"></div>
+  <div class="btn-row">
+    <button class="btn-s" onclick="goScreen(3)">← 이전</button>
+    <button class="btn-p" onclick="submitListening()">다음 →</button>
+  </div>
+</div>
+
+<!-- SCREEN 5: 쓰기 -->
+<div class="screen" id="s5">
+  <div class="chip">STEP 5 · 쓰기 (Writing)</div>
+  <h2 class="sec-title">영어 문장을 한국어로 번역하세요</h2>
+  <p class="sec-desc">각 영어 문장을 정확한 한국어 어미로 번역해 주세요.<br>현재형·과거형·진행형을 정확히 구분하는 것이 중요합니다.</p>
+  <div id="writingQs"></div>
+  <div class="btn-row">
+    <button class="btn-s" onclick="goScreen(4)">← 이전</button>
+    <button class="btn-p" onclick="submitWriting()">결과 보기 →</button>
+  </div>
+</div>
+
+<!-- SCREEN 6: 설문 (랜딩으로 통합됨 - 유지만) -->
+<div class="screen" id="s6">
+  <div style="background:#FDF5EC;border:1px solid #E8D4BC;border-radius:var(--r);padding:1rem 1.125rem;margin-bottom:1.25rem;">
+    <p style="font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">⚠️ 학부모님이 직접 작성해 주세요</p>
+    <p style="font-size:.78rem;color:var(--mid);line-height:1.65;">이 페이지는 학생이 아닌 <strong>학부모님이 직접</strong> 입력해야 정확한 정보를 얻을 수 있습니다.<br>잠시 학부모님께 화면을 전달해 주세요.</p>
+  </div>
+  <div class="chip">사전 설문 · 학습 이력 (학부모 작성)</div>
+  <h2 class="sec-title">아이의 학습 이력을 자세히 알려주세요</h2>
+  <p class="sec-desc">아래 항목은 추후 윤이연 대표와의 1:1 유료 상담을 진행하게 될 때 추가 자료로 활용됩니다.<br>오늘 학생이 진행하는 테스트 결과지에는 포함되지 않습니다.</p>
+  <div id="surveyContainer"></div>
+  <div class="btn-row">
+    <button class="btn-s" onclick="goScreen(5)">← 이전</button>
+    <button class="btn-p" onclick="submitAll()">제출 및 결과 확인 →</button>
+  </div>
+</div>
+
+<!-- SCREEN 7: 결과 -->
+<div class="screen" id="s7">
+  <div class="chip">진단 완료 · 결과 리포트</div>
+
+  <!-- 인쇄/PDF 버튼 -->
+  <div style="display:flex;gap:.625rem;margin-bottom:.75rem;flex-wrap:wrap;" id="printBtns">
+    <button onclick="window.print()" style="display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--sage);color:white;border:none;padding:.8rem 1.5rem;border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;width:100%;">
+      🖨️ 결과지 인쇄 / PDF 저장
+    </button>
+  </div>
+  <div style="background:var(--accent-l);border:1px solid #E8D4BC;border-radius:var(--rs);padding:.75rem 1rem;margin-bottom:1.25rem;font-size:.78rem;color:var(--mid);line-height:1.7;">
+    📌 <strong>PDF로 저장하는 방법:</strong> 위 버튼 클릭 → 인쇄 창에서 대상(프린터) 선택 → <strong>"PDF로 저장"</strong> 선택 → 저장
+  </div>
+
+  <div class="result-hero">
+    <div class="level-badge" id="levelBadge">기초 단계</div>
+    <h2 class="result-title" id="resultTitle">진단 완료!</h2>
+    <p class="result-desc" id="resultDesc"></p>
+  </div>
+  <div class="radar-wrap">
+    <div class="radar-title">📊 5개 영역 종합 분석</div>
+    <div class="chart-container"><canvas id="radarChart"></canvas></div>
+  </div>
+  <div class="detail-card">
+    <div class="detail-title">📈 영역별 점수</div>
+    <div id="areaScores"></div>
+  </div>
+  <div class="detail-card">
+    <div class="detail-title">✍️ 쓰기 번역 상세 결과</div>
+    <div id="writingDetail"></div>
+  </div>
+
+  <div class="kakao-box">
+    <div class="kakao-title">💛 헷지에듀 카카오 채널</div>
+    <div class="kakao-desc">헷지에듀의 소식과 이벤트 혜택을 받아보시려면<br>카카오 채널을 추가해 주세요.</div>
+    <button class="kakao-btn" onclick="window.open('http://pf.kakao.com/_UymBn','_blank')">카카오 채널 추가하기 →</button>
+  </div>
+  <div class="status-box" id="statusBox" style="display:none;"></div>
+  <div class="divider"></div>
+  <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:1rem;">더 알아보기</p>
+  <div class="cta-grid">
+    <a class="cta-card" href="https://map.naver.com/p/entry/place/1256593955?placePath=/ticket" target="_blank"><div class="cc-icon">📅</div><div class="cc-title">1:1 상담 예약</div><div class="cc-desc">온라인/오프라인</div></a>
+    <a class="cta-card" href="https://www.youtube.com/@hedgehogmykid" target="_blank"><div class="cc-icon">🎬</div><div class="cc-title">유튜브 채널</div><div class="cc-desc">영어 교육 콘텐츠</div></a>
+    <a class="cta-card" href="https://blog.naver.com/herissons81" target="_blank"><div class="cc-icon">✍️</div><div class="cc-title">블로그</div><div class="cc-desc">학부모 영어 칼럼</div></a>
+  </div>
+</div>
+
+</main>
+
+<script>
+const WEBHOOK_URL = 'https://hook.us2.make.com/ghkpy86gn39b73bw7mfq7nn3ios4bams';
+let ans = {}, trResults = [], currentGrade = '', curScreen = 0;
+
+// ===== 데이터 =====
+const vocabByGrade = {
+  '초1':[{w:'apple',o:['사과','바나나','포도','오렌지'],c:0},{w:'dog',o:['고양이','개','새','물고기'],c:1},{w:'run',o:['먹다','자다','달리다','앉다'],c:2},{w:'big',o:['작은','예쁜','큰','빠른'],c:2},{w:'happy',o:['슬픈','행복한','화난','피곤한'],c:1}],
+  '초2':[{w:'library',o:['학교','도서관','병원','공원'],c:1},{w:'jump',o:['걷다','점프하다','수영하다','날다'],c:1},{w:'cold',o:['더운','따뜻한','차가운','시원한'],c:2},{w:'always',o:['가끔','절대','항상','보통'],c:2},{w:'kitchen',o:['화장실','침실','부엌','거실'],c:2}],
+  '초3':[{w:'nervous',o:['화난','긴장한','슬픈','지루한'],c:1},{w:'explain',o:['설명하다','요리하다','청소하다','기다리다'],c:0},{w:'forest',o:['사막','바다','숲','산'],c:2},{w:'surprised',o:['실망한','놀란','기쁜','무서운'],c:1},{w:'collect',o:['버리다','모으다','나누다','빌리다'],c:1}],
+  '초4':[{w:'convenient',o:['편리한','불편한','위험한','지루한'],c:0},{w:'investigate',o:['포기하다','연습하다','조사하다','이해하다'],c:2},{w:'ancient',o:['현대의','오래된','새로운','작은'],c:1},{w:'achieve',o:['실패하다','달성하다','준비하다','계획하다'],c:1},{w:'patience',o:['용기','인내심','지혜','친절'],c:1}],
+  '초5':[{w:'atmosphere',o:['대기','표면','핵심','경계'],c:0},{w:'significant',o:['사소한','중요한','일반적인','빠른'],c:1},{w:'obtain',o:['잃다','얻다','주다','보내다'],c:1},{w:'recommend',o:['반대하다','추천하다','거절하다','확인하다'],c:1},{w:'magnificent',o:['평범한','웅장한','작은','조용한'],c:1}],
+  '초6':[{w:'sufficient',o:['충분한','부족한','과도한','적절한'],c:0},{w:'contribute',o:['방해하다','기여하다','반대하다','무시하다'],c:1},{w:'consequence',o:['원인','계획','결과','방법'],c:2},{w:'emphasize',o:['약화시키다','강조하다','무시하다','숨기다'],c:1},{w:'perspective',o:['사실','관점','결론','증거'],c:1}],
+};
+
+const grammarData = [
+  {q:'She ___ (play) tennis every day.',o:['play','plays','played','is playing'],c:1},
+  {q:'I ___ (cook) dinner right now.',o:['cook','cooked','am cooking','will cook'],c:2},
+  {q:'They ___ (finish) their homework yesterday.',o:['finish','finishes','finished','are finishing'],c:2},
+  {q:'He ___ a teacher. (직업/상태)',o:['does','is','was','will be'],c:1},
+  {q:'We ___ (go) to the park tomorrow.',o:['go','went','are going','will go'],c:3},
+  {q:'She ___ (study) when I called her.',o:['studies','studied','was studying','is studying'],c:2},
+  {q:'___ your dog ___ (like) to swim?',o:['Does/like','Is/liking','Did/liked','Will/like'],c:0},
+  {q:'I ___ (can) run very fast.',o:['can running','can run','am canning run','could running'],c:1},
+];
+
+const readingData = {
+  passage: `Tom is a boy who loves animals. He has a pet dog named Max. Every morning, Tom takes Max for a walk in the park. They always see many birds and flowers there. One day, Tom found a small rabbit near the trees. The rabbit looked scared and hungry. Tom carefully picked it up and brought it home. His mother helped him feed the rabbit with some vegetables. After a week, the rabbit became healthy and happy. Tom decided to keep it as another pet.`,
+  questions: [
+    {
+      q: '이 글의 내용과 일치하지 않는 것을 고르시오.',
+      opts: [
+        'Tom은 매일 아침 Max를 공원에 산책시킨다.',
+        'Tom은 나무 근처에서 작은 토끼를 발견했다.',
+        'Tom의 아버지가 토끼에게 채소를 먹이는 것을 도와주었다.',
+        '토끼는 일주일 후 건강하고 행복해졌다.'
+      ],
+      c: 2
+    },
+    {
+      q: 'Tom이 토끼를 발견했을 때 토끼의 상태로 알맞은 것은?',
+      opts: [
+        '건강하고 활발했다.',
+        '무섭고 배가 고팠다.',
+        '행복하고 편안했다.',
+        '다치고 잠을 자고 있었다.'
+      ],
+      c: 1
+    },
+    {
+      q: 'Tom이 토끼를 발견한 장소는?',
+      opts: [
+        '공원 벤치 근처',
+        '집 마당',
+        '나무 근처',
+        '강가'
+      ],
+      c: 2
+    },
+    {
+      q: '이 글을 읽고 알 수 있는 Tom의 성격으로 가장 알맞은 것은?',
+      opts: [
+        '겁이 많고 소극적이다.',
+        '동물을 사랑하고 따뜻한 마음을 가지고 있다.',
+        '규칙을 잘 따르고 엄격하다.',
+        '호기심이 없고 조용하다.'
+      ],
+      c: 1
+    },
+    {
+      q: 'Tom과 Max가 공원 산책 중 항상 보는 것은?',
+      opts: [
+        '다른 개들과 고양이들',
+        '새들과 꽃들',
+        '토끼와 다람쥐들',
+        '아이들이 노는 모습'
+      ],
+      c: 1
+    },
+  ]
+};
+
+const listeningData = [
+  {s:'I was reading a book when my mom called me.',q:'화자가 하고 있던 동작은?',o:['전화하기','책 읽기','밥 먹기','잠자기'],c:1},
+  {s:'She will visit her grandmother next Sunday.',q:'언제 할머니를 방문할 예정인가?',o:['어제','오늘','다음 주 일요일','매주 일요일'],c:2},
+  {s:'The children are playing in the garden right now.',q:'아이들이 현재 하고 있는 것은?',o:['공원에서 공부','정원에서 놀기','집에서 잠자기','학교에서 수업'],c:1},
+  {s:'My father cooked delicious spaghetti for dinner last night.',q:'언제 만든 식사인가?',o:['오늘 아침','어젯밤','다음 주','지금'],c:1},
+  {s:'You should eat more vegetables to stay healthy.',q:'이 문장이 말하는 내용은?',o:['채소를 덜 먹어라','건강하려면 채소를 먹어야 한다','채소는 맛없다','병원에 가야 한다'],c:1},
+];
+
+const writingData = [
+  {e:'I cook.',t:'현재',a:[
+    '나는 요리한다','나는 요리해','난 요리한다','난 요리해',
+    '저는 요리합니다','나는 밥을 한다','나는 밥을 해','나는 밥을 짓는다',
+    '나는 cooking한다','내가 요리한다','나는 음식을 만든다'
+  ]},
+  {e:'I am cooking.',t:'현재진행',a:[
+    '나는 요리하고 있다','나는 요리하고 있어','나는 요리 중이다',
+    '나는 지금 요리하고 있다','나는 요리하는 중이다','저는 요리하고 있습니다',
+    '나는 지금 요리 중이다','나는 요리 중이에요','나는 밥을 하고 있다',
+    '나는 지금 밥을 하고 있다','나는 지금 요리해','나는 요리를 하고 있다'
+  ]},
+  {e:'I was cooking.',t:'과거진행',a:[
+    '나는 요리하고 있었다','나는 요리 중이었다','나는 요리하고 있었어',
+    '나는 요리하는 중이었다','저는 요리하고 있었습니다','나는 밥을 하고 있었다',
+    '나는 요리를 하고 있었다','나는 요리 중이었어','나는 요리를 하는 중이었다'
+  ]},
+  {e:'I cooked.',t:'과거',a:[
+    '나는 요리했다','나는 요리했어','나는 요리를 했다',
+    '저는 요리했습니다','내가 요리했다','나는 밥을 했다',
+    '나는 요리를 만들었다','나는 음식을 만들었다','나는 밥을 지었다'
+  ]},
+  {e:'I can cook.',t:'현재(조동사-가능)',a:[
+    '나는 요리할 수 있다','나는 요리할 수 있어','나는 요리를 할 수 있다',
+    '저는 요리할 수 있습니다','나는 요리가 가능하다','나는 밥을 할 수 있다',
+    '나는 요리를 잘 할 수 있다','내가 요리할 수 있다','나는 요리할 줄 안다'
+  ]},
+  {e:'I should cook.',t:'현재(조동사-의무/권고)',a:[
+    '나는 요리해야 한다','나는 요리해야 해','나는 요리해야만 한다',
+    '저는 요리해야 합니다','나는 요리를 해야 한다','나는 요리하는 것이 좋겠다',
+    '나는 요리를 해야 해','나는 요리를 해야만 한다','나는 요리해야겠다',
+    '나는 요리를 해야겠다','나는 요리하는 게 좋겠다','나는 요리를 해야할 것 같다',
+    '내가 요리해야 한다','나는 요리하는 것이 낫겠다','나는 요리를 했으면 좋겠다'
+  ]},
+  {e:'I will cook.',t:'미래',a:[
+    '나는 요리할 것이다','나는 요리할 거야','나는 요리할 거다',
+    '저는 요리할 것입니다','나는 요리하겠다','나는 요리를 할 것이다',
+    '나는 요리를 할 거야','나는 요리를 할 거다','내가 요리할 것이다',
+    '나는 밥을 할 것이다','나는 요리할 예정이다'
+  ]},
+  {e:'I will be cooking.',t:'미래진행',a:[
+    '나는 요리하고 있을 것이다','나는 요리하고 있을 거야','나는 요리 중일 것이다',
+    '저는 요리하고 있을 것입니다','나는 요리를 하고 있을 것이다',
+    '나는 요리하는 중일 것이다','나는 요리 중일 거야','나는 요리하고 있을 것이야',
+    '나는 요리를 하고 있을 거야'
+  ]},
+  {e:'I have to cook.',t:'현재(의무)',a:[
+    '나는 요리해야 한다','나는 요리해야 해','나는 요리해야만 한다',
+    '저는 요리해야 합니다','나는 요리를 해야만 한다','나는 요리를 해야 한다',
+    '나는 요리를 해야 해','나는 반드시 요리해야 한다','나는 꼭 요리해야 한다',
+    '나는 요리해야겠다','나는 밥을 해야 한다','내가 요리해야 한다'
+  ]},
+  {e:'I was cooking when you were at school.',t:'과거진행+과거',a:[
+    '네가 학교에 있을 때 나는 요리하고 있었다',
+    '당신이 학교에 있을 때 나는 요리하고 있었다',
+    '네가 학교에 있을 때 나는 요리 중이었다',
+    '당신이 학교에 있을 때 나는 요리 중이었다',
+    '네가 학교에 있는 동안 나는 요리하고 있었다',
+    '당신이 학교에 있는 동안 나는 요리하고 있었다',
+    '네가 학교에 있을 때 나는 요리를 하고 있었다',
+    '당신이 학교에 있을 때 나는 요리를 하고 있었다',
+    '네가 학교에 있을 때 나는 밥을 하고 있었다',
+    '네가 학교에 있을 때 나는 요리하는 중이었다'
+  ]},
+  {e:'I am cooking stew that you like.',t:'현재진행+관계사',a:[
+    '나는 네가 좋아하는 스튜를 요리하고 있다',
+    '나는 당신이 좋아하는 스튜를 요리하고 있다',
+    '나는 네가 좋아하는 찌개를 요리하고 있다',
+    '나는 네가 좋아하는 국을 요리하고 있다',
+    '저는 당신이 좋아하는 스튜를 요리하고 있습니다',
+    '나는 네가 좋아하는 스튜를 만들고 있다',
+    '나는 당신이 좋아하는 찌개를 요리하고 있다',
+    '나는 네가 좋아하는 스튜를 끓이고 있다',
+    '나는 당신이 좋아하는 국을 요리하고 있다',
+    '나는 네가 좋아하는 요리를 하고 있다',
+    '나는 네가 좋아하는 스튜를 요리하는 중이다',
+    '나는 당신이 좋아하는 스튜를 요리하는 중이다',
+    '나는 네가 좋아하는 찌개를 요리하는 중이다',
+    '나는 네가 좋아하는 국을 요리하는 중이다',
+    '저는 당신이 좋아하는 스튜를 요리하는 중입니다',
+    '나는 네가 좋아하는 스튜를 만드는 중이다',
+    '나는 네가 좋아하는 스튜를 끓이는 중이다'
+  ]},
+];
+
+const surveyDef = [
+  {id:'engStart',label:'영어 공부를 시작한 시기',required:true,type:'radio',opts:['3~4세','5~6세 (유치원)','초등학교 입학 전후 (7~8세)','초등 2~3학년','초등 4학년 이후','아직 시작 안 함']},
+  {id:'engHistory',label:'지금까지 영어 공부를 어떻게 해왔는지 설명해 주세요',required:true,type:'textarea',placeholder:'예) 영어유치원 2년, 리딩학원 1년, 현재 혼자 책 읽기 중...'},
+  {id:'korReading',label:'한 주에 국어 읽기를 얼마나 하나요?',required:true,type:'radio',opts:['거의 안 함','주 1~2회 (30분 이내)','주 3~4회 (30분 이상)','매일 30분 이상','매일 1시간 이상']},
+  {id:'essay',label:'현재 논술 학원에 다니고 있나요?',required:true,type:'radio',opts:['예, 현재 다니고 있어요','다닌 적 있지만 지금은 아님','아니요']},
+  {id:'socialKnow',label:'사회·역사에 대한 기초 지식이 있나요? (만화책 포함)',required:true,type:'radio',opts:['많이 알고 있어요','조금 알고 있어요','잘 모르는 편이에요']},
+  {id:'sciKnow',label:'과학·실험에 대한 기초 지식이 있나요? (만화책 포함)',required:true,type:'radio',opts:['많이 알고 있어요','조금 알고 있어요','잘 모르는 편이에요']},
+  {id:'grammar',label:'영문법 공부를 해본 적이 있나요?',required:true,type:'radio',opts:['예','아니요']},
+  {id:'grammarAge',label:'영문법을 몇 살에 시작했나요? (경험 없으면 건너뛰기)',required:false,type:'radio',opts:['7세 이하','8세','9세','10세','11세','12세 이상']},
+  {id:'personality',label:'학생의 평소 성격을 모두 선택해 주세요',required:true,type:'chips',opts:['적극적','소극적','주도적','쾌활함','수다스러움','얌전함','책임감 강함','완벽주의','끈기 있음','창의적','분석적','감성적','논리적','호기심 많음','자신감 있음','자신감 부족','독립적','의존적','경쟁심 강함','협동적','고집스러움','유연함','장난스러움','진지함','규칙을 잘 따름','낯가림','사교적','꼼꼼함','느긋함','성실함']},
+  {id:'selfStudy',label:'정해진 시간에 규칙적으로 학습하고 있나요? (학원 숙제 제외)',required:true,type:'radio',opts:['예, 규칙적으로 하고 있어요','아니요, 잘 안 되고 있어요']},
+  {id:'selfStudyDetail',label:'학습하고 있다면 어떤 과목을 주 몇 회, 몇 분씩 하나요?',required:false,type:'textarea',placeholder:'예) 수학 주 5회 30분, 영어 주 3회 20분'},
+  {id:'studyDuration',label:'그렇게 해온 지 얼마나 됐나요?',required:false,type:'radio',opts:['3개월 미만','3~6개월','6개월~1년','1년~2년','2년 이상','해당 없음']},
+  {id:'studyRefusal',label:'"학원 가기 싫다", "공부하기 싫다" 같은 말을 한 적 있나요?',required:true,type:'radio',opts:['자주 해요','가끔 해요','거의 없어요','전혀 없어요']},
+  {id:'engStudyFreq',label:'한 주에 몇 회 이상 영어 공부를 하고 있나요?',required:true,type:'radio',opts:['주 1회','주 2~3회','주 4~5회','매일','거의 안 함']},
+  {id:'mainConcern',label:'아이 학습에 대해 가장 고민하고 있는 내용은?',required:true,type:'textarea',placeholder:'자유롭게 자세히 적어주세요...'},
+];
+
+// ===== 초기화 =====
+function init() {
+  buildGrammarUI();
+  buildReadingUI();
+  buildListeningUI();
+  buildWritingUI();
+  buildSurveyUI();
+}
+
+// ===== 화면 전환 =====
+function goScreen(n) {
+  document.getElementById('s'+curScreen).classList.remove('active');
+  document.getElementById('s'+n).classList.add('active');
+  curScreen = n;
+  updateProg(n);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateProg(n) {
+  const pw = document.getElementById('progWrap');
+  if(n===0){pw.classList.remove('show');return;}
+  pw.classList.add('show');
+  const labels=['','단어','문법','읽기','듣기','쓰기','학습 설문','결과'];
+  const pct = Math.round((n/7)*100);
+  document.getElementById('progLabel').textContent=(labels[n]||'')+' ('+n+'/7)';
+  document.getElementById('progBar').style.width=pct+'%';
+  document.getElementById('progPct').textContent=pct+'%';
+}
+
+// ===== 학년 선택 =====
+function selGrade(el, g) {
+  document.querySelectorAll('.grade-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+  currentGrade = g;
+  ans.grade = g;
+}
+
+// ===== 시작 =====
+function startTest() {
+  const name = document.getElementById('studentName').value.trim();
+  if(!name){alert('학생 이름을 입력해 주세요.');return;}
+  const email = document.getElementById('parentEmail').value.trim();
+  if(!email||!email.includes('@')){alert('정확한 이메일 주소를 입력해 주세요.');return;}
+  if(!currentGrade){alert('학년을 선택해 주세요.');return;}
+  ans.studentName=name; ans.parentEmail=email;
+  ans.submittedAt=new Date().toLocaleString('ko-KR',{timeZone:'Asia/Seoul'});
+
+  // 랜딩 설문 데이터 수집
+  surveyDef.forEach(s=>{
+    if(s.type==='textarea'){ans[s.id]=(document.getElementById('landing_'+s.id)?.value||'');}
+    else if(s.type==='chips'){ans[s.id]=[...document.querySelectorAll(`#landing_${s.id} .chip-opt.sel`)].map(el=>el.querySelector('input').value);}
+    else if(s.type==='radio'){
+      const sel=document.querySelector(`input[name="landing_${s.id}"]:checked`);
+      if(sel) ans[s.id]=sel.value;
+    }
+  });
+  ans.mainConcern=(document.getElementById('landing_mainConcern')?.value||'');
+
+  buildVocabUI();
+  goScreen(1);
+}
+
+// ===== 단어 =====
+function buildVocabUI() {
+  const qs = vocabByGrade[currentGrade]||vocabByGrade['초3'];
+  document.getElementById('vocabQs').innerHTML = qs.map((q,i)=>`
+    <div class="card">
+      <div class="q-num">단어 ${i+1} / ${qs.length}</div>
+      <div class="q-en" style="margin-top:.35rem;margin-bottom:.875rem;">${q.w}</div>
+      <div class="opts">${q.o.map((o,j)=>`
+        <div class="opt" onclick="selRadio(this,'v${i}',${j})">
+          <input type="radio" name="v${i}" value="${j}"><label>${o}</label>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function submitVocab() {
+  const qs = vocabByGrade[currentGrade]||vocabByGrade['초3'];
+  let vc=[];
+  for(let i=0;i<qs.length;i++){
+    const s=document.querySelector(`input[name="v${i}"]:checked`);
+    vc.push(s ? parseInt(s.value)===qs[i].c : false);
+  }
+  ans.vocabScore=vc.filter(v=>v).length; ans.vocabTotal=qs.length;
+  goScreen(2);
+}
+
+// ===== 문법 =====
+function buildGrammarUI() {
+  document.getElementById('grammarQs').innerHTML = grammarData.map((q,i)=>`
+    <div class="card">
+      <div class="q-num">문법 ${i+1} / ${grammarData.length}</div>
+      <div class="q-label" style="margin-top:.35rem;">${q.q}</div>
+      <div class="opts">${q.o.map((o,j)=>`
+        <div class="opt" onclick="selRadio(this,'g${i}',${j})">
+          <input type="radio" name="g${i}" value="${j}"><label>${o}</label>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function submitGrammar() {
+  let gc=[];
+  for(let i=0;i<grammarData.length;i++){
+    const s=document.querySelector(`input[name="g${i}"]:checked`);
+    gc.push(s ? parseInt(s.value)===grammarData[i].c : false);
+  }
+  ans.grammarScore=gc.filter(v=>v).length; ans.grammarTotal=grammarData.length;
+  goScreen(3);
+}
+
+// ===== 읽기 =====
+function buildReadingUI() {
+  document.getElementById('readingPassage').innerHTML = readingData.passage;
+  const nums = ['①','②','③','④'];
+  const c = document.getElementById('readingQs');
+  c.innerHTML = readingData.questions.map((q,i)=>`
+    <div class="card">
+      <div class="q-num">읽기 ${i+1} / ${readingData.questions.length}</div>
+      <div class="q-label" style="margin-top:.35rem;">${q.q}</div>
+      <div class="opts" style="margin-top:.625rem;">${q.opts.map((o,j)=>`
+        <div class="opt" onclick="selRadio(this,'r${i}',${j})">
+          <input type="radio" name="r${i}" value="${j}">
+          <label>${nums[j]} ${o}</label>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function submitReading() {
+  let rc=[];
+  for(let i=0;i<readingData.questions.length;i++){
+    const s=document.querySelector(`input[name="r${i}"]:checked`);
+    rc.push(s ? parseInt(s.value)===readingData.questions[i].c : false);
+  }
+  ans.readingScore=rc.filter(v=>v).length; ans.readingTotal=readingData.questions.length;
+  goScreen(4);
+}
+
+// ===== 듣기 =====
+function buildListeningUI() {
+  document.getElementById('listeningQs').innerHTML = listeningData.map((q,i)=>`
+    <div class="card">
+      <div class="q-num">듣기 ${i+1} / ${listeningData.length}</div>
+      <div class="listen-card">
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:.75rem;">버튼을 눌러 문장을 들으세요</p>
+        <button class="tts-btn" id="tts${i}" onclick="playTTS(${i})">▶ 듣기</button>
+      </div>
+      <div class="q-label">${q.q}</div>
+      <div class="opts" style="margin-top:.625rem;">${q.o.map((o,j)=>`
+        <div class="opt" onclick="selRadio(this,'l${i}',${j})">
+          <input type="radio" name="l${i}" value="${j}"><label>${o}</label>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+let curUtterance=null;
+function playTTS(idx) {
+  if(curUtterance){ speechSynthesis.cancel(); curUtterance=null; }
+  const btn=document.getElementById('tts'+idx);
+  btn.classList.add('playing'); btn.textContent='준비 중...';
+
+  // 1단계: 무음 워밍업으로 TTS 엔진을 깨워서 첫 음절 잘림 방지
+  const warmup = new SpeechSynthesisUtterance('ready');
+  warmup.lang='en-US'; warmup.volume=0; warmup.rate=1;
+  warmup.onend = () => {
+    setTimeout(() => {
+      // 2단계: 문장 앞에 ". . ." 삽입으로 자연스러운 시작 보장
+      const utt = new SpeechSynthesisUtterance('. . . ' + listeningData[idx].s);
+      utt.lang='en-US'; utt.rate=0.72; utt.pitch=1.0; utt.volume=1.0;
+      btn.textContent='재생 중...';
+      utt.onend=()=>{
+        btn.classList.remove('playing');
+        btn.textContent='▶ 다시 듣기';
+        curUtterance=null;
+      };
+      curUtterance=utt;
+      speechSynthesis.speak(utt);
+    }, 800);
+  };
+  speechSynthesis.speak(warmup);
+}
+
+function submitListening() {
+  let lc=[];
+  for(let i=0;i<listeningData.length;i++){
+    const s=document.querySelector(`input[name="l${i}"]:checked`);
+    lc.push(s ? parseInt(s.value)===listeningData[i].c : false);
+  }
+  ans.listeningScore=lc.filter(v=>v).length; ans.listeningTotal=listeningData.length;
+  goScreen(5);
+}
+
+// ===== 쓰기 =====
+function buildWritingUI() {
+  document.getElementById('writingQs').innerHTML = writingData.map((q,i)=>`
+    <div class="card">
+      <div class="q-num">쓰기 ${i+1} / ${writingData.length} · ${q.t}</div>
+      <div class="q-en">${q.e}</div>
+      <textarea class="txt-input" id="w${i}" placeholder="한국어로 번역해 주세요..." rows="2" style="min-height:54px;"></textarea>
+      <div class="fb" id="wfb${i}"></div>
+    </div>`).join('');
+}
+
+function norm(s){return s.trim().replace(/[.,!?。]/g,'').replace(/\s+/g,' ').toLowerCase();}
+
+function checkW(userAns, acceptList) {
+  const u = norm(userAns);
+  if(!u) return false;
+  return acceptList.some(a => {
+    const n = norm(a);
+    // 1. 완전 일치
+    if(u === n) return true;
+    // 2. 포함 관계
+    if(u.includes(n) || n.includes(u)) return true;
+    // 3. 어미 3글자 일치 + 길이 충분
+    if(u.length >= 4 && n.length >= 4 && u.slice(-3) === n.slice(-3)) return true;
+    // 4. 핵심 동사 어근 + 어미 조합으로 유사도 검사
+    const uWords = u.replace(/\s+/g,' ').split(' ');
+    const nWords = n.replace(/\s+/g,' ').split(' ');
+    // 마지막 단어(서술어) 기준 3글자 이상 일치
+    const uLast = uWords[uWords.length-1];
+    const nLast = nWords[nWords.length-1];
+    if(uLast && nLast && uLast.length>=3 && nLast.length>=3) {
+      if(uLast.slice(0,3) === nLast.slice(0,3)) return true;
+    }
+    return false;
+  });
+}
+
+function submitWriting() {
+  trResults=[];
+  let hasAny=false;
+  for(let i=0;i<writingData.length;i++){
+    const val=(document.getElementById('w'+i)?.value||'').trim();
+    if(val) hasAny=true;
+    const ok=val?checkW(val,writingData[i].a):false;
+    trResults.push({e:writingData[i].e,t:writingData[i].t,answer:val||'(미입력)',correct:ok});
+    const inp=document.getElementById('w'+i);
+    if(inp)inp.className=val?'txt-input':'txt-input';
+  }
+  ans.writingScore=trResults.filter(r=>r.correct).length; ans.writingTotal=writingData.length;
+  goScreen(7);
+  buildResult();
+  sendData();
+}
+
+// ===== 설문 =====
+function buildSurveyUI() {
+  // 랜딩 화면에 설문 렌더링 (prefix: landing_)
+  const lc = document.getElementById('landingSurveyContainer');
+  if(lc) lc.innerHTML = surveyDef.map((s,idx)=>`
+    <div class="card">
+      <div class="q-num">설문 ${idx+1} / ${surveyDef.length}</div>
+      <div class="q-label">${s.label}${s.required?'<span class="required">*</span>':''}</div>
+      ${s.type==='radio'?`<div class="opts" id="landing_${s.id}">${s.opts.map(o=>`
+        <div class="opt" onclick="selRadioLanding(this,'landing_${s.id}','${s.id}','${o}')">
+          <input type="radio" name="landing_${s.id}" value="${o}"><label>${o}</label>
+        </div>`).join('')}</div>`:''}
+      ${s.type==='chips'?`<div class="chips" id="landing_${s.id}">${s.opts.map(o=>`
+        <label class="chip-opt">
+          <input type="checkbox" name="landing_${s.id}" value="${o}" onchange="toggleChip(this.parentElement)">${o}
+        </label>`).join('')}</div>`:''}
+      ${s.type==='textarea'?`<textarea class="txt-input" id="landing_${s.id}" placeholder="${s.placeholder||''}" style="min-height:70px;"></textarea>`:''}
+    </div>`).join('');
+  // s6 화면도 렌더링 (유지)
+  const sc = document.getElementById('surveyContainer');
+  if(sc) sc.innerHTML = '';
+}
+
+function selRadio(el, name, value) {
+  el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  el.querySelector('input').checked=true;
+  ans[name]=value;
+}
+
+function toggleChip(el){el.classList.toggle('sel');}
+
+function selRadioLanding(el, domName, ansKey, value) {
+  el.closest('.opts').querySelectorAll('.opt').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  el.querySelector('input').checked=true;
+  ans[ansKey]=value;
+}
+
+// ===== 최종 제출 =====
+function submitAll() {
+  const concern=document.getElementById('mainConcern')?.value.trim();
+  if(!concern){alert('마지막 고민 내용을 입력해 주세요.');return;}
+  // 설문 수집
+  surveyDef.forEach(s=>{
+    if(s.type==='textarea'){ans[s.id]=(document.getElementById(s.id)?.value||'');}
+    else if(s.type==='chips'){ans[s.id]=[...document.querySelectorAll(`#${s.id} .chip-opt.sel`)].map(el=>el.querySelector('input').value);}
+  });
+  goScreen(7);
+  buildResult();
+  sendData();
+}
+
+// ===== 결과 =====
+function buildResult() {
+  const vS=ans.vocabScore||0,vT=ans.vocabTotal||5;
+  const gS=ans.grammarScore||0,gT=ans.grammarTotal||8;
+  const rS=ans.readingScore||0,rT=ans.readingTotal||5;
+  const lS=ans.listeningScore||0,lT=ans.listeningTotal||5;
+  const wS=ans.writingScore||0,wT=ans.writingTotal||11;
+  const vP=Math.round((vS/vT)*100),gP=Math.round((gS/gT)*100);
+  const rP=Math.round((rS/rT)*100),lP=Math.round((lS/lT)*100),wP=Math.round((wS/wT)*100);
+  const total=Math.round((vP+gP+rP+lP+wP)/5);
+  ans.totalScore=total;
+
+  let level,desc;
+  if(total>=85){level='심화 단계';desc='전 영역에서 탄탄한 실력을 보여주고 있어요. 더 복잡한 문장 구조와 어휘로 나아갈 준비가 되어 있습니다.';}
+  else if(total>=65){level='초급 단계';desc='기본적인 이해력은 갖추어져 있지만, 일부 영역에서 더 많은 연습이 필요합니다.';}
+  else if(total>=40){level='기초 단계';desc='영어의 기초가 시작되고 있어요. 체계적인 학습으로 더 빠르게 성장할 수 있습니다.';}
+  else{level='입문 단계';desc='영어 학습의 시작 단계입니다. 헷지에듀 Level 1부터 차근차근 익혀나가는 과정을 권장합니다.';}
+  ans.level=level;
+
+  document.getElementById('levelBadge').textContent=level;
+  document.getElementById('resultTitle').textContent=ans.studentName+' 학생 진단 완료! 🎉';
+  document.getElementById('resultDesc').textContent=desc;
+
+  const areas=[
+    {name:'단어',p:vP,s:vS,t:vT},{name:'문법',p:gP,s:gS,t:gT},
+    {name:'읽기',p:rP,s:rS,t:rT},{name:'듣기',p:lP,s:lS,t:lT},{name:'쓰기',p:wP,s:wS,t:wT},
+  ];
+  document.getElementById('areaScores').innerHTML=areas.map(a=>`
+    <div class="area-row">
+      <span class="area-name">${a.name}</span>
+      <div class="area-bar"><div class="area-bar-inner" style="width:${a.p}%"></div></div>
+      <span class="area-score">${a.s}/${a.t} (${a.p}%)</span>
+    </div>`).join('');
+
+  document.getElementById('writingDetail').innerHTML=trResults.map((r,i)=>`
+    <div class="writing-row">
+      <div class="writing-en">${i+1}. ${r.e} <span class="writing-tag ${r.correct?'tag-ok':'tag-ng'}">${r.correct?'✓ 정답':'△ 재확인'}</span></div>
+      <div class="writing-ans">내 답: ${r.answer}</div>
+      <div style="font-size:.72rem;color:var(--muted);">${r.t}</div>
+    </div>`).join('');
+
+  setTimeout(()=>{
+    const ctx=document.getElementById('radarChart').getContext('2d');
+    new Chart(ctx,{
+      type:'radar',
+      data:{
+        labels:['단어','문법','읽기','듣기','쓰기'],
+        datasets:[{
+          label:ans.studentName+' 학생',
+          data:[vP,gP,rP,lP,wP],
+          backgroundColor:'rgba(107,143,113,0.2)',
+          borderColor:'#6B8F71',borderWidth:2,
+          pointBackgroundColor:'#6B8F71',pointRadius:5,
+        }]
+      },
+      options:{
+        scales:{r:{beginAtZero:true,max:100,ticks:{stepSize:25,font:{size:10},color:'#8C8880'},
+          pointLabels:{font:{size:12,family:'Noto Sans KR'},color:'#1C1A17'},
+          grid:{color:'rgba(0,0,0,0.08)'},angleLines:{color:'rgba(0,0,0,0.08)'},}},
+        plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw}%`}}}
+      }
+    });
+  },300);
+}
+
+// ===== 데이터 전송 =====
+async function sendData() {
+  const statusEl=document.getElementById('statusBox');
+  const vT=ans.vocabTotal||5,gT=ans.grammarTotal||8,rT=ans.readingTotal||5,lT=ans.listeningTotal||5,wT=ans.writingTotal||11;
+  const vP=Math.round(((ans.vocabScore||0)/vT)*100);
+  const gP=Math.round(((ans.grammarScore||0)/gT)*100);
+  const rP=Math.round(((ans.readingScore||0)/rT)*100);
+  const lP=Math.round(((ans.listeningScore||0)/lT)*100);
+  const wP=Math.round(((ans.writingScore||0)/wT)*100);
+  const trText=trResults.map((r,i)=>`${i+1}. ${r.e} → ${r.answer} (${r.t}) [${r.correct?'정답':'오답'}]`).join('\n');
+  const weak=[vP<60?'단어':'',gP<60?'문법':'',rP<60?'읽기':'',lP<60?'듣기':'',wP<60?'쓰기':''].filter(Boolean).join(', ')||'없음';
+
+  // 이메일 HTML 본문 생성
+  const emailHtml = `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#F7F4EE;"><div style="background:#1C1A17;padding:24px;text-align:center;"><p style="color:#6B8F71;font-size:11px;margin:0 0 4px;">HEDGE · EDU · WRITING ENGLISH</p><h1 style="color:#F7F4EE;font-size:20px;margin:0;">영어 레벨 진단 결과</h1><p style="color:#C5C0B8;font-size:12px;margin:6px 0 0;">${ans.submittedAt||''}</p></div><div style="padding:24px;"><p style="font-size:14px;color:#1C1A17;margin:0 0 20px;">안녕하세요,<br>헷지에듀 무료 레벨 진단 테스트에 참여해 주셔서 감사합니다.</p><div style="background:#E8F0E9;border-radius:10px;padding:20px;margin-bottom:16px;text-align:center;"><p style="font-size:12px;color:#4A6B4F;margin:0 0 4px;">${ans.studentName||''} 학생 (${ans.grade||''}) 진단 레벨</p><p style="font-size:30px;font-weight:bold;color:#4A6B4F;margin:0;">${ans.level||''}</p><p style="font-size:13px;color:#6B8F71;margin:4px 0 0;">종합 정답률 ${ans.totalScore||0}%</p></div><div style="background:#fff;border:1px solid #E0DAD0;border-radius:10px;padding:16px;margin-bottom:12px;"><p style="font-size:13px;font-weight:bold;color:#1C1A17;margin:0 0 10px;">📊 5개 영역 점수</p><table style="width:100%;font-size:12px;border-collapse:collapse;"><tr><td style="padding:6px 0;color:#888;border-bottom:1px solid #f0f0f0;">단어</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;border-bottom:1px solid #f0f0f0;">${ans.vocabScore||0}/${vT} (${vP}%)</td></tr><tr><td style="padding:6px 0;color:#888;border-bottom:1px solid #f0f0f0;">문법</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;border-bottom:1px solid #f0f0f0;">${ans.grammarScore||0}/${gT} (${gP}%)</td></tr><tr><td style="padding:6px 0;color:#888;border-bottom:1px solid #f0f0f0;">읽기</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;border-bottom:1px solid #f0f0f0;">${ans.readingScore||0}/${rT} (${rP}%)</td></tr><tr><td style="padding:6px 0;color:#888;border-bottom:1px solid #f0f0f0;">듣기</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;border-bottom:1px solid #f0f0f0;">${ans.listeningScore||0}/${lT} (${lP}%)</td></tr><tr><td style="padding:6px 0;color:#888;">쓰기</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;">${ans.writingScore||0}/${wT} (${wP}%)</td></tr></table></div><div style="background:#fff;border:1px solid #E0DAD0;border-radius:10px;padding:16px;margin-bottom:12px;"><p style="font-size:13px;font-weight:bold;color:#1C1A17;margin:0 0 10px;">✍️ 쓰기 번역 상세 결과</p><div style="font-size:12px;color:#444;line-height:2;">${trResults.map((r,i)=>`<div style="padding:4px 0;border-bottom:1px solid #f5f5f5;"><span style="color:#1C1A17;font-weight:500;">${i+1}. ${r.e}</span> <span style="display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;${r.correct?'background:#E8F0E9;color:#4A6B4F;':'background:#FDEDEC;color:#C0392B;'}">${r.correct?'✓ 정답':'△ 재확인'}</span><br><span style="color:#888;">내 답: ${r.answer}</span></div>`).join('')}</div></div><div style="background:#FDF5EC;border:1px solid #E8D4BC;border-radius:10px;padding:16px;margin-bottom:12px;"><p style="font-size:13px;font-weight:bold;color:#1C1A17;margin:0 0 6px;">🔍 보완이 필요한 영역</p><p style="font-size:12px;color:#444;margin:0;">${weak}</p></div><div style="background:#FDF5EC;border:1px solid #E8D4BC;border-radius:10px;padding:16px;margin-bottom:12px;"><p style="font-size:13px;font-weight:bold;color:#1C1A17;margin:0 0 6px;">🤖 헷지에듀 AI 코멘트</p><p style="font-size:12px;color:#444;margin:0;">테스트 결과를 바탕으로 분석한 학습 방향을 안내드립니다. 더 정확한 진단은 1:1 상담을 통해 받아보세요.</p></div><div style="background:#1C1A17;border-radius:10px;padding:20px;margin-bottom:12px;text-align:center;"><p style="color:#F7F4EE;font-size:13px;margin:0 0 12px;">더 정확한 진단과 맞춤 학습 로드맵이 필요하시다면<br><span style="color:#A8C5AC;">윤이연 대표와 1:1 유료 상담</span>을 예약해 보세요.</p><a href="https://map.naver.com/p/entry/place/1256593955?placePath=/ticket" style="display:inline-block;background:#6B8F71;color:white;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:bold;">1:1 상담 예약하기 →</a></div><div style="background:#FEE500;border-radius:10px;padding:16px;text-align:center;"><p style="color:#3A1D1D;font-size:13px;font-weight:bold;margin:0 0 10px;">헷지에듀 카카오 채널</p><a href="http://pf.kakao.com/_UymBn" style="display:inline-block;background:#3A1D1D;color:#FEE500;padding:8px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:bold;">카카오 채널 추가하기</a></div></div><div style="background:#1C1A17;padding:14px;text-align:center;"><p style="color:#888;font-size:10px;margin:0;">헷지에듀 · Writing English · 경기도 화성시 동탄 본원</p></div></div>`;
+
+  const payload={
+    studentName:ans.studentName||'',parentEmail:ans.parentEmail||'',
+    submittedAt:ans.submittedAt||'',grade:ans.grade||'',level:ans.level||'',
+    totalScore:ans.totalScore||0,
+    vocabScore:`${ans.vocabScore||0}/${vT} (${vP}%)`,
+    grammarScore:`${ans.grammarScore||0}/${gT} (${gP}%)`,
+    readingScore:`${ans.readingScore||0}/${rT} (${rP}%)`,
+    listeningScore:`${ans.listeningScore||0}/${lT} (${lP}%)`,
+    writingScore:`${ans.writingScore||0}/${wT} (${wP}%)`,
+    translationDetail:trText,weakPoints:weak,
+    emailHtml:emailHtml,
+    engStart:ans.engStart||'',engHistory:(ans.engHistory||'').substring(0,2000),
+    korReading:ans.korReading||'',essay:ans.essay||'',
+    socialKnow:ans.socialKnow||'',sciKnow:ans.sciKnow||'',
+    grammar:ans.grammar||'',grammarAge:ans.grammarAge||'',
+    personality:(ans.personality||[]).join(', '),selfStudy:ans.selfStudy||'',
+    selfStudyDetail:(ans.selfStudyDetail||'').substring(0,2000),
+    studyDuration:ans.studyDuration||'',studyRefusal:ans.studyRefusal||'',
+    engStudyFreq:ans.engStudyFreq||'',
+    mainConcern:(ans.mainConcern||'').substring(0,2000),
+  };
+
+  try {
+    const res=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    // 전송 완료 (상태 표시 없음)
+  } catch(e) {
+    console.log('전송 오류:', e.message);
+  }
+}
+
+function savePDF() {
+  // 인쇄 대화상자 열기 (PDF 저장 옵션 포함)
+  window.print();
+}
+
+init();
+</script>
+</body>
+</html>
