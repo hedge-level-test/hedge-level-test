@@ -932,13 +932,12 @@ function buildResult() {
 }
 
 // ===== 데이터 전송 =====
+// ===== 데이터 전송 =====
 async function sendData() {
-  const statusEl=document.getElementById('statusBox');
-  const vT=ans.vocabTotal||5,gT=ans.grammarTotal||8,rT=ans.readingTotal||5,lT=ans.listeningTotal||5,wT=ans.writingTotal||11;
-  const vP=Math.round(((ans.vocabScore||0)/vT)*100);
-  const gP=Math.round(((ans.grammarScore||0)/gT)*100);
-  const rP=Math.round(((ans.readingScore||0)/rT)*100);
-  const lP=Math.round(((ans.listeningScore||0)/lT)*100);
+  // 이메일 발송 완전 비활성화
+}
+
+function savePDF() {
   const wP=Math.round(((ans.writingScore||0)/wT)*100);
   const trText=trResults.map((r,i)=>`${i+1}. ${r.e} → ${r.answer} (${r.t}) [${r.correct?'정답':'오답'}]`).join('\n');
   const weak=[vP<60?'단어':'',gP<60?'문법':'',rP<60?'읽기':'',lP<60?'듣기':'',wP<60?'쓰기':''].filter(Boolean).join(', ')||'없음';
