@@ -215,8 +215,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
     <div class="q-num">시작 전 기본 정보</div>
     <div class="q-label" style="margin-top:.5rem;">학생 이름<span class="required">*</span></div>
     <input type="text" id="studentName" class="ei" placeholder="학생 이름">
-    <div class="q-label" style="margin-top:1rem;">학부모 이메일<span class="required">*</span></div>
-    <input type="email" id="parentEmail" class="ei" placeholder="example@email.com">
+
     <div class="q-label" style="margin-top:1rem;">현재 학년<span class="required">*</span></div>
     <div class="grade-grid" style="margin-top:.5rem;">
       <button class="grade-btn" onclick="selGrade(this,'초1')">초등 1학년</button>
@@ -462,44 +461,45 @@ const listeningData = [
 const writingData = [
   {e:'I cook.',t:'현재',a:[
     '나는 요리한다','나는 요리해','난 요리한다','난 요리해',
-    '저는 요리합니다','내가 요리한다','나는 음식을 만든다'
+    '저는 요리합니다','나는 밥을 한다','나는 밥을 해','나는 밥을 짓는다',
+    '나는 cooking한다','내가 요리한다','나는 음식을 만든다'
   ]},
   {e:'I am cooking.',t:'현재진행',a:[
     '나는 요리하고 있다','나는 요리하고 있어','나는 요리 중이다',
     '나는 지금 요리하고 있다','나는 요리하는 중이다','저는 요리하고 있습니다',
-    '나는 지금 요리 중이다','나는 요리 중이에요','나는 지금 요리해','나는 요리를 하고 있다',
-    '나는 요리하는 중이야'
+    '나는 지금 요리 중이다','나는 요리 중이에요','나는 밥을 하고 있다',
+    '나는 지금 밥을 하고 있다','나는 지금 요리해','나는 요리를 하고 있다'
   ]},
   {e:'I was cooking.',t:'과거진행',a:[
     '나는 요리하고 있었다','나는 요리 중이었다','나는 요리하고 있었어',
-    '나는 요리하는 중이었다','저는 요리하고 있었습니다','나는 요리를 하고 있었다','나는 요리 중이었어','나는 요리를 하는 중이었다'
+    '나는 요리하는 중이었다','저는 요리하고 있었습니다','나는 밥을 하고 있었다',
+    '나는 요리를 하고 있었다','나는 요리 중이었어','나는 요리를 하는 중이었다'
   ]},
   {e:'I cooked.',t:'과거',a:[
     '나는 요리했다','나는 요리했어','나는 요리를 했다',
     '저는 요리했습니다','내가 요리했다','나는 밥을 했다',
-    '나는 요리를 만들었다','나는 음식을 만들었다'
+    '나는 요리를 만들었다','나는 음식을 만들었다','나는 밥을 지었다'
   ]},
   {e:'I can cook.',t:'현재(조동사-가능)',a:[
     '나는 요리할 수 있다','나는 요리할 수 있어','나는 요리를 할 수 있다',
     '저는 요리할 수 있습니다','나는 요리가 가능하다','나는 밥을 할 수 있다',
-    '나는 요리를 잘 할 수 있다','내가 요리할 수 있다','나는 요리할 줄 안다',
-    '나는 요리할수 있어'
+    '나는 요리를 잘 할 수 있다','내가 요리할 수 있다','나는 요리할 줄 안다'
   ]},
   {e:'I should cook.',t:'현재(조동사-의무/권고)',a:[
     '나는 요리해야 한다','나는 요리해야 해','나는 요리해야만 한다',
     '저는 요리해야 합니다','나는 요리를 해야 한다','나는 요리하는 것이 좋겠다',
     '나는 요리를 해야 해','나는 요리를 해야만 한다','나는 요리해야겠다',
     '나는 요리를 해야겠다','나는 요리하는 게 좋겠다','나는 요리를 해야할 것 같다',
-    '내가 요리해야 한다','나는 요리하는 것이 낫겠다','나는 요리를 했으면 좋겠다'
-    ,'내가 요리하는 것이 좋겠다','나는 요리를 해야할 것 같다','나는 요리 해야해',
-    '나는 요리를 해야해'
+    '내가 요리해야 한다','나는 요리하는 것이 낫겠다','나는 요리를 했으면 좋겠다',
+    '나는 요리 해야해','나는 요리 해야 해','나는 요리해야해','난 요리 해야해','난 요리해야해'
   ]},
   {e:'I will cook.',t:'미래',a:[
     '나는 요리할 것이다','나는 요리할 거야','나는 요리할 거다',
     '저는 요리할 것입니다','나는 요리하겠다','나는 요리를 할 것이다',
     '나는 요리를 할 거야','나는 요리를 할 거다','내가 요리할 것이다',
-    '나는 밥을 할 것이다','나는 요리할 예정이다','나는 요리를 할거야',
-    '난 요리할거야','나는 요리할거야'
+    '나는 밥을 할 것이다','나는 요리할 예정이다',
+    '나는 요리 할거야','나는 요리 할 거야','나는 요리 할것이다','나는 요리 할 것이다',
+    '난 요리할 거야','난 요리 할거야','나는 요리를 할거야','나는 요리할거야'
   ]},
   {e:'I will be cooking.',t:'미래진행',a:[
     '나는 요리하고 있을 것이다','나는 요리하고 있을 거야','나는 요리 중일 것이다',
@@ -512,7 +512,9 @@ const writingData = [
     '저는 요리해야 합니다','나는 요리를 해야만 한다','나는 요리를 해야 한다',
     '나는 요리를 해야 해','나는 반드시 요리해야 한다','나는 꼭 요리해야 한다',
     '나는 요리해야겠다','나는 밥을 해야 한다','내가 요리해야 한다',
-    '나는 요리를 꼭 해야만해','나는 요리를 꼭 해야해','나는 요리를 해야만해'
+    '나는 요리를 꼭 해야만해','나는 요리를 꼭 해야만 해','나는 요리를 꼭 해야해',
+    '나는 꼭 요리해야 해','나는 꼭 요리해야만 해','난 꼭 요리해야 해',
+    '나는 요리를 해야만해','나는 요리해야만해'
   ]},
   {e:'I was cooking when you were at school.',t:'과거진행+과거',a:[
     '네가 학교에 있을 때 나는 요리하고 있었다',
@@ -606,10 +608,8 @@ function selGrade(el, g) {
 function startTest() {
   const name = document.getElementById('studentName').value.trim();
   if(!name){alert('학생 이름을 입력해 주세요.');return;}
-  const email = document.getElementById('parentEmail').value.trim();
-  if(!email||!email.includes('@')){alert('정확한 이메일 주소를 입력해 주세요.');return;}
   if(!currentGrade){alert('학년을 선택해 주세요.');return;}
-  ans.studentName=name; ans.parentEmail=email;
+  ans.studentName=name; ans.parentEmail='';
   ans.submittedAt=new Date().toLocaleString('ko-KR',{timeZone:'Asia/Seoul'});
 
   // 랜딩 설문 데이터 수집
@@ -932,47 +932,8 @@ function buildResult() {
 }
 
 // ===== 데이터 전송 =====
-// ===== 데이터 전송 =====
 async function sendData() {
-  // 이메일 발송 완전 비활성화
-}
-
-function savePDF() {
-  const wP=Math.round(((ans.writingScore||0)/wT)*100);
-  const trText=trResults.map((r,i)=>`${i+1}. ${r.e} → ${r.answer} (${r.t}) [${r.correct?'정답':'오답'}]`).join('\n');
-  const weak=[vP<60?'단어':'',gP<60?'문법':'',rP<60?'읽기':'',lP<60?'듣기':'',wP<60?'쓰기':''].filter(Boolean).join(', ')||'없음';
-
-  // 이메일 HTML 본문 생성
-  const emailHtml = `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#F7F4EE;"><div style="background:#1C1A17;padding:24px;text-align:center;"><p style="color:#6B8F71;font-size:11px;margin:0 0 4px;">HEDGE · EDU · WRITING ENGLISH</p><h1 style="color:#F7F4EE;font-size:20px;margin:0;">영어 레벨 진단 결과</h1><p style="color:#C5C0B8;font-size:12px;margin:6px 0 0;">${ans.submittedAt||''}</p></div><div style="padding:24px;"><p style="font-size:14px;color:#1C1A17;margin:0 0 20px;">안녕하세요,<br>헷지에듀 무료 레벨 진단 테스트에 참여해 주셔서 감사합니다.</p><div style="background:#E8F0E9;border-radius:10px;padding:20px;margin-bottom:16px;text-align:center;"><p style="font-size:12px;color:#4A6B4F;margin:0 0 4px;">${ans.studentName||''} 학생 (${ans.grade||''}) 진단 레벨</p><p style="font-size:30px;font-weight:bold;color:#4A6B4F;margin:0;">${ans.level||''}</p><p style="font-size:13px;color:#6B8F71;margin:4px 0 0;">종합 정답률 ${ans.totalScore||0}%</p></div><div style="background:#fff;border:1px solid #E0DAD0;border-radius:10px;padding:16px;margin-bottom:12px;"><p style="font-size:13px;font-weight:bold;color:#1C1A17;margin:0 0 10px;">📊 5개 영역 점수</p><table style="width:100%;font-size:12px;border-collapse:collapse;"><tr><td style="padding:6px 0;color:#888;border-bottom:1px solid #f0f0f0;">단어</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;border-bottom:1px solid #f0f0f0;">${ans.vocabScore||0}/${vT} (${vP}%)</td></tr><tr><td style="padding:6px 0;color:#888;border-bottom:1px solid #f0f0f0;">문법</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;border-bottom:1px solid #f0f0f0;">${ans.grammarScore||0}/${gT} (${gP}%)</td></tr><tr><td style="padding:6px 0;color:#888;border-bottom:1px solid #f0f0f0;">읽기</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;border-bottom:1px solid #f0f0f0;">${ans.readingScore||0}/${rT} (${rP}%)</td></tr><tr><td style="padding:6px 0;color:#888;border-bottom:1px solid #f0f0f0;">듣기</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;border-bottom:1px solid #f0f0f0;">${ans.listeningScore||0}/${lT} (${lP}%)</td></tr><tr><td style="padding:6px 0;color:#888;">쓰기</td><td style="text-align:right;color:#4A6B4F;font-weight:bold;">${ans.writingScore||0}/${wT} (${wP}%)</td></tr></table></div><div style="background:#fff;border:1px solid #E0DAD0;border-radius:10px;padding:16px;margin-bottom:12px;"><p style="font-size:13px;font-weight:bold;color:#1C1A17;margin:0 0 10px;">✍️ 쓰기 번역 상세 결과</p><div style="font-size:12px;color:#444;line-height:2;">${trResults.map((r,i)=>`<div style="padding:4px 0;border-bottom:1px solid #f5f5f5;"><span style="color:#1C1A17;font-weight:500;">${i+1}. ${r.e}</span> <span style="display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;${r.correct?'background:#E8F0E9;color:#4A6B4F;':'background:#FDEDEC;color:#C0392B;'}">${r.correct?'✓ 정답':'△ 재확인'}</span><br><span style="color:#888;">내 답: ${r.answer}</span></div>`).join('')}</div></div><div style="background:#FDF5EC;border:1px solid #E8D4BC;border-radius:10px;padding:16px;margin-bottom:12px;"><p style="font-size:13px;font-weight:bold;color:#1C1A17;margin:0 0 6px;">🔍 보완이 필요한 영역</p><p style="font-size:12px;color:#444;margin:0;">${weak}</p></div><div style="background:#FDF5EC;border:1px solid #E8D4BC;border-radius:10px;padding:16px;margin-bottom:12px;"><p style="font-size:13px;font-weight:bold;color:#1C1A17;margin:0 0 6px;">🤖 헷지에듀 AI 코멘트</p><p style="font-size:12px;color:#444;margin:0;">테스트 결과를 바탕으로 분석한 학습 방향을 안내드립니다. 더 정확한 진단은 1:1 상담을 통해 받아보세요.</p></div><div style="background:#1C1A17;border-radius:10px;padding:20px;margin-bottom:12px;text-align:center;"><p style="color:#F7F4EE;font-size:13px;margin:0 0 12px;">더 정확한 진단과 맞춤 학습 로드맵이 필요하시다면<br><span style="color:#A8C5AC;">윤이연 대표와 1:1 유료 상담</span>을 예약해 보세요.</p><a href="https://map.naver.com/p/entry/place/1256593955?placePath=/ticket" style="display:inline-block;background:#6B8F71;color:white;padding:10px 24px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:bold;">1:1 상담 예약하기 →</a></div><div style="background:#FEE500;border-radius:10px;padding:16px;text-align:center;"><p style="color:#3A1D1D;font-size:13px;font-weight:bold;margin:0 0 10px;">헷지에듀 카카오 채널</p><a href="http://pf.kakao.com/_UymBn" style="display:inline-block;background:#3A1D1D;color:#FEE500;padding:8px 20px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:bold;">카카오 채널 추가하기</a></div></div><div style="background:#1C1A17;padding:14px;text-align:center;"><p style="color:#888;font-size:10px;margin:0;">헷지에듀 · Writing English · 경기도 화성시 동탄 본원</p></div></div>`;
-
-  const payload={
-    studentName:ans.studentName||'',parentEmail:ans.parentEmail||'',
-    submittedAt:ans.submittedAt||'',grade:ans.grade||'',level:ans.level||'',
-    totalScore:ans.totalScore||0,
-    vocabScore:`${ans.vocabScore||0}/${vT} (${vP}%)`,
-    grammarScore:`${ans.grammarScore||0}/${gT} (${gP}%)`,
-    readingScore:`${ans.readingScore||0}/${rT} (${rP}%)`,
-    listeningScore:`${ans.listeningScore||0}/${lT} (${lP}%)`,
-    writingScore:`${ans.writingScore||0}/${wT} (${wP}%)`,
-    translationDetail:trText,weakPoints:weak,
-    emailHtml:emailHtml,
-    engStart:ans.engStart||'',engHistory:(ans.engHistory||'').substring(0,2000),
-    korReading:ans.korReading||'',essay:ans.essay||'',
-    socialKnow:ans.socialKnow||'',sciKnow:ans.sciKnow||'',
-    grammar:ans.grammar||'',grammarAge:ans.grammarAge||'',
-    personality:(ans.personality||[]).join(', '),selfStudy:ans.selfStudy||'',
-    selfStudyDetail:(ans.selfStudyDetail||'').substring(0,2000),
-    studyDuration:ans.studyDuration||'',studyRefusal:ans.studyRefusal||'',
-    engStudyFreq:ans.engStudyFreq||'',
-    mainConcern:(ans.mainConcern||'').substring(0,2000),
-  };
-
-  try {
-    const res=await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    // 전송 완료 (상태 표시 없음)
-  } catch(e) {
-    console.log('전송 오류:', e.message);
-  }
+  // 이메일 발송 비활성화
 }
 
 function savePDF() {
