@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>헷지에듀 무료 영어 레벨 진단 테스트</title>
+<title>í·ì§ìë ë¬´ë£ ìì´ ë ë²¨ ì§ë¨ íì¤í¸</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
@@ -132,7 +132,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
   print-color-adjust: exact;
   @page { margin: 1cm; size: A4 portrait; }
 
-  /* 불필요 요소 모두 숨기기 */
+  /* ë¶íì ìì ëª¨ë ì¨ê¸°ê¸° */
   #printBtns, .hdr, .prog-wrap, .kakao-box, .cta-grid,
   .divider, .status-box, .btn-row, .email-confirm, .chip,
   #s0, #s1, #s2, #s3, #s4, #s5, #s6 { display:none !important; }
@@ -141,32 +141,32 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
   body { background: white !important; margin: 0; font-size: 11px !important; }
   .main { padding: 0 !important; max-width: 100% !important; }
 
-  /* 결과 화면만 표시 */
+  /* ê²°ê³¼ íë©´ë§ íì */
   #s7 { display: block !important; animation: none !important; }
 
-  /* 전체 폰트 크기 축소 */
+  /* ì ì²´ í°í¸ í¬ê¸° ì¶ì */
   * { font-size: 11px !important; line-height: 1.4 !important; }
   .result-title { font-size: 14px !important; }
   .level-badge { font-size: 10px !important; padding: 2px 10px !important; }
   .q-en, .writing-en { font-size: 12px !important; }
 
-  /* 카드 여백 최소화 */
+  /* ì¹´ë ì¬ë°± ìµìí */
   .result-hero { padding: 10px !important; margin-bottom: 6px !important; }
   .radar-wrap { padding: 8px !important; margin: 6px 0 !important; }
   .detail-card { padding: 8px !important; margin-bottom: 6px !important; break-inside: avoid; }
   .writing-row { padding: 3px 0 !important; }
   .area-row { padding: 3px 0 !important; }
 
-  /* 레이더 차트 크기 축소 */
+  /* ë ì´ë ì°¨í¸ í¬ê¸° ì¶ì */
   .chart-container { max-width: 200px !important; }
 
-  /* 색상 강제 적용 */
+  /* ìì ê°ì  ì ì© */
   .area-bar-inner { background: #6B8F71 !important; print-color-adjust: exact; }
   .level-badge { background: #6B8F71 !important; color: white !important; }
   .tag-ok { background: #E8F0E9 !important; color: #4A6B4F !important; }
   .tag-ng { background: #FDEDEC !important; color: #C0392B !important; }
 
-  /* 2단 레이아웃으로 영역별 점수 + 쓰기 상세 나란히 */
+  /* 2ë¨ ë ì´ììì¼ë¡ ìì­ë³ ì ì + ì°ê¸° ìì¸ ëëí */
   #s7 > .detail-card:nth-of-type(1),
   #s7 > .detail-card:nth-of-type(2) {
     width: 48% !important;
@@ -179,8 +179,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
 <body>
 
 <header class="hdr">
-  <div class="logo">HEDGE<span>·</span>EDU</div>
-  <div class="hdr-sub">무료 영어 레벨 진단</div>
+  <div class="logo">HEDGE<span>Â·</span>EDU</div>
+  <div class="hdr-sub">ë¬´ë£ ìì´ ë ë²¨ ì§ë¨</div>
 </header>
 <div class="prog-wrap" id="progWrap">
   <span class="prog-label" id="progLabel"></span>
@@ -190,180 +190,180 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
 
 <main class="main">
 
-<!-- SCREEN 0: 랜딩 -->
+<!-- SCREEN 0: ëë© -->
 <div class="screen active" id="s0">
   <div class="hero">
-    <span class="hedgehog">🦔</span>
-    <h1 class="hero-title">영어 공부 안 하지 않았던 우리 아이,<br><em>지금 영어 잘 하나요?</em></h1>
-    <p class="hero-sub">헷지에듀 쓰기영어에서 제공하는 영어 무료 테스트를 먼저 받아보세요.<br>헷지에듀 윤이연 대표가 직접 설계한 레벨 테스트로<br>초등 학생의 단어·문법·읽기·듣기·쓰기 5개 영역 수준을<br>1차로 파악해볼 수 있습니다.</p>
+    <span class="hedgehog">ð¦</span>
+    <h1 class="hero-title">ìì´ ê³µë¶ ì íì§ ììë ì°ë¦¬ ìì´,<br><em>ì§ê¸ ìì´ ì íëì?</em></h1>
+    <p class="hero-sub">í·ì§ìë ì°ê¸°ìì´ìì ì ê³µíë ìì´ ë¬´ë£ íì¤í¸ë¥¼ ë¨¼ì  ë°ìë³´ì¸ì.<br>í·ì§ìë ì¤ì´ì° ëíê° ì§ì  ì¤ê³í ë ë²¨ íì¤í¸ë¡<br>ì´ë± íìì ë¨ì´Â·ë¬¸ë²Â·ì½ê¸°Â·ë£ê¸°Â·ì°ê¸° 5ê° ìì­ ìì¤ì<br>1ì°¨ë¡ íìí´ë³¼ ì ììµëë¤.</p>
   </div>
   <div class="stat-grid">
-    <div class="stat-card"><div class="stat-num">5영역</div><div class="stat-lbl">종합 진단</div></div>
-    <div class="stat-card"><div class="stat-num">초1~6</div><div class="stat-lbl">대상 학년</div></div>
-    <div class="stat-card"><div class="stat-num">무료</div><div class="stat-lbl">비용 없음</div></div>
+    <div class="stat-card"><div class="stat-num">5ìì­</div><div class="stat-lbl">ì¢í© ì§ë¨</div></div>
+    <div class="stat-card"><div class="stat-num">ì´1~6</div><div class="stat-lbl">ëì íë</div></div>
+    <div class="stat-card"><div class="stat-num">ë¬´ë£</div><div class="stat-lbl">ë¹ì© ìì</div></div>
   </div>
   <div class="notice">
-    📌 쓰기 문항은 헷지에듀 온라인 사이트에서 사용하는 테스트 내용을 그대로 적용했습니다.<br>
-    학습 이력 설문은 추후 윤이연 대표와의 1:1 유료 상담으로 이어질 경우에 자료로 활용됩니다.
+    ð ì°ê¸° ë¬¸í­ì í·ì§ìë ì¨ë¼ì¸ ì¬ì´í¸ìì ì¬ì©íë íì¤í¸ ë´ì©ì ê·¸ëë¡ ì ì©íìµëë¤.<br>
+    íìµ ì´ë ¥ ì¤ë¬¸ì ì¶í ì¤ì´ì° ëíìì 1:1 ì ë£ ìë´ì¼ë¡ ì´ì´ì§ ê²½ì°ì ìë£ë¡ íì©ë©ëë¤.
   </div>
   <div style="background:var(--accent-l);border:1px solid #E8D4BC;border-radius:var(--r);padding:1rem 1.125rem;margin-bottom:1.125rem;">
-    <p style="font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">📋 학부모님께서 먼저 작성해 주세요</p>
-    <p style="font-size:.78rem;color:var(--mid);line-height:1.65;">아래 기본 정보와 학습 이력 설문은 <strong>학부모님이 직접</strong> 입력해 주세요.<br>학생이 직접 테스트를 시작하기 전에 완료해 주셔야 합니다.</p>
+    <p style="font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">ð íë¶ëª¨ëê»ì ë¨¼ì  ìì±í´ ì£¼ì¸ì</p>
+    <p style="font-size:.78rem;color:var(--mid);line-height:1.65;">ìë ê¸°ë³¸ ì ë³´ì íìµ ì´ë ¥ ì¤ë¬¸ì <strong>íë¶ëª¨ëì´ ì§ì </strong> ìë ¥í´ ì£¼ì¸ì.<br>íìì´ ì§ì  íì¤í¸ë¥¼ ììíê¸° ì ì ìë£í´ ì£¼ìì¼ í©ëë¤.</p>
   </div>
 
   <div class="card">
-    <div class="q-num">시작 전 기본 정보</div>
-    <div class="q-label" style="margin-top:.5rem;">학생 이름<span class="required">*</span></div>
-    <input type="text" id="studentName" class="ei" placeholder="학생 이름">
+    <div class="q-num">ìì ì  ê¸°ë³¸ ì ë³´</div>
+    <div class="q-label" style="margin-top:.5rem;">íì ì´ë¦<span class="required">*</span></div>
+    <input type="text" id="studentName" class="ei" placeholder="íì ì´ë¦">
 
-    <div class="q-label" style="margin-top:1rem;">현재 학년<span class="required">*</span></div>
+    <div class="q-label" style="margin-top:1rem;">íì¬ íë<span class="required">*</span></div>
     <div class="grade-grid" style="margin-top:.5rem;">
-      <button class="grade-btn" onclick="selGrade(this,'초1')">초등 1학년</button>
-      <button class="grade-btn" onclick="selGrade(this,'초2')">초등 2학년</button>
-      <button class="grade-btn" onclick="selGrade(this,'초3')">초등 3학년</button>
-      <button class="grade-btn" onclick="selGrade(this,'초4')">초등 4학년</button>
-      <button class="grade-btn" onclick="selGrade(this,'초5')">초등 5학년</button>
-      <button class="grade-btn" onclick="selGrade(this,'초6')">초등 6학년</button>
+      <button class="grade-btn" onclick="selGrade(this,'ì´1')">ì´ë± 1íë</button>
+      <button class="grade-btn" onclick="selGrade(this,'ì´2')">ì´ë± 2íë</button>
+      <button class="grade-btn" onclick="selGrade(this,'ì´3')">ì´ë± 3íë</button>
+      <button class="grade-btn" onclick="selGrade(this,'ì´4')">ì´ë± 4íë</button>
+      <button class="grade-btn" onclick="selGrade(this,'ì´5')">ì´ë± 5íë</button>
+      <button class="grade-btn" onclick="selGrade(this,'ì´6')">ì´ë± 6íë</button>
     </div>
   </div>
 
-  <!-- 학습 이력 설문 (학부모 작성) -->
+  <!-- íìµ ì´ë ¥ ì¤ë¬¸ (íë¶ëª¨ ìì±) -->
   <div style="background:var(--accent-l);border:1px solid #E8D4BC;border-radius:var(--r);padding:1rem 1.125rem;margin:1.25rem 0 .75rem;">
-    <p style="font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">📋 학부모님이 아래 설문을 먼저 작성해 주세요</p>
-    <p style="font-size:.78rem;color:var(--mid);line-height:1.65;">아래 항목은 추후 윤이연 대표와의 1:1 유료 상담을 진행하게 될 때 추가 자료로 활용됩니다.<br>오늘 학생이 진행하는 테스트 결과지에는 포함되지 않습니다.</p>
+    <p style="font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">ð íë¶ëª¨ëì´ ìë ì¤ë¬¸ì ë¨¼ì  ìì±í´ ì£¼ì¸ì</p>
+    <p style="font-size:.78rem;color:var(--mid);line-height:1.65;">ìë í­ëª©ì ì¶í ì¤ì´ì° ëíìì 1:1 ì ë£ ìë´ì ì§ííê² ë  ë ì¶ê° ìë£ë¡ íì©ë©ëë¤.<br>ì¤ë íìì´ ì§ííë íì¤í¸ ê²°ê³¼ì§ìë í¬í¨ëì§ ììµëë¤.</p>
   </div>
 
   <div id="landingSurveyContainer"></div>
 
-  <!-- 테스트 시작 -->
+  <!-- íì¤í¸ ìì -->
   <div style="text-align:center;margin-top:1.75rem;">
-    <button class="btn-p full" style="max-width:320px;margin:0 auto;" onclick="startTest()">테스트 시작하기 →</button>
-    <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem;">지금부터 학생이 진행합니다</p>
+    <button class="btn-p full" style="max-width:320px;margin:0 auto;" onclick="startTest()">íì¤í¸ ììíê¸° â</button>
+    <p style="font-size:.78rem;color:var(--muted);margin-top:.75rem;">ì§ê¸ë¶í° íìì´ ì§íí©ëë¤</p>
   </div>
 </div>
 
-<!-- SCREEN 1: 단어 -->
+<!-- SCREEN 1: ë¨ì´ -->
 <div class="screen" id="s1">
-  <div class="chip">STEP 1 · 단어 (Vocabulary)</div>
-  <h2 class="sec-title">단어를 보고 알맞은 뜻을 선택하세요</h2>
-  <p class="sec-desc">각 단어의 정확한 우리말 뜻을 고르세요.</p>
+  <div class="chip">STEP 1 Â· ë¨ì´ (Vocabulary)</div>
+  <h2 class="sec-title">ë¨ì´ë¥¼ ë³´ê³  ìë§ì ë»ì ì ííì¸ì</h2>
+  <p class="sec-desc">ê° ë¨ì´ì ì íí ì°ë¦¬ë§ ë»ì ê³ ë¥´ì¸ì.</p>
   <div id="vocabQs"></div>
   <div class="btn-row">
-    <button class="btn-s" onclick="goScreen(0)">← 이전</button>
-    <button class="btn-p" onclick="submitVocab()">다음 →</button>
+    <button class="btn-s" onclick="goScreen(0)">â ì´ì </button>
+    <button class="btn-p" onclick="submitVocab()">ë¤ì â</button>
   </div>
 </div>
 
-<!-- SCREEN 2: 문법 -->
+<!-- SCREEN 2: ë¬¸ë² -->
 <div class="screen" id="s2">
-  <div class="chip">STEP 2 · 문법 (Grammar)</div>
-  <h2 class="sec-title">알맞은 형태를 선택하세요</h2>
-  <p class="sec-desc">동사의 유형과 시제를 구분하여 올바른 형태를 고르세요.</p>
+  <div class="chip">STEP 2 Â· ë¬¸ë² (Grammar)</div>
+  <h2 class="sec-title">ìë§ì ííë¥¼ ì ííì¸ì</h2>
+  <p class="sec-desc">ëì¬ì ì íê³¼ ìì ë¥¼ êµ¬ë¶íì¬ ì¬ë°ë¥¸ ííë¥¼ ê³ ë¥´ì¸ì.</p>
   <div id="grammarQs"></div>
   <div class="btn-row">
-    <button class="btn-s" onclick="goScreen(1)">← 이전</button>
-    <button class="btn-p" onclick="submitGrammar()">다음 →</button>
+    <button class="btn-s" onclick="goScreen(1)">â ì´ì </button>
+    <button class="btn-p" onclick="submitGrammar()">ë¤ì â</button>
   </div>
 </div>
 
-<!-- SCREEN 3: 읽기 -->
+<!-- SCREEN 3: ì½ê¸° -->
 <div class="screen" id="s3">
-  <div class="chip">STEP 3 · 읽기 (Reading)</div>
-  <h2 class="sec-title">지문을 읽고 빈칸을 채우세요</h2>
-  <p class="sec-desc">이야기를 읽고 문맥에 맞는 단어를 빈칸에 입력하세요.</p>
+  <div class="chip">STEP 3 Â· ì½ê¸° (Reading)</div>
+  <h2 class="sec-title">ì§ë¬¸ì ì½ê³  ë¹ì¹¸ì ì±ì°ì¸ì</h2>
+  <p class="sec-desc">ì´ì¼ê¸°ë¥¼ ì½ê³  ë¬¸ë§¥ì ë§ë ë¨ì´ë¥¼ ë¹ì¹¸ì ìë ¥íì¸ì.</p>
   <div class="passage" id="readingPassage"></div>
   <div id="readingQs"></div>
   <div class="btn-row">
-    <button class="btn-s" onclick="goScreen(2)">← 이전</button>
-    <button class="btn-p" onclick="submitReading()">다음 →</button>
+    <button class="btn-s" onclick="goScreen(2)">â ì´ì </button>
+    <button class="btn-p" onclick="submitReading()">ë¤ì â</button>
   </div>
 </div>
 
-<!-- SCREEN 4: 듣기 -->
+<!-- SCREEN 4: ë£ê¸° -->
 <div class="screen" id="s4">
-  <div class="chip">STEP 4 · 듣기 (Listening)</div>
-  <h2 class="sec-title">문장을 듣고 올바른 내용을 선택하세요</h2>
-  <p class="sec-desc">재생 버튼을 눌러 문장을 들은 후 알맞은 답을 고르세요.</p>
+  <div class="chip">STEP 4 Â· ë£ê¸° (Listening)</div>
+  <h2 class="sec-title">ë¬¸ì¥ì ë£ê³  ì¬ë°ë¥¸ ë´ì©ì ì ííì¸ì</h2>
+  <p class="sec-desc">ì¬ì ë²í¼ì ëë¬ ë¬¸ì¥ì ë¤ì í ìë§ì ëµì ê³ ë¥´ì¸ì.</p>
   <div id="listeningQs"></div>
   <div class="btn-row">
-    <button class="btn-s" onclick="goScreen(3)">← 이전</button>
-    <button class="btn-p" onclick="submitListening()">다음 →</button>
+    <button class="btn-s" onclick="goScreen(3)">â ì´ì </button>
+    <button class="btn-p" onclick="submitListening()">ë¤ì â</button>
   </div>
 </div>
 
-<!-- SCREEN 5: 쓰기 -->
+<!-- SCREEN 5: ì°ê¸° -->
 <div class="screen" id="s5">
-  <div class="chip">STEP 5 · 쓰기 (Writing)</div>
-  <h2 class="sec-title">영어 문장을 한국어로 번역하세요</h2>
-  <p class="sec-desc">각 영어 문장을 정확한 한국어 어미로 번역해 주세요.<br>현재형·과거형·진행형을 정확히 구분하는 것이 중요합니다.</p>
+  <div class="chip">STEP 5 Â· ì°ê¸° (Writing)</div>
+  <h2 class="sec-title">ìì´ ë¬¸ì¥ì íêµ­ì´ë¡ ë²ì­íì¸ì</h2>
+  <p class="sec-desc">ê° ìì´ ë¬¸ì¥ì ì íí íêµ­ì´ ì´ë¯¸ë¡ ë²ì­í´ ì£¼ì¸ì.<br>íì¬íÂ·ê³¼ê±°íÂ·ì§ííì ì íí êµ¬ë¶íë ê²ì´ ì¤ìí©ëë¤.</p>
   <div id="writingQs"></div>
   <div class="btn-row">
-    <button class="btn-s" onclick="goScreen(4)">← 이전</button>
-    <button class="btn-p" onclick="submitWriting()">결과 보기 →</button>
+    <button class="btn-s" onclick="goScreen(4)">â ì´ì </button>
+    <button class="btn-p" onclick="submitWriting()">ê²°ê³¼ ë³´ê¸° â</button>
   </div>
 </div>
 
-<!-- SCREEN 6: 설문 (랜딩으로 통합됨 - 유지만) -->
+<!-- SCREEN 6: ì¤ë¬¸ (ëë©ì¼ë¡ íµí©ë¨ - ì ì§ë§) -->
 <div class="screen" id="s6">
   <div style="background:#FDF5EC;border:1px solid #E8D4BC;border-radius:var(--r);padding:1rem 1.125rem;margin-bottom:1.25rem;">
-    <p style="font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">⚠️ 학부모님이 직접 작성해 주세요</p>
-    <p style="font-size:.78rem;color:var(--mid);line-height:1.65;">이 페이지는 학생이 아닌 <strong>학부모님이 직접</strong> 입력해야 정확한 정보를 얻을 수 있습니다.<br>잠시 학부모님께 화면을 전달해 주세요.</p>
+    <p style="font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:.3rem;">â ï¸ íë¶ëª¨ëì´ ì§ì  ìì±í´ ì£¼ì¸ì</p>
+    <p style="font-size:.78rem;color:var(--mid);line-height:1.65;">ì´ íì´ì§ë íìì´ ìë <strong>íë¶ëª¨ëì´ ì§ì </strong> ìë ¥í´ì¼ ì íí ì ë³´ë¥¼ ì»ì ì ììµëë¤.<br>ì ì íë¶ëª¨ëê» íë©´ì ì ë¬í´ ì£¼ì¸ì.</p>
   </div>
-  <div class="chip">사전 설문 · 학습 이력 (학부모 작성)</div>
-  <h2 class="sec-title">아이의 학습 이력을 자세히 알려주세요</h2>
-  <p class="sec-desc">아래 항목은 추후 윤이연 대표와의 1:1 유료 상담을 진행하게 될 때 추가 자료로 활용됩니다.<br>오늘 학생이 진행하는 테스트 결과지에는 포함되지 않습니다.</p>
+  <div class="chip">ì¬ì  ì¤ë¬¸ Â· íìµ ì´ë ¥ (íë¶ëª¨ ìì±)</div>
+  <h2 class="sec-title">ìì´ì íìµ ì´ë ¥ì ìì¸í ìë ¤ì£¼ì¸ì</h2>
+  <p class="sec-desc">ìë í­ëª©ì ì¶í ì¤ì´ì° ëíìì 1:1 ì ë£ ìë´ì ì§ííê² ë  ë ì¶ê° ìë£ë¡ íì©ë©ëë¤.<br>ì¤ë íìì´ ì§ííë íì¤í¸ ê²°ê³¼ì§ìë í¬í¨ëì§ ììµëë¤.</p>
   <div id="surveyContainer"></div>
   <div class="btn-row">
-    <button class="btn-s" onclick="goScreen(5)">← 이전</button>
-    <button class="btn-p" onclick="submitAll()">제출 및 결과 확인 →</button>
+    <button class="btn-s" onclick="goScreen(5)">â ì´ì </button>
+    <button class="btn-p" onclick="submitAll()">ì ì¶ ë° ê²°ê³¼ íì¸ â</button>
   </div>
 </div>
 
-<!-- SCREEN 7: 결과 -->
+<!-- SCREEN 7: ê²°ê³¼ -->
 <div class="screen" id="s7">
-  <div class="chip">진단 완료 · 결과 리포트</div>
+  <div class="chip">ì§ë¨ ìë£ Â· ê²°ê³¼ ë¦¬í¬í¸</div>
 
-  <!-- 인쇄/PDF 버튼 -->
+  <!-- ì¸ì/PDF ë²í¼ -->
   <div style="display:flex;gap:.625rem;margin-bottom:.75rem;flex-wrap:wrap;" id="printBtns">
     <button onclick="window.print()" style="display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--sage);color:white;border:none;padding:.8rem 1.5rem;border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;width:100%;">
-      🖨️ 결과지 인쇄 / PDF 저장
+      ð¨ï¸ ê²°ê³¼ì§ ì¸ì / PDF ì ì¥
     </button>
   </div>
   <div style="background:var(--accent-l);border:1px solid #E8D4BC;border-radius:var(--rs);padding:.75rem 1rem;margin-bottom:1.25rem;font-size:.78rem;color:var(--mid);line-height:1.7;">
-    📌 <strong>PDF로 저장하는 방법:</strong> 위 버튼 클릭 → 인쇄 창에서 대상(프린터) 선택 → <strong>"PDF로 저장"</strong> 선택 → 저장
+    ð <strong>PDFë¡ ì ì¥íë ë°©ë²:</strong> ì ë²í¼ í´ë¦­ â ì¸ì ì°½ìì ëì(íë¦°í°) ì í â <strong>"PDFë¡ ì ì¥"</strong> ì í â ì ì¥
   </div>
 
   <div class="result-hero">
-    <div class="level-badge" id="levelBadge">기초 단계</div>
-    <h2 class="result-title" id="resultTitle">진단 완료!</h2>
+    <div class="level-badge" id="levelBadge">ê¸°ì´ ë¨ê³</div>
+    <h2 class="result-title" id="resultTitle">ì§ë¨ ìë£!</h2>
     <p class="result-desc" id="resultDesc"></p>
   </div>
   <div class="radar-wrap">
-    <div class="radar-title">📊 5개 영역 종합 분석</div>
+    <div class="radar-title">ð 5ê° ìì­ ì¢í© ë¶ì</div>
     <div class="chart-container"><canvas id="radarChart"></canvas></div>
   </div>
   <div class="detail-card">
-    <div class="detail-title">📈 영역별 점수</div>
+    <div class="detail-title">ð ìì­ë³ ì ì</div>
     <div id="areaScores"></div>
   </div>
   <div class="detail-card">
-    <div class="detail-title">✍️ 쓰기 번역 상세 결과</div>
+    <div class="detail-title">âï¸ ì°ê¸° ë²ì­ ìì¸ ê²°ê³¼</div>
     <div id="writingDetail"></div>
   </div>
 
   <div class="kakao-box">
-    <div class="kakao-title">💛 헷지에듀 카카오 채널</div>
-    <div class="kakao-desc">헷지에듀의 소식과 이벤트 혜택을 받아보시려면<br>카카오 채널을 추가해 주세요.</div>
-    <button class="kakao-btn" onclick="window.open('http://pf.kakao.com/_UymBn','_blank')">카카오 채널 추가하기 →</button>
+    <div class="kakao-title">ð í·ì§ìë ì¹´ì¹´ì¤ ì±ë</div>
+    <div class="kakao-desc">í·ì§ìëì ììê³¼ ì´ë²¤í¸ ííì ë°ìë³´ìë ¤ë©´<br>ì¹´ì¹´ì¤ ì±ëì ì¶ê°í´ ì£¼ì¸ì.</div>
+    <button class="kakao-btn" onclick="window.open('http://pf.kakao.com/_UymBn','_blank')">ì¹´ì¹´ì¤ ì±ë ì¶ê°íê¸° â</button>
   </div>
   <div class="status-box" id="statusBox" style="display:none;"></div>
   <div class="divider"></div>
-  <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:1rem;">더 알아보기</p>
+  <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:1rem;">ë ììë³´ê¸°</p>
   <div class="cta-grid">
-    <a class="cta-card" href="https://map.naver.com/p/entry/place/1256593955?placePath=/ticket" target="_blank"><div class="cc-icon">📅</div><div class="cc-title">1:1 상담 예약</div><div class="cc-desc">온라인/오프라인</div></a>
-    <a class="cta-card" href="https://www.youtube.com/@hedgehogmykid" target="_blank"><div class="cc-icon">🎬</div><div class="cc-title">유튜브 채널</div><div class="cc-desc">영어 교육 콘텐츠</div></a>
-    <a class="cta-card" href="https://blog.naver.com/herissons81" target="_blank"><div class="cc-icon">✍️</div><div class="cc-title">블로그</div><div class="cc-desc">학부모 영어 칼럼</div></a>
-    <a class="cta-card" href="https://www.instagram.com/happyhedgehogkids?igsh=M3o5ZWdwa3NnY2xy&utm_source=qr" target="_blank"><div class="cc-icon">📸</div><div class="cc-title">인스타그램</div><div class="cc-desc">헷지에듀 소식</div></a>
+    <a class="cta-card" href="https://map.naver.com/p/entry/place/1256593955?placePath=/ticket" target="_blank"><div class="cc-icon">ð</div><div class="cc-title">1:1 ìë´ ìì½</div><div class="cc-desc">ì¨ë¼ì¸/ì¤íë¼ì¸</div></a>
+    <a class="cta-card" href="https://www.youtube.com/@hedgehogmykid" target="_blank"><div class="cc-icon">ð¬</div><div class="cc-title">ì íë¸ ì±ë</div><div class="cc-desc">ìì´ êµì¡ ì½íì¸ </div></a>
+    <a class="cta-card" href="https://blog.naver.com/herissons81" target="_blank"><div class="cc-icon">âï¸</div><div class="cc-title">ë¸ë¡ê·¸</div><div class="cc-desc">íë¶ëª¨ ìì´ ì¹¼ë¼</div></a>
+    <a class="cta-card" href="https://www.instagram.com/happyhedgehogkids?igsh=M3o5ZWdwa3NnY2xy&utm_source=qr" target="_blank"><div class="cc-icon">ð¸</div><div class="cc-title">ì¸ì¤íê·¸ë¨</div><div class="cc-desc">í·ì§ìë ìì</div></a>
   </div>
 </div>
 
@@ -373,21 +373,21 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
 const WEBHOOK_URL = 'https://hook.us2.make.com/sob4025nc99gtpa04p1h28g9jibglh5a';
 let ans = {}, trResults = [], currentGrade = '', curScreen = 0;
 
-// ===== 데이터 =====
+// ===== ë°ì´í° =====
 const vocabByGrade = {
-  '초1':[{w:'apple',o:['사과','바나나','포도','오렌지'],c:0},{w:'dog',o:['고양이','개','새','물고기'],c:1},{w:'run',o:['먹다','자다','달리다','앉다'],c:2},{w:'big',o:['작은','예쁜','큰','빠른'],c:2},{w:'happy',o:['슬픈','행복한','화난','피곤한'],c:1}],
-  '초2':[{w:'library',o:['학교','도서관','병원','공원'],c:1},{w:'jump',o:['걷다','점프하다','수영하다','날다'],c:1},{w:'cold',o:['더운','따뜻한','차가운','시원한'],c:2},{w:'always',o:['가끔','절대','항상','보통'],c:2},{w:'kitchen',o:['화장실','침실','부엌','거실'],c:2}],
-  '초3':[{w:'nervous',o:['화난','긴장한','슬픈','지루한'],c:1},{w:'explain',o:['설명하다','요리하다','청소하다','기다리다'],c:0},{w:'forest',o:['사막','바다','숲','산'],c:2},{w:'surprised',o:['실망한','놀란','기쁜','무서운'],c:1},{w:'collect',o:['버리다','모으다','나누다','빌리다'],c:1}],
-  '초4':[{w:'convenient',o:['편리한','불편한','위험한','지루한'],c:0},{w:'investigate',o:['포기하다','연습하다','조사하다','이해하다'],c:2},{w:'ancient',o:['현대의','오래된','새로운','작은'],c:1},{w:'achieve',o:['실패하다','달성하다','준비하다','계획하다'],c:1},{w:'patience',o:['용기','인내심','지혜','친절'],c:1}],
-  '초5':[{w:'atmosphere',o:['대기','표면','핵심','경계'],c:0},{w:'significant',o:['사소한','중요한','일반적인','빠른'],c:1},{w:'obtain',o:['잃다','얻다','주다','보내다'],c:1},{w:'recommend',o:['반대하다','추천하다','거절하다','확인하다'],c:1},{w:'magnificent',o:['평범한','웅장한','작은','조용한'],c:1}],
-  '초6':[{w:'sufficient',o:['충분한','부족한','과도한','적절한'],c:0},{w:'contribute',o:['방해하다','기여하다','반대하다','무시하다'],c:1},{w:'consequence',o:['원인','계획','결과','방법'],c:2},{w:'emphasize',o:['약화시키다','강조하다','무시하다','숨기다'],c:1},{w:'perspective',o:['사실','관점','결론','증거'],c:1}],
+  'ì´1':[{w:'apple',o:['ì¬ê³¼','ë°ëë','í¬ë','ì¤ë ì§'],c:0},{w:'dog',o:['ê³ ìì´','ê°','ì','ë¬¼ê³ ê¸°'],c:1},{w:'run',o:['ë¨¹ë¤','ìë¤','ë¬ë¦¬ë¤','ìë¤'],c:2},{w:'big',o:['ìì','ìì','í°','ë¹ ë¥¸'],c:2},{w:'happy',o:['ì¬í','íë³µí','íë','í¼ê³¤í'],c:1}],
+  'ì´2':[{w:'library',o:['íêµ','ëìê´','ë³ì','ê³µì'],c:1},{w:'jump',o:['ê±·ë¤','ì ííë¤','ììíë¤','ë ë¤'],c:1},{w:'cold',o:['ëì´','ë°ë»í','ì°¨ê°ì´','ììí'],c:2},{w:'always',o:['ê°ë','ì ë','í­ì','ë³´íµ'],c:2},{w:'kitchen',o:['íì¥ì¤','ì¹¨ì¤','ë¶ì','ê±°ì¤'],c:2}],
+  'ì´3':[{w:'nervous',o:['íë','ê¸´ì¥í','ì¬í','ì§ë£¨í'],c:1},{w:'explain',o:['ì¤ëªíë¤','ìë¦¬íë¤','ì²­ìíë¤','ê¸°ë¤ë¦¬ë¤'],c:0},{w:'forest',o:['ì¬ë§','ë°ë¤','ì²','ì°'],c:2},{w:'surprised',o:['ì¤ë§í','ëë','ê¸°ì','ë¬´ìì´'],c:1},{w:'collect',o:['ë²ë¦¬ë¤','ëª¨ì¼ë¤','ëëë¤','ë¹ë¦¬ë¤'],c:1}],
+  'ì´4':[{w:'convenient',o:['í¸ë¦¬í','ë¶í¸í','ìíí','ì§ë£¨í'],c:0},{w:'investigate',o:['í¬ê¸°íë¤','ì°ìµíë¤','ì¡°ì¬íë¤','ì´í´íë¤'],c:2},{w:'ancient',o:['íëì','ì¤ëë','ìë¡ì´','ìì'],c:1},{w:'achieve',o:['ì¤í¨íë¤','ë¬ì±íë¤','ì¤ë¹íë¤','ê³ííë¤'],c:1},{w:'patience',o:['ì©ê¸°','ì¸ë´ì¬','ì§í','ì¹ì '],c:1}],
+  'ì´5':[{w:'atmosphere',o:['ëê¸°','íë©´','íµì¬','ê²½ê³'],c:0},{w:'significant',o:['ì¬ìí','ì¤ìí','ì¼ë°ì ì¸','ë¹ ë¥¸'],c:1},{w:'obtain',o:['ìë¤','ì»ë¤','ì£¼ë¤','ë³´ë´ë¤'],c:1},{w:'recommend',o:['ë°ëíë¤','ì¶ì²íë¤','ê±°ì íë¤','íì¸íë¤'],c:1},{w:'magnificent',o:['íë²í','ìì¥í','ìì','ì¡°ì©í'],c:1}],
+  'ì´6':[{w:'sufficient',o:['ì¶©ë¶í','ë¶ì¡±í','ê³¼ëí','ì ì í'],c:0},{w:'contribute',o:['ë°©í´íë¤','ê¸°ì¬íë¤','ë°ëíë¤','ë¬´ìíë¤'],c:1},{w:'consequence',o:['ìì¸','ê³í','ê²°ê³¼','ë°©ë²'],c:2},{w:'emphasize',o:['ì½íìí¤ë¤','ê°ì¡°íë¤','ë¬´ìíë¤','ì¨ê¸°ë¤'],c:1},{w:'perspective',o:['ì¬ì¤','ê´ì ','ê²°ë¡ ','ì¦ê±°'],c:1}],
 };
 
 const grammarData = [
   {q:'She ___ (play) tennis every day.',o:['play','plays','played','is playing'],c:1},
   {q:'I ___ (cook) dinner right now.',o:['cook','cooked','am cooking','will cook'],c:2},
   {q:'They ___ (finish) their homework yesterday.',o:['finish','finishes','finished','are finishing'],c:2},
-  {q:'He ___ a teacher. (직업/상태)',o:['does','is','was','will be'],c:1},
+  {q:'He ___ a teacher. (ì§ì/ìí)',o:['does','is','was','will be'],c:1},
   {q:'We ___ (go) to the park tomorrow.',o:['go','went','are going','will go'],c:3},
   {q:'She ___ (study) when I called her.',o:['studies','studied','was studying','is studying'],c:2},
   {q:'___ your dog ___ (like) to swim?',o:['Does/like','Is/liking','Did/liked','Will/like'],c:0},
@@ -398,52 +398,52 @@ const readingData = {
   passage: `Tom is a boy who loves animals. He has a pet dog named Max. Every morning, Tom takes Max for a walk in the park. They always see many birds and flowers there. One day, Tom found a small rabbit near the trees. The rabbit looked scared and hungry. Tom carefully picked it up and brought it home. His mother helped him feed the rabbit with some vegetables. After a week, the rabbit became healthy and happy. Tom decided to keep it as another pet.`,
   questions: [
     {
-      q: '이 글의 내용과 일치하지 않는 것을 고르시오.',
+      q: 'ì´ ê¸ì ë´ì©ê³¼ ì¼ì¹íì§ ìë ê²ì ê³ ë¥´ìì¤.',
       opts: [
-        'Tom은 매일 아침 Max를 공원에 산책시킨다.',
-        'Tom은 나무 근처에서 작은 토끼를 발견했다.',
-        'Tom의 아버지가 토끼에게 채소를 먹이는 것을 도와주었다.',
-        '토끼는 일주일 후 건강하고 행복해졌다.'
+        'Tomì ë§¤ì¼ ìì¹¨ Maxë¥¼ ê³µìì ì°ì±ìí¨ë¤.',
+        'Tomì ëë¬´ ê·¼ì²ìì ìì í ë¼ë¥¼ ë°ê²¬íë¤.',
+        'Tomì ìë²ì§ê° í ë¼ìê² ì±ìë¥¼ ë¨¹ì´ë ê²ì ëìì£¼ìë¤.',
+        'í ë¼ë ì¼ì£¼ì¼ í ê±´ê°íê³  íë³µí´ì¡ë¤.'
       ],
       c: 2
     },
     {
-      q: 'Tom이 토끼를 발견했을 때 토끼의 상태로 알맞은 것은?',
+      q: 'Tomì´ í ë¼ë¥¼ ë°ê²¬íì ë í ë¼ì ìíë¡ ìë§ì ê²ì?',
       opts: [
-        '건강하고 활발했다.',
-        '무섭고 배가 고팠다.',
-        '행복하고 편안했다.',
-        '다치고 잠을 자고 있었다.'
+        'ê±´ê°íê³  íë°íë¤.',
+        'ë¬´ì­ê³  ë°°ê° ê³ í ë¤.',
+        'íë³µíê³  í¸ìíë¤.',
+        'ë¤ì¹ê³  ì ì ìê³  ììë¤.'
       ],
       c: 1
     },
     {
-      q: 'Tom이 토끼를 발견한 장소는?',
+      q: 'Tomì´ í ë¼ë¥¼ ë°ê²¬í ì¥ìë?',
       opts: [
-        '공원 벤치 근처',
-        '집 마당',
-        '나무 근처',
-        '강가'
+        'ê³µì ë²¤ì¹ ê·¼ì²',
+        'ì§ ë§ë¹',
+        'ëë¬´ ê·¼ì²',
+        'ê°ê°'
       ],
       c: 2
     },
     {
-      q: '이 글을 읽고 알 수 있는 Tom의 성격으로 가장 알맞은 것은?',
+      q: 'ì´ ê¸ì ì½ê³  ì ì ìë Tomì ì±ê²©ì¼ë¡ ê°ì¥ ìë§ì ê²ì?',
       opts: [
-        '겁이 많고 소극적이다.',
-        '동물을 사랑하고 따뜻한 마음을 가지고 있다.',
-        '규칙을 잘 따르고 엄격하다.',
-        '호기심이 없고 조용하다.'
+        'ê²ì´ ë§ê³  ìê·¹ì ì´ë¤.',
+        'ëë¬¼ì ì¬ëíê³  ë°ë»í ë§ìì ê°ì§ê³  ìë¤.',
+        'ê·ì¹ì ì ë°ë¥´ê³  ìê²©íë¤.',
+        'í¸ê¸°ì¬ì´ ìê³  ì¡°ì©íë¤.'
       ],
       c: 1
     },
     {
-      q: 'Tom과 Max가 공원 산책 중 항상 보는 것은?',
+      q: 'Tomê³¼ Maxê° ê³µì ì°ì± ì¤ í­ì ë³´ë ê²ì?',
       opts: [
-        '다른 개들과 고양이들',
-        '새들과 꽃들',
-        '토끼와 다람쥐들',
-        '아이들이 노는 모습'
+        'ë¤ë¥¸ ê°ë¤ê³¼ ê³ ìì´ë¤',
+        'ìë¤ê³¼ ê½ë¤',
+        'í ë¼ì ë¤ëì¥ë¤',
+        'ìì´ë¤ì´ ë¸ë ëª¨ìµ'
       ],
       c: 1
     },
@@ -451,123 +451,123 @@ const readingData = {
 };
 
 const listeningData = [
-  {s:'I was reading a book when my mom called me.',q:'화자가 하고 있던 동작은?',o:['전화하기','책 읽기','밥 먹기','잠자기'],c:1},
-  {s:'She will visit her grandmother next Sunday.',q:'언제 할머니를 방문할 예정인가?',o:['어제','오늘','다음 주 일요일','매주 일요일'],c:2},
-  {s:'The children are playing in the garden right now.',q:'아이들이 현재 하고 있는 것은?',o:['공원에서 공부','정원에서 놀기','집에서 잠자기','학교에서 수업'],c:1},
-  {s:'My father cooked delicious spaghetti for dinner last night.',q:'언제 만든 식사인가?',o:['오늘 아침','어젯밤','다음 주','지금'],c:1},
-  {s:'You should eat more vegetables to stay healthy.',q:'이 문장이 말하는 내용은?',o:['채소를 덜 먹어라','건강하려면 채소를 먹어야 한다','채소는 맛없다','병원에 가야 한다'],c:1},
+  {s:'I was reading a book when my mom called me.',q:'íìê° íê³  ìë ëìì?',o:['ì ííê¸°','ì± ì½ê¸°','ë°¥ ë¨¹ê¸°','ì ìê¸°'],c:1},
+  {s:'She will visit her grandmother next Sunday.',q:'ì¸ì  í ë¨¸ëë¥¼ ë°©ë¬¸í  ìì ì¸ê°?',o:['ì´ì ','ì¤ë','ë¤ì ì£¼ ì¼ìì¼','ë§¤ì£¼ ì¼ìì¼'],c:2},
+  {s:'The children are playing in the garden right now.',q:'ìì´ë¤ì´ íì¬ íê³  ìë ê²ì?',o:['ê³µììì ê³µë¶','ì ììì ëê¸°','ì§ìì ì ìê¸°','íêµìì ìì'],c:1},
+  {s:'My father cooked delicious spaghetti for dinner last night.',q:'ì¸ì  ë§ë  ìì¬ì¸ê°?',o:['ì¤ë ìì¹¨','ì´ì ¯ë°¤','ë¤ì ì£¼','ì§ê¸'],c:1},
+  {s:'You should eat more vegetables to stay healthy.',q:'ì´ ë¬¸ì¥ì´ ë§íë ë´ì©ì?',o:['ì±ìë¥¼ ë ë¨¹ì´ë¼','ê±´ê°íë ¤ë©´ ì±ìë¥¼ ë¨¹ì´ì¼ íë¤','ì±ìë ë§ìë¤','ë³ìì ê°ì¼ íë¤'],c:1},
 ];
 
 const writingData = [
-  {e:'I cook.',t:'현재',a:[
-    '나는 요리한다','나는 요리해','난 요리한다','난 요리해',
-    '저는 요리합니다','나는 밥을 한다','나는 밥을 해','나는 밥을 짓는다',
-    '나는 cooking한다','내가 요리한다','나는 음식을 만든다'
+  {e:'I cook.',t:'íì¬',a:[
+    'ëë ìë¦¬íë¤','ëë ìë¦¬í´','ë ìë¦¬íë¤','ë ìë¦¬í´',
+    'ì ë ìë¦¬í©ëë¤','ëë ë°¥ì íë¤','ëë ë°¥ì í´','ëë ë°¥ì ì§ëë¤',
+    'ëë cookingíë¤','ë´ê° ìë¦¬íë¤','ëë ììì ë§ë ë¤'
   ]},
-  {e:'I am cooking.',t:'현재진행',a:[
-    '나는 요리하고 있다','나는 요리하고 있어','나는 요리 중이다',
-    '나는 지금 요리하고 있다','나는 요리하는 중이다','저는 요리하고 있습니다',
-    '나는 지금 요리 중이다','나는 요리 중이에요','나는 밥을 하고 있다',
-    '나는 지금 밥을 하고 있다','나는 지금 요리해','나는 요리를 하고 있다'
+  {e:'I am cooking.',t:'íì¬ì§í',a:[
+    'ëë ìë¦¬íê³  ìë¤','ëë ìë¦¬íê³  ìì´','ëë ìë¦¬ ì¤ì´ë¤',
+    'ëë ì§ê¸ ìë¦¬íê³  ìë¤','ëë ìë¦¬íë ì¤ì´ë¤','ì ë ìë¦¬íê³  ììµëë¤',
+    'ëë ì§ê¸ ìë¦¬ ì¤ì´ë¤','ëë ìë¦¬ ì¤ì´ìì','ëë ë°¥ì íê³  ìë¤',
+    'ëë ì§ê¸ ë°¥ì íê³  ìë¤','ëë ì§ê¸ ìë¦¬í´','ëë ìë¦¬ë¥¼ íê³  ìë¤'
   ]},
-  {e:'I was cooking.',t:'과거진행',a:[
-    '나는 요리하고 있었다','나는 요리 중이었다','나는 요리하고 있었어',
-    '나는 요리하는 중이었다','저는 요리하고 있었습니다','나는 밥을 하고 있었다',
-    '나는 요리를 하고 있었다','나는 요리 중이었어','나는 요리를 하는 중이었다'
+  {e:'I was cooking.',t:'ê³¼ê±°ì§í',a:[
+    'ëë ìë¦¬íê³  ììë¤','ëë ìë¦¬ ì¤ì´ìë¤','ëë ìë¦¬íê³  ììì´',
+    'ëë ìë¦¬íë ì¤ì´ìë¤','ì ë ìë¦¬íê³  ìììµëë¤','ëë ë°¥ì íê³  ììë¤',
+    'ëë ìë¦¬ë¥¼ íê³  ììë¤','ëë ìë¦¬ ì¤ì´ìì´','ëë ìë¦¬ë¥¼ íë ì¤ì´ìë¤'
   ]},
-  {e:'I cooked.',t:'과거',a:[
-    '나는 요리했다','나는 요리했어','나는 요리를 했다',
-    '저는 요리했습니다','내가 요리했다','나는 밥을 했다',
-    '나는 요리를 만들었다','나는 음식을 만들었다','나는 밥을 지었다'
+  {e:'I cooked.',t:'ê³¼ê±°',a:[
+    'ëë ìë¦¬íë¤','ëë ìë¦¬íì´','ëë ìë¦¬ë¥¼ íë¤',
+    'ì ë ìë¦¬íìµëë¤','ë´ê° ìë¦¬íë¤','ëë ë°¥ì íë¤',
+    'ëë ìë¦¬ë¥¼ ë§ë¤ìë¤','ëë ììì ë§ë¤ìë¤','ëë ë°¥ì ì§ìë¤'
   ]},
-  {e:'I can cook.',t:'현재(조동사-가능)',a:[
-    '나는 요리할 수 있다','나는 요리할 수 있어','나는 요리를 할 수 있다',
-    '저는 요리할 수 있습니다','나는 요리가 가능하다','나는 밥을 할 수 있다',
-    '나는 요리를 잘 할 수 있다','내가 요리할 수 있다','나는 요리할 줄 안다'
+  {e:'I can cook.',t:'íì¬(ì¡°ëì¬-ê°ë¥)',a:[
+    'ëë ìë¦¬í  ì ìë¤','ëë ìë¦¬í  ì ìì´','ëë ìë¦¬ë¥¼ í  ì ìë¤',
+    'ì ë ìë¦¬í  ì ììµëë¤','ëë ìë¦¬ê° ê°ë¥íë¤','ëë ë°¥ì í  ì ìë¤',
+    'ëë ìë¦¬ë¥¼ ì í  ì ìë¤','ë´ê° ìë¦¬í  ì ìë¤','ëë ìë¦¬í  ì¤ ìë¤'
   ]},
-  {e:'I should cook.',t:'현재(조동사-의무/권고)',a:[
-    '나는 요리해야 한다','나는 요리해야 해','나는 요리해야만 한다',
-    '저는 요리해야 합니다','나는 요리를 해야 한다','나는 요리하는 것이 좋겠다',
-    '나는 요리를 해야 해','나는 요리를 해야만 한다','나는 요리해야겠다',
-    '나는 요리를 해야겠다','나는 요리하는 게 좋겠다','나는 요리를 해야할 것 같다',
-    '내가 요리해야 한다','나는 요리하는 것이 낫겠다','나는 요리를 했으면 좋겠다',
-    '나는 요리 해야해','나는 요리 해야 해','나는 요리해야해','난 요리 해야해','난 요리해야해'
+  {e:'I should cook.',t:'íì¬(ì¡°ëì¬-ìë¬´/ê¶ê³ )',a:[
+    'ëë ìë¦¬í´ì¼ íë¤','ëë ìë¦¬í´ì¼ í´','ëë ìë¦¬í´ì¼ë§ íë¤',
+    'ì ë ìë¦¬í´ì¼ í©ëë¤','ëë ìë¦¬ë¥¼ í´ì¼ íë¤','ëë ìë¦¬íë ê²ì´ ì¢ê² ë¤',
+    'ëë ìë¦¬ë¥¼ í´ì¼ í´','ëë ìë¦¬ë¥¼ í´ì¼ë§ íë¤','ëë ìë¦¬í´ì¼ê² ë¤',
+    'ëë ìë¦¬ë¥¼ í´ì¼ê² ë¤','ëë ìë¦¬íë ê² ì¢ê² ë¤','ëë ìë¦¬ë¥¼ í´ì¼í  ê² ê°ë¤',
+    'ë´ê° ìë¦¬í´ì¼ íë¤','ëë ìë¦¬íë ê²ì´ ë«ê² ë¤','ëë ìë¦¬ë¥¼ íì¼ë©´ ì¢ê² ë¤',
+    'ëë ìë¦¬ í´ì¼í´','ëë ìë¦¬ í´ì¼ í´','ëë ìë¦¬í´ì¼í´','ë ìë¦¬ í´ì¼í´','ë ìë¦¬í´ì¼í´'
   ]},
-  {e:'I will cook.',t:'미래',a:[
-    '나는 요리할 것이다','나는 요리할 거야','나는 요리할 거다',
-    '저는 요리할 것입니다','나는 요리하겠다','나는 요리를 할 것이다',
-    '나는 요리를 할 거야','나는 요리를 할 거다','내가 요리할 것이다',
-    '나는 밥을 할 것이다','나는 요리할 예정이다',
-    '나는 요리 할거야','나는 요리 할 거야','나는 요리 할것이다','나는 요리 할 것이다',
-    '난 요리할 거야','난 요리 할거야','나는 요리를 할거야','나는 요리할거야'
+  {e:'I will cook.',t:'ë¯¸ë',a:[
+    'ëë ìë¦¬í  ê²ì´ë¤','ëë ìë¦¬í  ê±°ì¼','ëë ìë¦¬í  ê±°ë¤',
+    'ì ë ìë¦¬í  ê²ìëë¤','ëë ìë¦¬íê² ë¤','ëë ìë¦¬ë¥¼ í  ê²ì´ë¤',
+    'ëë ìë¦¬ë¥¼ í  ê±°ì¼','ëë ìë¦¬ë¥¼ í  ê±°ë¤','ë´ê° ìë¦¬í  ê²ì´ë¤',
+    'ëë ë°¥ì í  ê²ì´ë¤','ëë ìë¦¬í  ìì ì´ë¤',
+    'ëë ìë¦¬ í ê±°ì¼','ëë ìë¦¬ í  ê±°ì¼','ëë ìë¦¬ í ê²ì´ë¤','ëë ìë¦¬ í  ê²ì´ë¤',
+    'ë ìë¦¬í  ê±°ì¼','ë ìë¦¬ í ê±°ì¼','ëë ìë¦¬ë¥¼ í ê±°ì¼','ëë ìë¦¬í ê±°ì¼'
   ]},
-  {e:'I will be cooking.',t:'미래진행',a:[
-    '나는 요리하고 있을 것이다','나는 요리하고 있을 거야','나는 요리 중일 것이다',
-    '저는 요리하고 있을 것입니다','나는 요리를 하고 있을 것이다',
-    '나는 요리하는 중일 것이다','나는 요리 중일 거야','나는 요리하고 있을 것이야',
-    '나는 요리를 하고 있을 거야'
+  {e:'I will be cooking.',t:'ë¯¸ëì§í',a:[
+    'ëë ìë¦¬íê³  ìì ê²ì´ë¤','ëë ìë¦¬íê³  ìì ê±°ì¼','ëë ìë¦¬ ì¤ì¼ ê²ì´ë¤',
+    'ì ë ìë¦¬íê³  ìì ê²ìëë¤','ëë ìë¦¬ë¥¼ íê³  ìì ê²ì´ë¤',
+    'ëë ìë¦¬íë ì¤ì¼ ê²ì´ë¤','ëë ìë¦¬ ì¤ì¼ ê±°ì¼','ëë ìë¦¬íê³  ìì ê²ì´ì¼',
+    'ëë ìë¦¬ë¥¼ íê³  ìì ê±°ì¼'
   ]},
-  {e:'I have to cook.',t:'현재(의무)',a:[
-    '나는 요리해야 한다','나는 요리해야 해','나는 요리해야만 한다',
-    '저는 요리해야 합니다','나는 요리를 해야만 한다','나는 요리를 해야 한다',
-    '나는 요리를 해야 해','나는 반드시 요리해야 한다','나는 꼭 요리해야 한다',
-    '나는 요리해야겠다','나는 밥을 해야 한다','내가 요리해야 한다',
-    '나는 요리를 꼭 해야만해','나는 요리를 꼭 해야만 해','나는 요리를 꼭 해야해',
-    '나는 꼭 요리해야 해','나는 꼭 요리해야만 해','난 꼭 요리해야 해',
-    '나는 요리를 해야만해','나는 요리해야만해'
+  {e:'I have to cook.',t:'íì¬(ìë¬´)',a:[
+    'ëë ìë¦¬í´ì¼ íë¤','ëë ìë¦¬í´ì¼ í´','ëë ìë¦¬í´ì¼ë§ íë¤',
+    'ì ë ìë¦¬í´ì¼ í©ëë¤','ëë ìë¦¬ë¥¼ í´ì¼ë§ íë¤','ëë ìë¦¬ë¥¼ í´ì¼ íë¤',
+    'ëë ìë¦¬ë¥¼ í´ì¼ í´','ëë ë°ëì ìë¦¬í´ì¼ íë¤','ëë ê¼­ ìë¦¬í´ì¼ íë¤',
+    'ëë ìë¦¬í´ì¼ê² ë¤','ëë ë°¥ì í´ì¼ íë¤','ë´ê° ìë¦¬í´ì¼ íë¤',
+    'ëë ìë¦¬ë¥¼ ê¼­ í´ì¼ë§í´','ëë ìë¦¬ë¥¼ ê¼­ í´ì¼ë§ í´','ëë ìë¦¬ë¥¼ ê¼­ í´ì¼í´',
+    'ëë ê¼­ ìë¦¬í´ì¼ í´','ëë ê¼­ ìë¦¬í´ì¼ë§ í´','ë ê¼­ ìë¦¬í´ì¼ í´',
+    'ëë ìë¦¬ë¥¼ í´ì¼ë§í´','ëë ìë¦¬í´ì¼ë§í´'
   ]},
-  {e:'I was cooking when you were at school.',t:'과거진행+과거',a:[
-    '네가 학교에 있을 때 나는 요리하고 있었다',
-    '당신이 학교에 있을 때 나는 요리하고 있었다',
-    '네가 학교에 있을 때 나는 요리 중이었다',
-    '당신이 학교에 있을 때 나는 요리 중이었다',
-    '네가 학교에 있는 동안 나는 요리하고 있었다',
-    '당신이 학교에 있는 동안 나는 요리하고 있었다',
-    '네가 학교에 있을 때 나는 요리를 하고 있었다',
-    '당신이 학교에 있을 때 나는 요리를 하고 있었다',
-    '네가 학교에 있을 때 나는 밥을 하고 있었다',
-    '네가 학교에 있을 때 나는 요리하는 중이었다'
+  {e:'I was cooking when you were at school.',t:'ê³¼ê±°ì§í+ê³¼ê±°',a:[
+    'ë¤ê° íêµì ìì ë ëë ìë¦¬íê³  ììë¤',
+    'ë¹ì ì´ íêµì ìì ë ëë ìë¦¬íê³  ììë¤',
+    'ë¤ê° íêµì ìì ë ëë ìë¦¬ ì¤ì´ìë¤',
+    'ë¹ì ì´ íêµì ìì ë ëë ìë¦¬ ì¤ì´ìë¤',
+    'ë¤ê° íêµì ìë ëì ëë ìë¦¬íê³  ììë¤',
+    'ë¹ì ì´ íêµì ìë ëì ëë ìë¦¬íê³  ììë¤',
+    'ë¤ê° íêµì ìì ë ëë ìë¦¬ë¥¼ íê³  ììë¤',
+    'ë¹ì ì´ íêµì ìì ë ëë ìë¦¬ë¥¼ íê³  ììë¤',
+    'ë¤ê° íêµì ìì ë ëë ë°¥ì íê³  ììë¤',
+    'ë¤ê° íêµì ìì ë ëë ìë¦¬íë ì¤ì´ìë¤'
   ]},
-  {e:'I am cooking stew that you like.',t:'현재진행+관계사',a:[
-    '나는 네가 좋아하는 스튜를 요리하고 있다',
-    '나는 당신이 좋아하는 스튜를 요리하고 있다',
-    '나는 네가 좋아하는 찌개를 요리하고 있다',
-    '나는 네가 좋아하는 국을 요리하고 있다',
-    '저는 당신이 좋아하는 스튜를 요리하고 있습니다',
-    '나는 네가 좋아하는 스튜를 만들고 있다',
-    '나는 당신이 좋아하는 찌개를 요리하고 있다',
-    '나는 네가 좋아하는 스튜를 끓이고 있다',
-    '나는 당신이 좋아하는 국을 요리하고 있다',
-    '나는 네가 좋아하는 요리를 하고 있다',
-    '나는 네가 좋아하는 스튜를 요리하는 중이다',
-    '나는 당신이 좋아하는 스튜를 요리하는 중이다',
-    '나는 네가 좋아하는 찌개를 요리하는 중이다',
-    '나는 네가 좋아하는 국을 요리하는 중이다',
-    '저는 당신이 좋아하는 스튜를 요리하는 중입니다',
-    '나는 네가 좋아하는 스튜를 만드는 중이다',
-    '나는 네가 좋아하는 스튜를 끓이는 중이다'
+  {e:'I am cooking stew that you like.',t:'íì¬ì§í+ê´ê³ì¬',a:[
+    'ëë ë¤ê° ì¢ìíë ì¤íë¥¼ ìë¦¬íê³  ìë¤',
+    'ëë ë¹ì ì´ ì¢ìíë ì¤íë¥¼ ìë¦¬íê³  ìë¤',
+    'ëë ë¤ê° ì¢ìíë ì°ê°ë¥¼ ìë¦¬íê³  ìë¤',
+    'ëë ë¤ê° ì¢ìíë êµ­ì ìë¦¬íê³  ìë¤',
+    'ì ë ë¹ì ì´ ì¢ìíë ì¤íë¥¼ ìë¦¬íê³  ììµëë¤',
+    'ëë ë¤ê° ì¢ìíë ì¤íë¥¼ ë§ë¤ê³  ìë¤',
+    'ëë ë¹ì ì´ ì¢ìíë ì°ê°ë¥¼ ìë¦¬íê³  ìë¤',
+    'ëë ë¤ê° ì¢ìíë ì¤íë¥¼ ëì´ê³  ìë¤',
+    'ëë ë¹ì ì´ ì¢ìíë êµ­ì ìë¦¬íê³  ìë¤',
+    'ëë ë¤ê° ì¢ìíë ìë¦¬ë¥¼ íê³  ìë¤',
+    'ëë ë¤ê° ì¢ìíë ì¤íë¥¼ ìë¦¬íë ì¤ì´ë¤',
+    'ëë ë¹ì ì´ ì¢ìíë ì¤íë¥¼ ìë¦¬íë ì¤ì´ë¤',
+    'ëë ë¤ê° ì¢ìíë ì°ê°ë¥¼ ìë¦¬íë ì¤ì´ë¤',
+    'ëë ë¤ê° ì¢ìíë êµ­ì ìë¦¬íë ì¤ì´ë¤',
+    'ì ë ë¹ì ì´ ì¢ìíë ì¤íë¥¼ ìë¦¬íë ì¤ìëë¤',
+    'ëë ë¤ê° ì¢ìíë ì¤íë¥¼ ë§ëë ì¤ì´ë¤',
+    'ëë ë¤ê° ì¢ìíë ì¤íë¥¼ ëì´ë ì¤ì´ë¤'
   ]},
 ];
 
 const surveyDef = [
-  {id:'engStart',label:'영어 공부를 시작한 시기',required:true,type:'radio',opts:['3~4세','5~6세 (유치원)','초등학교 입학 전후 (7~8세)','초등 2~3학년','초등 4학년 이후','아직 시작 안 함']},
-  {id:'engHistory',label:'지금까지 영어 공부를 어떻게 해왔는지 설명해 주세요',required:true,type:'textarea',placeholder:'예) 영어유치원 2년, 리딩학원 1년, 현재 혼자 책 읽기 중...'},
-  {id:'korReading',label:'한 주에 국어 읽기를 얼마나 하나요?',required:true,type:'radio',opts:['거의 안 함','주 1~2회 (30분 이내)','주 3~4회 (30분 이상)','매일 30분 이상','매일 1시간 이상']},
-  {id:'essay',label:'현재 논술 학원에 다니고 있나요?',required:true,type:'radio',opts:['예, 현재 다니고 있어요','다닌 적 있지만 지금은 아님','아니요']},
-  {id:'socialKnow',label:'사회·역사에 대한 기초 지식이 있나요? (만화책 포함)',required:true,type:'radio',opts:['많이 알고 있어요','조금 알고 있어요','잘 모르는 편이에요']},
-  {id:'sciKnow',label:'과학·실험에 대한 기초 지식이 있나요? (만화책 포함)',required:true,type:'radio',opts:['많이 알고 있어요','조금 알고 있어요','잘 모르는 편이에요']},
-  {id:'grammar',label:'영문법 공부를 해본 적이 있나요?',required:true,type:'radio',opts:['예','아니요']},
-  {id:'grammarAge',label:'영문법을 몇 살에 시작했나요? (경험 없으면 건너뛰기)',required:false,type:'radio',opts:['7세 이하','8세','9세','10세','11세','12세 이상']},
-  {id:'personality',label:'학생의 평소 성격을 모두 선택해 주세요',required:true,type:'chips',opts:['적극적','소극적','주도적','쾌활함','수다스러움','얌전함','책임감 강함','완벽주의','끈기 있음','창의적','분석적','감성적','논리적','호기심 많음','자신감 있음','자신감 부족','독립적','의존적','경쟁심 강함','협동적','고집스러움','유연함','장난스러움','진지함','규칙을 잘 따름','낯가림','사교적','꼼꼼함','느긋함','성실함']},
-  {id:'selfStudy',label:'정해진 시간에 규칙적으로 학습하고 있나요? (학원 숙제 제외)',required:true,type:'radio',opts:['예, 규칙적으로 하고 있어요','아니요, 잘 안 되고 있어요']},
-  {id:'selfStudyDetail',label:'학습하고 있다면 어떤 과목을 주 몇 회, 몇 분씩 하나요?',required:false,type:'textarea',placeholder:'예) 수학 주 5회 30분, 영어 주 3회 20분'},
-  {id:'studyDuration',label:'그렇게 해온 지 얼마나 됐나요?',required:false,type:'radio',opts:['3개월 미만','3~6개월','6개월~1년','1년~2년','2년 이상','해당 없음']},
-  {id:'studyRefusal',label:'"학원 가기 싫다", "공부하기 싫다" 같은 말을 한 적 있나요?',required:true,type:'radio',opts:['자주 해요','가끔 해요','거의 없어요','전혀 없어요']},
-  {id:'engStudyFreq',label:'한 주에 몇 회 이상 영어 공부를 하고 있나요?',required:true,type:'radio',opts:['주 1회','주 2~3회','주 4~5회','매일','거의 안 함']},
-  {id:'mainConcern',label:'아이 학습에 대해 가장 고민하고 있는 내용은?',required:true,type:'textarea',placeholder:'자유롭게 자세히 적어주세요...'},
+  {id:'engStart',label:'ìì´ ê³µë¶ë¥¼ ììí ìê¸°',required:true,type:'radio',opts:['3~4ì¸','5~6ì¸ (ì ì¹ì)','ì´ë±íêµ ìí ì í (7~8ì¸)','ì´ë± 2~3íë','ì´ë± 4íë ì´í','ìì§ ìì ì í¨']},
+  {id:'engHistory',label:'ì§ê¸ê¹ì§ ìì´ ê³µë¶ë¥¼ ì´ë»ê² í´ìëì§ ì¤ëªí´ ì£¼ì¸ì',required:true,type:'textarea',placeholder:'ì) ìì´ì ì¹ì 2ë, ë¦¬ë©íì 1ë, íì¬ í¼ì ì± ì½ê¸° ì¤...'},
+  {id:'korReading',label:'í ì£¼ì êµ­ì´ ì½ê¸°ë¥¼ ì¼ë§ë íëì?',required:true,type:'radio',opts:['ê±°ì ì í¨','ì£¼ 1~2í (30ë¶ ì´ë´)','ì£¼ 3~4í (30ë¶ ì´ì)','ë§¤ì¼ 30ë¶ ì´ì','ë§¤ì¼ 1ìê° ì´ì']},
+  {id:'essay',label:'íì¬ ë¼ì  íìì ë¤ëê³  ìëì?',required:true,type:'radio',opts:['ì, íì¬ ë¤ëê³  ìì´ì','ë¤ë ì  ìì§ë§ ì§ê¸ì ìë','ìëì']},
+  {id:'socialKnow',label:'ì¬íÂ·ì­ì¬ì ëí ê¸°ì´ ì§ìì´ ìëì? (ë§íì± í¬í¨)',required:true,type:'radio',opts:['ë§ì´ ìê³  ìì´ì','ì¡°ê¸ ìê³  ìì´ì','ì ëª¨ë¥´ë í¸ì´ìì']},
+  {id:'sciKnow',label:'ê³¼íÂ·ì¤íì ëí ê¸°ì´ ì§ìì´ ìëì? (ë§íì± í¬í¨)',required:true,type:'radio',opts:['ë§ì´ ìê³  ìì´ì','ì¡°ê¸ ìê³  ìì´ì','ì ëª¨ë¥´ë í¸ì´ìì']},
+  {id:'grammar',label:'ìë¬¸ë² ê³µë¶ë¥¼ í´ë³¸ ì ì´ ìëì?',required:true,type:'radio',opts:['ì','ìëì']},
+  {id:'grammarAge',label:'ìë¬¸ë²ì ëª ì´ì ììíëì? (ê²½í ìì¼ë©´ ê±´ëë°ê¸°)',required:false,type:'radio',opts:['7ì¸ ì´í','8ì¸','9ì¸','10ì¸','11ì¸','12ì¸ ì´ì']},
+  {id:'personality',label:'íìì íì ì±ê²©ì ëª¨ë ì íí´ ì£¼ì¸ì',required:true,type:'chips',opts:['ì ê·¹ì ','ìê·¹ì ','ì£¼ëì ','ì¾íí¨','ìë¤ì¤ë¬ì','ìì í¨','ì±ìê° ê°í¨','ìë²½ì£¼ì','ëê¸° ìì','ì°½ìì ','ë¶ìì ','ê°ì±ì ','ë¼ë¦¬ì ','í¸ê¸°ì¬ ë§ì','ìì ê° ìì','ìì ê° ë¶ì¡±','ëë¦½ì ','ìì¡´ì ','ê²½ìì¬ ê°í¨','íëì ','ê³ ì§ì¤ë¬ì','ì ì°í¨','ì¥ëì¤ë¬ì','ì§ì§í¨','ê·ì¹ì ì ë°ë¦','ë¯ê°ë¦¼','ì¬êµì ','ê¼¼ê¼¼í¨','ëê¸í¨','ì±ì¤í¨']},
+  {id:'selfStudy',label:'ì í´ì§ ìê°ì ê·ì¹ì ì¼ë¡ íìµíê³  ìëì? (íì ìì  ì ì¸)',required:true,type:'radio',opts:['ì, ê·ì¹ì ì¼ë¡ íê³  ìì´ì','ìëì, ì ì ëê³  ìì´ì']},
+  {id:'selfStudyDetail',label:'íìµíê³  ìë¤ë©´ ì´ë¤ ê³¼ëª©ì ì£¼ ëª í, ëª ë¶ì© íëì?',required:false,type:'textarea',placeholder:'ì) ìí ì£¼ 5í 30ë¶, ìì´ ì£¼ 3í 20ë¶'},
+  {id:'studyDuration',label:'ê·¸ë ê² í´ì¨ ì§ ì¼ë§ë ëëì?',required:false,type:'radio',opts:['3ê°ì ë¯¸ë§','3~6ê°ì','6ê°ì~1ë','1ë~2ë','2ë ì´ì','í´ë¹ ìì']},
+  {id:'studyRefusal',label:'"íì ê°ê¸° ì«ë¤", "ê³µë¶íê¸° ì«ë¤" ê°ì ë§ì í ì  ìëì?',required:true,type:'radio',opts:['ìì£¼ í´ì','ê°ë í´ì','ê±°ì ìì´ì','ì í ìì´ì']},
+  {id:'engStudyFreq',label:'í ì£¼ì ëª í ì´ì ìì´ ê³µë¶ë¥¼ íê³  ìëì?',required:true,type:'radio',opts:['ì£¼ 1í','ì£¼ 2~3í','ì£¼ 4~5í','ë§¤ì¼','ê±°ì ì í¨']},
+  {id:'mainConcern',label:'ìì´ íìµì ëí´ ê°ì¥ ê³ ë¯¼íê³  ìë ë´ì©ì?',required:true,type:'textarea',placeholder:'ìì ë¡­ê² ìì¸í ì ì´ì£¼ì¸ì...'},
 ];
 
-// ===== 초기화 =====
+// ===== ì´ê¸°í =====
 function init() {
   buildGrammarUI();
   buildReadingUI();
@@ -576,7 +576,7 @@ function init() {
   buildSurveyUI();
 }
 
-// ===== 화면 전환 =====
+// ===== íë©´ ì í =====
 function goScreen(n) {
   document.getElementById('s'+curScreen).classList.remove('active');
   document.getElementById('s'+n).classList.add('active');
@@ -589,14 +589,14 @@ function updateProg(n) {
   const pw = document.getElementById('progWrap');
   if(n===0){pw.classList.remove('show');return;}
   pw.classList.add('show');
-  const labels=['','단어','문법','읽기','듣기','쓰기','학습 설문','결과'];
+  const labels=['','ë¨ì´','ë¬¸ë²','ì½ê¸°','ë£ê¸°','ì°ê¸°','íìµ ì¤ë¬¸','ê²°ê³¼'];
   const pct = Math.round((n/7)*100);
   document.getElementById('progLabel').textContent=(labels[n]||'')+' ('+n+'/7)';
   document.getElementById('progBar').style.width=pct+'%';
   document.getElementById('progPct').textContent=pct+'%';
 }
 
-// ===== 학년 선택 =====
+// ===== íë ì í =====
 function selGrade(el, g) {
   document.querySelectorAll('.grade-btn').forEach(b=>b.classList.remove('sel'));
   el.classList.add('sel');
@@ -604,15 +604,15 @@ function selGrade(el, g) {
   ans.grade = g;
 }
 
-// ===== 시작 =====
+// ===== ìì =====
 function startTest() {
   const name = document.getElementById('studentName').value.trim();
-  if(!name){alert('학생 이름을 입력해 주세요.');return;}
-  if(!currentGrade){alert('학년을 선택해 주세요.');return;}
+  if(!name){alert('íì ì´ë¦ì ìë ¥í´ ì£¼ì¸ì.');return;}
+  if(!currentGrade){alert('íëì ì íí´ ì£¼ì¸ì.');return;}
   ans.studentName=name; ans.parentEmail='';
   ans.submittedAt=new Date().toLocaleString('ko-KR',{timeZone:'Asia/Seoul'});
 
-  // 랜딩 설문 데이터 수집
+  // ëë© ì¤ë¬¸ ë°ì´í° ìì§
   surveyDef.forEach(s=>{
     if(s.type==='textarea'){ans[s.id]=(document.getElementById('landing_'+s.id)?.value||'');}
     else if(s.type==='chips'){ans[s.id]=[...document.querySelectorAll(`#landing_${s.id} .chip-opt.sel`)].map(el=>el.querySelector('input').value);}
@@ -627,12 +627,12 @@ function startTest() {
   goScreen(1);
 }
 
-// ===== 단어 =====
+// ===== ë¨ì´ =====
 function buildVocabUI() {
-  const qs = vocabByGrade[currentGrade]||vocabByGrade['초3'];
+  const qs = vocabByGrade[currentGrade]||vocabByGrade['ì´3'];
   document.getElementById('vocabQs').innerHTML = qs.map((q,i)=>`
     <div class="card">
-      <div class="q-num">단어 ${i+1} / ${qs.length}</div>
+      <div class="q-num">ë¨ì´ ${i+1} / ${qs.length}</div>
       <div class="q-en" style="margin-top:.35rem;margin-bottom:.875rem;">${q.w}</div>
       <div class="opts">${q.o.map((o,j)=>`
         <div class="opt" onclick="selRadio(this,'v${i}',${j})">
@@ -643,7 +643,7 @@ function buildVocabUI() {
 }
 
 function submitVocab() {
-  const qs = vocabByGrade[currentGrade]||vocabByGrade['초3'];
+  const qs = vocabByGrade[currentGrade]||vocabByGrade['ì´3'];
   let vc=[];
   for(let i=0;i<qs.length;i++){
     const s=document.querySelector(`input[name="v${i}"]:checked`);
@@ -653,11 +653,11 @@ function submitVocab() {
   goScreen(2);
 }
 
-// ===== 문법 =====
+// ===== ë¬¸ë² =====
 function buildGrammarUI() {
   document.getElementById('grammarQs').innerHTML = grammarData.map((q,i)=>`
     <div class="card">
-      <div class="q-num">문법 ${i+1} / ${grammarData.length}</div>
+      <div class="q-num">ë¬¸ë² ${i+1} / ${grammarData.length}</div>
       <div class="q-label" style="margin-top:.35rem;">${q.q}</div>
       <div class="opts">${q.o.map((o,j)=>`
         <div class="opt" onclick="selRadio(this,'g${i}',${j})">
@@ -677,14 +677,14 @@ function submitGrammar() {
   goScreen(3);
 }
 
-// ===== 읽기 =====
+// ===== ì½ê¸° =====
 function buildReadingUI() {
   document.getElementById('readingPassage').innerHTML = readingData.passage;
-  const nums = ['①','②','③','④'];
+  const nums = ['â ','â¡','â¢','â£'];
   const c = document.getElementById('readingQs');
   c.innerHTML = readingData.questions.map((q,i)=>`
     <div class="card">
-      <div class="q-num">읽기 ${i+1} / ${readingData.questions.length}</div>
+      <div class="q-num">ì½ê¸° ${i+1} / ${readingData.questions.length}</div>
       <div class="q-label" style="margin-top:.35rem;">${q.q}</div>
       <div class="opts" style="margin-top:.625rem;">${q.opts.map((o,j)=>`
         <div class="opt" onclick="selRadio(this,'r${i}',${j})">
@@ -705,15 +705,15 @@ function submitReading() {
   goScreen(4);
 }
 
-// ===== 듣기 =====
+// ===== ë£ê¸° =====
 function buildListeningUI() {
   document.getElementById('listeningQs').innerHTML = listeningData.map((q,i)=>`
     <div class="card">
-      <div class="q-num">듣기 ${i+1} / ${listeningData.length}</div>
+      <div class="q-num">ë£ê¸° ${i+1} / ${listeningData.length}</div>
       <div class="listen-card">
-        <p style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem;">버튼을 눌러 문장을 들으세요</p>
-        <p style="font-size:.7rem;color:var(--muted);margin-bottom:.75rem;">※ Chrome/Edge 브라우저에서 가장 잘 들려요</p>
-        <button class="tts-btn" id="tts${i}" onclick="playTTS(${i})">▶ 듣기</button>
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem;">ë²í¼ì ëë¬ ë¬¸ì¥ì ë¤ì¼ì¸ì</p>
+        <p style="font-size:.7rem;color:var(--muted);margin-bottom:.75rem;">â» Chrome/Edge ë¸ë¼ì°ì ìì ê°ì¥ ì ë¤ë ¤ì</p>
+        <button class="tts-btn" id="tts${i}" onclick="playTTS(${i})">â¶ ë£ê¸°</button>
       </div>
       <div class="q-label">${q.q}</div>
       <div class="opts" style="margin-top:.625rem;">${q.o.map((o,j)=>`
@@ -727,10 +727,10 @@ function buildListeningUI() {
 let curUtterance=null;
 let ttsReady=false;
 
-// 페이지 로드 시 TTS 엔진 초기화
+// íì´ì§ ë¡ë ì TTS ìì§ ì´ê¸°í
 function initTTS() {
   if(typeof speechSynthesis === 'undefined') return;
-  // 음성 목록 로드 대기
+  // ìì± ëª©ë¡ ë¡ë ëê¸°
   if(speechSynthesis.getVoices().length > 0) {
     ttsReady = true;
   } else {
@@ -740,7 +740,7 @@ function initTTS() {
 
 function getEnglishVoice() {
   const voices = speechSynthesis.getVoices();
-  // 영어 음성 우선순위: en-US > en-GB > en
+  // ìì´ ìì± ì°ì ìì: en-US > en-GB > en
   return voices.find(v => v.lang === 'en-US' && v.localService) ||
          voices.find(v => v.lang === 'en-US') ||
          voices.find(v => v.lang.startsWith('en-GB')) ||
@@ -751,61 +751,61 @@ function getEnglishVoice() {
 function playTTS(idx) {
   const btn = document.getElementById('tts'+idx);
   
-  // 브라우저 TTS 지원 여부 확인
+  // ë¸ë¼ì°ì  TTS ì§ì ì¬ë¶ íì¸
   if(typeof speechSynthesis === 'undefined') {
-    btn.textContent = '⚠ 이 브라우저는 듣기를 지원하지 않아요';
+    btn.textContent = 'â  ì´ ë¸ë¼ì°ì ë ë£ê¸°ë¥¼ ì§ìíì§ ììì';
     btn.style.background = 'var(--accent)';
     return;
   }
 
-  // 이미 재생 중이면 중지
+  // ì´ë¯¸ ì¬ì ì¤ì´ë©´ ì¤ì§
   if(curUtterance) {
     speechSynthesis.cancel();
     curUtterance = null;
     btn.classList.remove('playing');
-    btn.textContent = '▶ 듣기';
+    btn.textContent = 'â¶ ë£ê¸°';
     return;
   }
 
   btn.classList.add('playing');
-  btn.textContent = '준비 중...';
+  btn.textContent = 'ì¤ë¹ ì¤...';
 
-  // TTS 실행 함수
+  // TTS ì¤í í¨ì
   function doSpeak() {
     speechSynthesis.cancel();
     
     const sentence = listeningData[idx].s;
-    // 앞에 묵음 구간을 위해 쉼표 추가
+    // ìì ë¬µì êµ¬ê°ì ìí´ ì¼í ì¶ê°
     const utt = new SpeechSynthesisUtterance(sentence);
     utt.lang = 'en-US';
     utt.rate = 0.75;
     utt.pitch = 1.0;
     utt.volume = 1.0;
 
-    // 영어 음성 설정
+    // ìì´ ìì± ì¤ì 
     const voice = getEnglishVoice();
     if(voice) utt.voice = voice;
 
     utt.onstart = () => {
-      btn.textContent = '■ 정지';
+      btn.textContent = 'â  ì ì§';
     };
     utt.onend = () => {
       btn.classList.remove('playing');
-      btn.textContent = '▶ 다시 듣기';
+      btn.textContent = 'â¶ ë¤ì ë£ê¸°';
       curUtterance = null;
     };
     utt.onerror = (e) => {
       btn.classList.remove('playing');
-      btn.textContent = '▶ 다시 듣기';
+      btn.textContent = 'â¶ ë¤ì ë£ê¸°';
       curUtterance = null;
-      console.log('TTS 오류:', e.error);
+      console.log('TTS ì¤ë¥:', e.error);
     };
 
     curUtterance = utt;
     speechSynthesis.speak(utt);
   }
 
-  // 2초 딜레이 후 재생 (엔진 준비 대기)
+  // 2ì´ ëë ì´ í ì¬ì (ìì§ ì¤ë¹ ëê¸°)
   setTimeout(doSpeak, 2000);
 }
 
@@ -819,37 +819,37 @@ function submitListening() {
   goScreen(5);
 }
 
-// ===== 쓰기 =====
+// ===== ì°ê¸° =====
 function buildWritingUI() {
   document.getElementById('writingQs').innerHTML = writingData.map((q,i)=>`
     <div class="card">
-      <div class="q-num">쓰기 ${i+1} / ${writingData.length} · ${q.t}</div>
+      <div class="q-num">ì°ê¸° ${i+1} / ${writingData.length} Â· ${q.t}</div>
       <div class="q-en">${q.e}</div>
-      <textarea class="txt-input" id="w${i}" placeholder="한국어로 번역해 주세요..." rows="2" style="min-height:54px;"></textarea>
+      <textarea class="txt-input" id="w${i}" placeholder="íêµ­ì´ë¡ ë²ì­í´ ì£¼ì¸ì..." rows="2" style="min-height:54px;"></textarea>
       <div class="fb" id="wfb${i}"></div>
     </div>`).join('');
 }
 
-function norm(s){return s.trim().replace(/[.,!?。\s]/g,' ').replace(/\s+/g,' ').trim().toLowerCase();}
+function norm(s){return s.trim().replace(/[.,!?ã\s]/g,' ').replace(/\s+/g,' ').trim().toLowerCase();}
 
 function checkW(userAns, acceptList) {
   const u = norm(userAns);
   if(!u) return false;
 
-  // 한글이 포함되지 않으면 무조건 오답
-  if(!/[가-힣]/.test(u)) return false;
+  // íê¸ì´ í¬í¨ëì§ ìì¼ë©´ ë¬´ì¡°ê±´ ì¤ëµ
+  if(!/[ê°-í£]/.test(u)) return false;
 
-  // 한글 글자 수가 3자 미만이면 오답
-  const koreanChars = u.match(/[가-힣]/g) || [];
+  // íê¸ ê¸ì ìê° 3ì ë¯¸ë§ì´ë©´ ì¤ëµ
+  const koreanChars = u.match(/[ê°-í£]/g) || [];
   if(koreanChars.length < 3) return false;
 
   return acceptList.some(a => {
     const n = norm(a);
-    // 1. 완전 일치
+    // 1. ìì  ì¼ì¹
     if(u === n) return true;
-    // 2. 사용자 입력과 정답이 완전히 같은 의미 (앞뒤 주어 포함 여부 차이 허용)
+    // 2. ì¬ì©ì ìë ¥ê³¼ ì ëµì´ ìì í ê°ì ìë¯¸ (ìë¤ ì£¼ì´ í¬í¨ ì¬ë¶ ì°¨ì´ íì©)
     if(u.includes(n) && n.length >= 6) return true;
-    // 3. 어미 5글자 일치 (시제 어미 정확히 맞춰야 함)
+    // 3. ì´ë¯¸ 5ê¸ì ì¼ì¹ (ìì  ì´ë¯¸ ì íí ë§ì¶°ì¼ í¨)
     if(u.length >= 8 && n.length >= 8 && u.slice(-5) === n.slice(-5)) return true;
     return false;
   });
@@ -862,7 +862,7 @@ function submitWriting() {
     const val=(document.getElementById('w'+i)?.value||'').trim();
     if(val) hasAny=true;
     const ok=val?checkW(val,writingData[i].a):false;
-    trResults.push({e:writingData[i].e,t:writingData[i].t,answer:val||'(미입력)',correct:ok});
+    trResults.push({e:writingData[i].e,t:writingData[i].t,answer:val||'(ë¯¸ìë ¥)',correct:ok});
     const inp=document.getElementById('w'+i);
     if(inp)inp.className=val?'txt-input':'txt-input';
   }
@@ -872,13 +872,13 @@ function submitWriting() {
   sendData();
 }
 
-// ===== 설문 =====
+// ===== ì¤ë¬¸ =====
 function buildSurveyUI() {
-  // 랜딩 화면에 설문 렌더링 (prefix: landing_)
+  // ëë© íë©´ì ì¤ë¬¸ ë ëë§ (prefix: landing_)
   const lc = document.getElementById('landingSurveyContainer');
   if(lc) lc.innerHTML = surveyDef.map((s,idx)=>`
     <div class="card">
-      <div class="q-num">설문 ${idx+1} / ${surveyDef.length}</div>
+      <div class="q-num">ì¤ë¬¸ ${idx+1} / ${surveyDef.length}</div>
       <div class="q-label">${s.label}${s.required?'<span class="required">*</span>':''}</div>
       ${s.type==='radio'?`<div class="opts" id="landing_${s.id}">${s.opts.map(o=>`
         <div class="opt" onclick="selRadioLanding(this,'landing_${s.id}','${s.id}','${o}')">
@@ -890,7 +890,7 @@ function buildSurveyUI() {
         </label>`).join('')}</div>`:''}
       ${s.type==='textarea'?`<textarea class="txt-input" id="landing_${s.id}" placeholder="${s.placeholder||''}" style="min-height:70px;"></textarea>`:''}
     </div>`).join('');
-  // s6 화면도 렌더링 (유지)
+  // s6 íë©´ë ë ëë§ (ì ì§)
   const sc = document.getElementById('surveyContainer');
   if(sc) sc.innerHTML = '';
 }
@@ -911,11 +911,11 @@ function selRadioLanding(el, domName, ansKey, value) {
   ans[ansKey]=value;
 }
 
-// ===== 최종 제출 =====
+// ===== ìµì¢ ì ì¶ =====
 function submitAll() {
   const concern=document.getElementById('mainConcern')?.value.trim();
-  if(!concern){alert('마지막 고민 내용을 입력해 주세요.');return;}
-  // 설문 수집
+  if(!concern){alert('ë§ì§ë§ ê³ ë¯¼ ë´ì©ì ìë ¥í´ ì£¼ì¸ì.');return;}
+  // ì¤ë¬¸ ìì§
   surveyDef.forEach(s=>{
     if(s.type==='textarea'){ans[s.id]=(document.getElementById(s.id)?.value||'');}
     else if(s.type==='chips'){ans[s.id]=[...document.querySelectorAll(`#${s.id} .chip-opt.sel`)].map(el=>el.querySelector('input').value);}
@@ -925,7 +925,7 @@ function submitAll() {
   sendData();
 }
 
-// ===== 결과 =====
+// ===== ê²°ê³¼ =====
 function buildResult() {
   const vS=ans.vocabScore||0,vT=ans.vocabTotal||5;
   const gS=ans.grammarScore||0,gT=ans.grammarTotal||8;
@@ -938,19 +938,19 @@ function buildResult() {
   ans.totalScore=total;
 
   let level,desc;
-  if(total>=85){level='심화 단계';desc='전 영역에서 탄탄한 실력을 보여주고 있어요. 더 복잡한 문장 구조와 어휘로 나아갈 준비가 되어 있습니다.';}
-  else if(total>=65){level='초급 단계';desc='기본적인 이해력은 갖추어져 있지만, 일부 영역에서 더 많은 연습이 필요합니다.';}
-  else if(total>=40){level='기초 단계';desc='영어의 기초가 시작되고 있어요. 체계적인 학습으로 더 빠르게 성장할 수 있습니다.';}
-  else{level='입문 단계';desc='영어 학습의 시작 단계입니다. 헷지에듀 Level 1부터 차근차근 익혀나가는 과정을 권장합니다.';}
+  if(total>=85){level='ì¬í ë¨ê³';desc='ì  ìì­ìì ííí ì¤ë ¥ì ë³´ì¬ì£¼ê³  ìì´ì. ë ë³µì¡í ë¬¸ì¥ êµ¬ì¡°ì ì´íë¡ ëìê° ì¤ë¹ê° ëì´ ììµëë¤.';}
+  else if(total>=65){level='ì´ê¸ ë¨ê³';desc='ê¸°ë³¸ì ì¸ ì´í´ë ¥ì ê°ì¶ì´ì ¸ ìì§ë§, ì¼ë¶ ìì­ìì ë ë§ì ì°ìµì´ íìí©ëë¤.';}
+  else if(total>=40){level='ê¸°ì´ ë¨ê³';desc='ìì´ì ê¸°ì´ê° ììëê³  ìì´ì. ì²´ê³ì ì¸ íìµì¼ë¡ ë ë¹ ë¥´ê² ì±ì¥í  ì ììµëë¤.';}
+  else{level='ìë¬¸ ë¨ê³';desc='ìì´ íìµì ìì ë¨ê³ìëë¤. í·ì§ìë Level 1ë¶í° ì°¨ê·¼ì°¨ê·¼ ìµíëê°ë ê³¼ì ì ê¶ì¥í©ëë¤.';}
   ans.level=level;
 
   document.getElementById('levelBadge').textContent=level;
-  document.getElementById('resultTitle').textContent=ans.studentName+' 학생 진단 완료! 🎉';
+  document.getElementById('resultTitle').textContent=ans.studentName+' íì ì§ë¨ ìë£! ð';
   document.getElementById('resultDesc').textContent=desc;
 
   const areas=[
-    {name:'단어',p:vP,s:vS,t:vT},{name:'문법',p:gP,s:gS,t:gT},
-    {name:'읽기',p:rP,s:rS,t:rT},{name:'듣기',p:lP,s:lS,t:lT},{name:'쓰기',p:wP,s:wS,t:wT},
+    {name:'ë¨ì´',p:vP,s:vS,t:vT},{name:'ë¬¸ë²',p:gP,s:gS,t:gT},
+    {name:'ì½ê¸°',p:rP,s:rS,t:rT},{name:'ë£ê¸°',p:lP,s:lS,t:lT},{name:'ì°ê¸°',p:wP,s:wS,t:wT},
   ];
   document.getElementById('areaScores').innerHTML=areas.map(a=>`
     <div class="area-row">
@@ -961,8 +961,8 @@ function buildResult() {
 
   document.getElementById('writingDetail').innerHTML=trResults.map((r,i)=>`
     <div class="writing-row">
-      <div class="writing-en">${i+1}. ${r.e} <span class="writing-tag ${r.correct?'tag-ok':'tag-ng'}">${r.correct?'✓ 정답':'△ 재확인'}</span></div>
-      <div class="writing-ans">내 답: ${r.answer}</div>
+      <div class="writing-en">${i+1}. ${r.e} <span class="writing-tag ${r.correct?'tag-ok':'tag-ng'}">${r.correct?'â ì ëµ':'â³ ì¬íì¸'}</span></div>
+      <div class="writing-ans">ë´ ëµ: ${r.answer}</div>
       <div style="font-size:.72rem;color:var(--muted);">${r.t}</div>
     </div>`).join('');
 
@@ -971,9 +971,9 @@ function buildResult() {
     new Chart(ctx,{
       type:'radar',
       data:{
-        labels:['단어','문법','읽기','듣기','쓰기'],
+        labels:['ë¨ì´','ë¬¸ë²','ì½ê¸°','ë£ê¸°','ì°ê¸°'],
         datasets:[{
-          label:ans.studentName+' 학생',
+          label:ans.studentName+' íì',
           data:[vP,gP,rP,lP,wP],
           backgroundColor:'rgba(107,143,113,0.2)',
           borderColor:'#6B8F71',borderWidth:2,
@@ -990,13 +990,67 @@ function buildResult() {
   },300);
 }
 
-// ===== 데이터 전송 =====
+// ===== ë°ì´í° ì ì¡ =====
 async function sendData() {
-  // 이메일 발송 비활성화
+  const vP = ans.vocabTotal ? Math.round((ans.vocabScore / ans.vocabTotal) * 100) : 0;
+  const gP = ans.grammarTotal ? Math.round((ans.grammarScore / ans.grammarTotal) * 100) : 0;
+  const rP = ans.readingTotal ? Math.round((ans.readingScore / ans.readingTotal) * 100) : 0;
+  const lP = ans.listeningTotal ? Math.round((ans.listeningScore / ans.listeningTotal) * 100) : 0;
+  const wP = ans.writingTotal ? Math.round((ans.writingScore / ans.writingTotal) * 100) : 0;
+
+  const areas = [
+    { name: '\uB2E8\uC5B4', p: vP }, { name: '\uBB38\uBC95', p: gP },
+    { name: '\uC77D\uAE30', p: rP }, { name: '\uB4E3\uAE30', p: lP }, { name: '\uC4F0\uAE30', p: wP }
+  ];
+  const weak = areas.filter(a => a.p < 65).map(a => a.name + '(' + a.p + '%)').join(', ') || '\uC5C6\uC74C';
+
+  const trDetail = trResults.map(function(r, i) {
+    return (i + 1) + '. ' + r.e + ' \u2192 ' + r.answer + ' (' + (r.correct ? '\uC815\uB2F5' : '\uC624\uB2F5') + ')';
+  }).join(' | ');
+
+  const data = {
+    studentName: ans.studentName || '',
+    grade: ans.grade || '',
+    level: ans.level || '',
+    totalScore: ans.totalScore + '%',
+    vocabScore: vP + '%',
+    grammarScore: gP + '%',
+    readingScore: rP + '%',
+    listeningScore: lP + '%',
+    writingScore: wP + '%',
+    translationDetail: trDetail,
+    weakPoints: weak,
+    submittedAt: ans.submittedAt || '',
+    engStart: ans.engStart || '',
+    engHistory: ans.engHistory || '',
+    korReading: ans.korReading || '',
+    essay: ans.essay || '',
+    socialKnow: ans.socialKnow || '',
+    sciKnow: ans.sciKnow || '',
+    grammar: ans.grammar || '',
+    grammarAge: ans.grammarAge || '',
+    personality: ans.personality || '',
+    selfStudy: ans.selfStudy || '',
+    selfStudyDetail: ans.selfStudyDetail || '',
+    studyDuration: ans.studyDuration || '',
+    studyRefusal: ans.studyRefusal || '',
+    engStudyFreq: ans.engStudyFreq || '',
+    mainConcern: ans.mainConcern || ''
+  };
+
+  try {
+    await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch (e) {
+    console.error('\uB370\uC774\uD130 \uC804\uC1A1 \uC2E4\uD328:', e);
+  }
 }
 
 function savePDF() {
-  // 인쇄 대화상자 열기 (PDF 저장 옵션 포함)
+  // ì¸ì ëíìì ì´ê¸° (PDF ì ì¥ ìµì í¬í¨)
   window.print();
 }
 
