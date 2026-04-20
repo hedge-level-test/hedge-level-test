@@ -382,7 +382,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
 </main>
 
 <script>
-const WEBHOOK_URL = 'https://hook.us2.make.com/sob4025nc99gtpa04p1h28g9jibglh5a';
+const WEBHOOK_URL = 'https://hook.us2.make.com/khxlin77r5iqnbkg4ut3gx3xyrympaui';
 let ans = {}, trResults = [], currentGrade = '', curScreen = 0;
 
 // ===== 데이터 =====
@@ -1004,9 +1004,29 @@ function buildResult() {
 
 // ===== 데이터 전송 =====
 async function sendData() {
-  // 이메일 발송 비활성화
-}
-
+  const vP=ans.vocabTotal?Math.round((ans.vocabScore/ans.vocabTotal)*100):0;
+    const gP=ans.grammarTotal?Math.round((ans.grammarScore/ans.grammarTotal)*100):0;
+      const rP=ans.readingTotal?Math.round((ans.readingScore/ans.readingTotal)*100):0;
+        const lP=ans.listeningTotal?Math.round((ans.listeningScore/ans.listeningTotal)*100):0;
+          const wP=ans.writingTotal?Math.round((ans.writingScore/ans.writingTotal)*100):0;
+            const areas=[{name:'단어',p:vP},{name:'문법',p:gP},{name:'읽기',p:rP},{name:'듣기',p:lP},{name:'쓰기',p:wP}];
+              const weak=areas.filter(a=>a.p<65).map(a=>a.name+'('+a.p+'%)').join(', ')||'없음';
+                const trDetail=trResults.map(function(r,i){return (i+1)+'. '+r.e+' → '+r.answer+' ('+(r.correct?'정답':'오답')+')';}).join(' | ');
+                  const data={
+                      studentName:ans.studentName||'',grade:ans.grade||'',level:ans.level||'',
+                          totalScore:ans.totalScore+'%',vocabScore:vP+'%',grammarScore:gP+'%',
+                              readingScore:rP+'%',listeningScore:lP+'%',writingScore:wP+'%',
+                                  translationDetail:trDetail,weakPoints:weak,submittedAt:ans.submittedAt||'',
+                                      engStart:ans.engStart||'',engHistory:ans.engHistory||'',korReading:ans.korReading||'',
+                                          essay:ans.essay||'',socialKnow:ans.socialKnow||'',sciKnow:ans.sciKnow||'',
+                                              grammar:ans.grammar||'',grammarAge:ans.grammarAge||'',personality:ans.personality||'',
+                                                  selfStudy:ans.selfStudy||'',selfStudyDetail:ans.selfStudyDetail||'',
+                                                      studyDuration:ans.studyDuration||'',studyRefusal:ans.studyRefusal||'',
+                                                          engStudyFreq:ans.engStudyFreq||'',mainConcern:ans.mainConcern||''
+                                                            };
+                                                              try{await fetch(WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});}catch(e){console.error('데이터 전송 실패:',e);}
+                                                              }
+                                                              }
 function savePDF() {
   // 인쇄 대화상자 열기 (PDF 저장 옵션 포함)
   window.print();
