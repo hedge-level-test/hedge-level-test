@@ -1051,11 +1051,17 @@ async function sendData() {
   };
 
   try {
-    await fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+    // sendBeacon: 페이지 종료/탭 닫기 후에도 데이터 전송 보장
+    const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+    const sent = navigator.sendBeacon(WEBHOOK_URL, blob);
+    if (!sent) {
+      // sendBeacon 실패 시 fetch fallback
+      await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    }
   } catch (e) {
     console.error('데이터 전송 실패:', e);
   }
