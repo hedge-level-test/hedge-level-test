@@ -577,6 +577,16 @@ const surveyDef = [
   {id:'studyRefusal',label:'"학원 가기 싫다", "공부하기 싫다" 같은 말을 한 적 있나요?',required:true,type:'radio',opts:['자주 해요','가끔 해요','거의 없어요','전혀 없어요']},
   {id:'engStudyFreq',label:'한 주에 몇 회 이상 영어 공부를 하고 있나요?',required:true,type:'radio',opts:['주 1회','주 2~3회','주 4~5회','매일','거의 안 함']},
   {id:'mainConcern',label:'아이 학습에 대해 가장 고민하고 있는 내용은?',required:true,type:'textarea',placeholder:'자유롭게 자세히 적어주세요...'},
+  // ===== 2026-06-01 추가: 신규 등록 onboarding intake (스케줄·결제·연락처) =====
+  {id:'engName',label:'학생 영문 이름',required:true,type:'text',placeholder:'예) Minseo Kim',note:'여권/공식 영문명이 없으면 한글 이름을 영문 스펠링으로 적어주세요. (필수)'},
+  {id:'parentPhone',label:'보호자 연락처',required:true,type:'text',placeholder:'예) 010-1234-5678'},
+  {id:'payerName',label:'수강권 결제자 성함',required:true,type:'text',placeholder:'결제하신 분 성함'},
+  {id:'ticketType',label:'구매하신 수강권',required:true,type:'radio',opts:['정규수업 3회권','정규수업 10회권','정규수업 20회권','정규수업 50회권']},
+  {id:'preferDays',label:'원하는 수업 요일 (가능한 요일 모두 선택)',required:true,type:'chips',opts:['월','화','수','목','금','토','일']},
+  {id:'weeklyCount',label:'주당 희망 수업 횟수 (회당 30분 기준)',required:true,type:'radio',opts:['주 2회','주 3회','주 4회','주 5회'],note:'헷지에듀 주당 수업은 기본 주2회 이상으로 구성하셔야 합니다. (주1회 불가) 단, 주3회 미만으로 구성 시 단어 어플과 듣기 음원이 제공되지 않습니다. 원활한 쓰기 학습을 위해 주3회 이상을 권장합니다.'},
+  {id:'preferTime',label:'원하는 수업 시간대',required:true,type:'text',placeholder:'예) 평일 오후 4시~5시 사이',note:'오전 8시부터 저녁 10시 수업 종료까지 구성 가능합니다. (마지막 수업 시작 가능 시간: 21:30)'},
+  {id:'firstClassWish',label:'첫 수업을 시작하고 싶은 주',required:true,type:'text',placeholder:'예) 6월 셋째 주부터',note:'첫 수업 시작 가능일은 상담·강사배정 완료 시점에 따라 정해집니다 — 월요일까지 완료 시 금주 금요일 / 화·수요일 완료 시 다음주 월요일 / 목요일 완료 시 다음주 수요일 / 금요일 완료 시 다음주 목요일부터 시작 가능합니다.'},
+  {id:'referrer',label:'추천인 성함',required:false,type:'text',placeholder:'없으면 비워두셔도 됩니다',note:'추천해주신 분이 있을 경우에만 작성해주세요. (선택)'},
 ];
 
 // ===== 초기화 =====
@@ -626,7 +636,7 @@ function startTest() {
 
   // 랜딩 설문 데이터 수집
   surveyDef.forEach(s=>{
-    if(s.type==='textarea'){ans[s.id]=(document.getElementById('landing_'+s.id)?.value||'');}
+    if(s.type==='textarea'||s.type==='text'){ans[s.id]=(document.getElementById('landing_'+s.id)?.value||'').trim();}
     else if(s.type==='chips'){ans[s.id]=[...document.querySelectorAll(`#landing_${s.id} .chip-opt.sel`)].map(el=>el.querySelector('input').value);}
     else if(s.type==='radio'){
       const sel=document.querySelector(`input[name="landing_${s.id}"]:checked`);
@@ -634,6 +644,19 @@ function startTest() {
     }
   });
   ans.mainConcern=(document.getElementById('landing_mainConcern')?.value||'');
+
+  // 2026-06-01: 필수 설문 항목 미입력 검증 (영문이름·연락처·결제·회차·스케줄 등)
+  for(const s of surveyDef){
+    if(!s.required) continue;
+    const v=ans[s.id];
+    const empty = (v===undefined||v===null||v==='' || (Array.isArray(v)&&v.length===0));
+    if(empty){
+      alert('필수 항목을 입력해 주세요:\n\n· '+s.label);
+      const el=document.getElementById('landing_'+s.id);
+      if(el && el.scrollIntoView) el.scrollIntoView({behavior:'smooth',block:'center'});
+      return;
+    }
+  }
 
   buildVocabUI();
   goScreen(1);
@@ -892,6 +915,7 @@ function buildSurveyUI() {
     <div class="card">
       <div class="q-num">설문 ${idx+1} / ${surveyDef.length}</div>
       <div class="q-label">${s.label}${s.required?'<span class="required">*</span>':''}</div>
+      ${s.note?`<div style="font-size:.74rem;color:var(--mid);line-height:1.6;background:rgba(0,0,0,.03);border-radius:8px;padding:.5rem .7rem;margin-bottom:.5rem;">${s.note}</div>`:''}
       ${s.type==='radio'?`<div class="opts" id="landing_${s.id}">${s.opts.map(o=>`
         <div class="opt" onclick="selRadioLanding(this,'landing_${s.id}','${s.id}','${o}')">
           <input type="radio" name="landing_${s.id}" value="${o}"><label>${o}</label>
@@ -901,6 +925,7 @@ function buildSurveyUI() {
           <input type="checkbox" name="landing_${s.id}" value="${o}" onchange="toggleChip(this.parentElement)">${o}
         </label>`).join('')}</div>`:''}
       ${s.type==='textarea'?`<textarea class="txt-input" id="landing_${s.id}" placeholder="${s.placeholder||''}" style="min-height:70px;"></textarea>`:''}
+      ${s.type==='text'?`<input type="text" class="txt-input" id="landing_${s.id}" placeholder="${s.placeholder||''}" style="width:100%;box-sizing:border-box;">`:''}
     </div>`).join('');
   // s6 화면도 렌더링 (유지)
   const sc = document.getElementById('surveyContainer');
@@ -1047,7 +1072,17 @@ async function sendData() {
     studyDuration: ans.studyDuration || '',
     studyRefusal: ans.studyRefusal || '',
     engStudyFreq: ans.engStudyFreq || '',
-    mainConcern: ans.mainConcern || ''
+    mainConcern: ans.mainConcern || '',
+    // 2026-06-01: 신규 등록 onboarding intake (Make v3 → 노션 새 컬럼)
+    engName: ans.engName || '',
+    parentPhone: ans.parentPhone || '',
+    payerName: ans.payerName || '',
+    ticketType: ans.ticketType || '',
+    preferDays: Array.isArray(ans.preferDays) ? ans.preferDays.join(', ') : (ans.preferDays || ''),
+    weeklyCount: ans.weeklyCount || '',
+    preferTime: ans.preferTime || '',
+    firstClassWish: ans.firstClassWish || '',
+    referrer: ans.referrer || ''
   };
 
   try {
