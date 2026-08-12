@@ -781,7 +781,7 @@ function buildListeningUI() {
       <div class="q-num">듣기 ${i+1} / ${listeningData.length}</div>
       <div class="listen-card">
         <p style="font-size:.78rem;color:var(--muted);margin-bottom:.5rem;">버튼을 눌러 문장을 들으세요</p>
-        <p style="font-size:.7rem;color:var(--muted);margin-bottom:.75rem;">※ Chrome/Edge 브라우저에서 가장 잘 들려요</p>
+        <p style="font-size:.7rem;color:var(--muted);margin-bottom:.75rem;">※ 소리가 안 들리면 기기 볼륨/무음 설정을 확인해 주세요</p>
         <button class="tts-btn" id="tts${i}" onclick="playTTS(${i})">▶ 듣기</button>
       </div>
       <div class="q-label">${q.q}</div>
@@ -793,23 +793,24 @@ function buildListeningUI() {
     </div>`).join('');
 }
 
+// 2026-08-08 듣기 재생 근본 수정 (PC마다 안 들리는 문제):
+//   기존엔 브라우저 TTS(speechSynthesis)로 재생 → 영어 음성이 설치 안 된 PC(한국 가정 多)는
+//   무음/한국어음성, getVoices() 비동기 레이스, 클릭 후 2초 setTimeout 으로 사용자제스처 만료 차단 등
+//   "되는 PC/안 되는 PC" 편차의 근본 원인이 OS 음성 의존이었음.
+//   → 미리 생성한 오디오 파일(audio/listen_N.mp3, OpenAI TTS)을 클릭 즉시 재생 → 모든 PC 동일 작동.
+//     오디오 로드/재생 실패 시에만 기존 TTS 로 폴백(이중 안전).
 let curUtterance=null;
+let curAudio=null;
 let ttsReady=false;
 
-// 페이지 로드 시 TTS 엔진 초기화
 function initTTS() {
   if(typeof speechSynthesis === 'undefined') return;
-  // 음성 목록 로드 대기
-  if(speechSynthesis.getVoices().length > 0) {
-    ttsReady = true;
-  } else {
-    speechSynthesis.onvoiceschanged = () => { ttsReady = true; };
-  }
+  if(speechSynthesis.getVoices().length > 0) { ttsReady = true; }
+  else { speechSynthesis.onvoiceschanged = () => { ttsReady = true; }; }
 }
 
 function getEnglishVoice() {
   const voices = speechSynthesis.getVoices();
-  // 영어 음성 우선순위: en-US > en-GB > en
   return voices.find(v => v.lang === 'en-US' && v.localService) ||
          voices.find(v => v.lang === 'en-US') ||
          voices.find(v => v.lang.startsWith('en-GB')) ||
@@ -817,65 +818,56 @@ function getEnglishVoice() {
          null;
 }
 
-function playTTS(idx) {
-  const btn = document.getElementById('tts'+idx);
-  
-  // 브라우저 TTS 지원 여부 확인
+function _ttsStopAll() {
+  if(curAudio){ try{ curAudio.pause(); curAudio.currentTime = 0; }catch(_){}; curAudio = null; }
+  if(curUtterance){ try{ speechSynthesis.cancel(); }catch(_){}; curUtterance = null; }
+}
+
+function _btnIdle(btn){ btn.classList.remove('playing'); btn.textContent = '▶ 다시 듣기'; }
+
+// TTS 폴백 (오디오 파일 로드/재생 실패 시에만)
+function _ttsFallback(idx, btn) {
   if(typeof speechSynthesis === 'undefined') {
-    btn.textContent = '⚠ 이 브라우저는 듣기를 지원하지 않아요';
-    btn.style.background = 'var(--accent)';
-    return;
-  }
-
-  // 이미 재생 중이면 중지
-  if(curUtterance) {
-    speechSynthesis.cancel();
-    curUtterance = null;
     btn.classList.remove('playing');
-    btn.textContent = '▶ 듣기';
+    btn.textContent = '⚠ 듣기 미지원 브라우저';
     return;
   }
-
-  btn.classList.add('playing');
-  btn.textContent = '준비 중...';
-
-  // TTS 실행 함수
-  function doSpeak() {
+  try {
     speechSynthesis.cancel();
-    
-    const sentence = listeningData[idx].s;
-    // 앞에 묵음 구간을 위해 쉼표 추가
-    const utt = new SpeechSynthesisUtterance(sentence);
-    utt.lang = 'en-US';
-    utt.rate = 0.75;
-    utt.pitch = 1.0;
-    utt.volume = 1.0;
-
-    // 영어 음성 설정
-    const voice = getEnglishVoice();
-    if(voice) utt.voice = voice;
-
-    utt.onstart = () => {
-      btn.textContent = '■ 정지';
-    };
-    utt.onend = () => {
-      btn.classList.remove('playing');
-      btn.textContent = '▶ 다시 듣기';
-      curUtterance = null;
-    };
-    utt.onerror = (e) => {
-      btn.classList.remove('playing');
-      btn.textContent = '▶ 다시 듣기';
-      curUtterance = null;
-      console.log('TTS 오류:', e.error);
-    };
-
+    const utt = new SpeechSynthesisUtterance(listeningData[idx].s);
+    utt.lang = 'en-US'; utt.rate = 0.8; utt.pitch = 1.0; utt.volume = 1.0;
+    const voice = getEnglishVoice(); if(voice) utt.voice = voice;
+    utt.onend = () => { curUtterance = null; _btnIdle(btn); };
+    utt.onerror = () => { curUtterance = null; _btnIdle(btn); };
     curUtterance = utt;
     speechSynthesis.speak(utt);
-  }
+  } catch(e) { _btnIdle(btn); }
+}
 
-  // 2초 딜레이 후 재생 (엔진 준비 대기)
-  setTimeout(doSpeak, 2000);
+function playTTS(idx) {
+  const btn = document.getElementById('tts'+idx);
+  // 재생 중인 이 버튼을 다시 누르면 정지(토글)
+  if(btn.classList.contains('playing')) {
+    _ttsStopAll();
+    _btnIdle(btn);
+    return;
+  }
+  // 다른 문장 재생 중이면 모두 정지
+  document.querySelectorAll('.tts-btn.playing').forEach(_btnIdle);
+  _ttsStopAll();
+
+  btn.classList.add('playing');
+  btn.textContent = '■ 정지';
+
+  // 1) 미리 생성한 오디오 파일 재생 (OS 음성 의존 없음 → 모든 PC 동일). 클릭 핸들러 내 즉시 재생 = 자동재생 차단 회피.
+  const audio = new Audio('audio/listen_'+idx+'.mp3');
+  curAudio = audio;
+  audio.onended = () => { if(curAudio===audio) curAudio = null; _btnIdle(btn); };
+  audio.onerror = () => { if(curAudio===audio) curAudio = null; _ttsFallback(idx, btn); };  // 파일 로드 실패 → TTS
+  const p = audio.play();
+  if(p && typeof p.catch === 'function') {
+    p.catch(() => { if(curAudio===audio) curAudio = null; _ttsFallback(idx, btn); });  // 재생 차단/실패 → TTS
+  }
 }
 
 function submitListening() {
