@@ -1079,6 +1079,8 @@ function buildResult() {
   const rKey=t=>/^추론/.test(t)?'추론':/^세부/.test(t)?'세부 내용':'내용 일치';
   const rBad=[...new Set(tagsOf(ans.readingDetail).map(rKey))], rGood=[...new Set((ans.readingDetail||[]).filter(x=>x.ok&&x.tag).map(x=>rKey(x.tag)))].filter(k=>!rBad.includes(k));
   const vMiss=(ans.vocabDetail||[]).filter(x=>!x.ok).length;
+  // 2026-11-11 사장님 지시: 영역 끝 주의 문구 (문장 그대로)
+  const warn=t=>'<div style="margin-top:.5rem;padding:.55rem .7rem;background:#FFF4E5;border:1px solid #F0C27B;border-radius:8px;color:#8A4B0F;font-size:.78rem;line-height:1.65;">⚠️ '+t+'</div>';
   // 점수 → 초등 학년·학기 환산: 초3 1학기(0)~초6 2학기(7) 8칸에 고르게 대응 (0점 = 초3 1학기 수준에 못 미침, 100점 = 초6 2학기 이상)
   // 2026-11-11 사장님 기준: 입문=초1~2(0~49점) · 기초=초3~5(50~83점) · 초급=초6~중1(84~94점) · 심화=중2 이상(95~100점), 구간 안은 학기 단위로 등분
   const SEM=['초등 1학년 1학기','초등 1학년 2학기','초등 2학년 1학기','초등 2학년 2학기','초등 3학년 1학기','초등 3학년 2학기','초등 4학년 1학기','초등 4학년 2학기','초등 5학년 1학기','초등 5학년 2학기','초등 6학년 1학기','초등 6학년 2학기','중학교 1학년 1학기','중학교 1학년 2학기'];
@@ -1086,15 +1088,15 @@ function buildResult() {
   // 종합: 진단 단계 + 그 단계의 학년 범위를 총점으로 등분 (입문 0~24 초1·25~49 초2 / 기초 50~66 초3·67~83 초4·84~ 초5 / 초급 84~89 초6·90~94 중1 / 심화 중2 이상)
   const overallLabel=p=>level==='심화 단계'?'중학교 2학년 이상 수준':level==='초급 단계'?(p>=90?'중학교 1학년 수준':'초등 6학년 수준'):level==='기초 단계'?(p>=84?'초등 5학년 수준':p>=67?'초등 4학년 수준':'초등 3학년 수준'):(p>=25?'초등 2학년 수준':'초등 1학년 수준');
   const blocks=[
-    {n:'단어',p:vP,s:vS,t:vT,what:(gNo?gNo+'학년 ':'')+'평균 수준의 영어 단어'+((ans.vocabDetail||[]).length?'(예: '+(ans.vocabDetail||[]).slice(0,4).map(x=>esc(x.w)).join(', ')+')':'')+' 뜻을 알고 있는지 봤어요.',
+    {n:'단어',p:vP,s:vS,t:vT,what:(gNo?gNo+'학년 ':'')+'평균 수준의 영어 단어 뜻을 알고 있는지 봤어요.'+((ans.vocabDetail||[]).some(x=>!x.ok)?' (틀린 단어: '+(ans.vocabDetail||[]).filter(x=>!x.ok).slice(0,4).map(x=>esc(x.w)).join(', ')+')':''),
       body:'<div style="margin-top:.3rem;">'+(vMiss===0?'✓ '+(gNo?gNo+'학년':'학년')+' 수준 단어를 모두 알고 있어요.':vS>=vT-1?'✓ '+(gNo?gNo+'학년':'학년')+' 수준 단어를 대부분 알고 있어요.':vS>=Math.ceil(vT/2)?'△ '+(gNo?gNo+'학년':'학년')+' 수준 단어 중 절반 정도를 알고 있어요. 단어량을 더 늘려야 해요.':'△ '+(gNo?gNo+'학년':'학년')+' 수준 단어를 아직 많이 모르고 있어요. 아래 학년 단어부터 차근차근 익혀야 해요.')+'</div>'},
     {n:'문법',p:gP,s:gS,t:gT,what:'동사의 시제(현재·과거·진행·미래)와 조동사·의문문 형태를 고를 수 있는지 봤어요.',
-      body:two([],g=>'',tagsOf(ans.grammarDetail),g=>'아직 헷갈려하는 문법: <b>'+g.join(', ')+'</b>')},
+      body:two([],g=>'',tagsOf(ans.grammarDetail),g=>'아직 헷갈려하는 문법: <b>'+g.join(', ')+'</b>')+(level!=='심화 단계'?warn('학생이 아직 4학년 미만인 경우, 절대 먼저 문법 학습부터 시작해서는 안됩니다. 상담을 통해 학습 순서를 계획한 후에 학습을 진행해주세요.'):'')},
     {n:'읽기',p:rP,s:rS,t:rT,what:'짧은 이야기를 읽고 내용 일치·세부 내용·인물의 성격을 파악하는지 봤어요.',
-      body:two(rGood,g=>'잘하는 것: '+g.map(k=>rSkill[k]).join(', '),rBad,g=>'더 키워야 할 것: '+g.map(k=>rSkill[k]).join(', '))},
+      body:two(rGood,g=>'잘하는 것: '+g.map(k=>rSkill[k]).join(', '),rBad,g=>'더 키워야 할 것: '+g.map(k=>rSkill[k]).join(', '))+(vP<70?warn('읽기 성장을 위해서는 단어량이 먼저 쌓여야 합니다. 단어 학습을 먼저 진행해주세요.'):'')},
     {n:'듣기',p:lP,s:lS,t:lT,what:'영어 문장을 듣고 언제·무엇을 하는지(시제와 내용)를 알아듣는지 봤어요.',
       body:(tagsOf(ans.listeningDetail).length?'<div style="margin-top:.3rem;">놓친 문장의 시제: <b>'+tagsOf(ans.listeningDetail).join(', ')+'</b></div>':'')+
-        '<div style="margin-top:.3rem;">'+(gNo?gNo+'학년인 ':'')+esc(ans.studentName||'')+' 학생의 듣기 수준은 '+(/^중학교/.test(semLabel(lP))?'':'초등 평균 수준에서 ')+'<b>'+semLabel(lP)+'</b> 정도의 결과가 나왔어요.</div>'},
+        '<div style="margin-top:.3rem;">'+(gNo?gNo+'학년인 ':'')+esc(ans.studentName||'')+' 학생의 듣기 수준은 '+(/^중학교/.test(semLabel(lP))?'':'초등 평균 수준에서 ')+'<b>'+semLabel(lP)+'</b> 정도의 결과가 나왔어요.</div>'+warn('읽기와 듣기 학습은 쓰기와 함께 서브로 병행해야 하는 과정입니다. 반드시 쓰기 학습과 함께 진행해주세요.')},
   ];
   document.getElementById('areaAnalysis').innerHTML=blocks.map(b=>
     '<div style="padding:.75rem 0;border-bottom:1px solid var(--border);font-size:.8rem;line-height:1.7;color:var(--mid);">'+
