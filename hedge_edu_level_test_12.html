@@ -1230,7 +1230,8 @@ async function saveResultImage(){
   try{
     const h2c=await _loadH2C();
     const SC=3, MAXH=3600;   // 한 장 세로 최대 3600px(화면 1200px) — 휴대폰 사진첩·메신저가 줄이지 않는 크기
-    const canvas=await h2c(el,{scale:SC,backgroundColor:'#F7F4EE',useCORS:true});
+    // 2026-11-11: 복사본에서 화면 등장 효과(투명→진하게 0.4초)가 다시 시작돼 반투명하게 찍히던 것 → 효과 끄고 찍는다
+    const canvas=await h2c(el,{scale:SC,backgroundColor:'#F7F4EE',useCORS:true,onclone:doc=>{const st=doc.createElement('style');st.textContent='*,*::before,*::after{animation:none!important;transition:none!important}#s7{opacity:1!important;transform:none!important}';doc.head.appendChild(st);}});
     // 자를 자리: 글자가 끊기지 않게 카드·문단(블록) 아래 경계에서
     const top=el.getBoundingClientRect().top;
     const cand=[...new Set([...el.querySelectorAll('*')].filter(n=>{const cs=getComputedStyle(n);return n.offsetHeight>0&&/^(block|flex|grid|list-item)$/.test(cs.display);})
