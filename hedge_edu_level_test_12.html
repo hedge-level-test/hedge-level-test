@@ -360,13 +360,13 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
   </div>
   <div id="imgModal" data-noimg="1" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9999;overflow:auto;padding:16px;">
     <div style="max-width:520px;margin:0 auto;background:#fff;border-radius:12px;padding:14px;">
-      <p style="font-size:.85rem;font-weight:800;color:var(--sage-d);margin:0 0 .4rem;">결과지 사진이 만들어졌어요</p>
-      <p style="font-size:.75rem;color:var(--mid);line-height:1.6;margin:0 0 .6rem;">아래 <b>저장하기</b>를 누르거나, 사진을 <b>길게 눌러</b> 사진첩에 저장하세요.</p>
+      <p id="imgModalTitle" style="font-size:.85rem;font-weight:800;color:var(--sage-d);margin:0 0 .4rem;">결과지 사진이 만들어졌어요</p>
+      <p style="font-size:.75rem;color:var(--mid);line-height:1.6;margin:0 0 .6rem;">아래 <b>저장하기</b>를 누르면 모든 장이 저장됩니다. 사진을 <b>길게 눌러</b> 한 장씩 저장해도 됩니다.</p>
       <div style="display:flex;gap:.5rem;margin-bottom:.6rem;">
         <button id="imgSaveBtn" style="flex:1;background:var(--sage);color:#fff;border:none;padding:.7rem;border-radius:8px;font-weight:800;font-size:.85rem;cursor:pointer;">저장하기</button>
         <button onclick="document.getElementById('imgModal').style.display='none'" style="flex:0 0 auto;background:#fff;color:var(--mid);border:1px solid var(--border);padding:.7rem 1rem;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;">닫기</button>
       </div>
-      <img id="imgPreview" alt="결과지" style="width:100%;height:auto;border:1px solid var(--border);border-radius:8px;display:block;">
+      <div id="imgPreviews"></div>
     </div>
   </div>
 
@@ -400,15 +400,15 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
     <div id="areaAnalysis"></div>
   </div>
 
-  <div class="kakao-box" data-noimg="1">
+  <div class="kakao-box">
     <div class="kakao-title">💛 헷지에듀 카카오 채널</div>
     <div class="kakao-desc">헷지에듀의 소식과 이벤트 혜택을 받아보시려면<br>카카오 채널을 추가해 주세요.</div>
     <button class="kakao-btn" onclick="window.open('http://pf.kakao.com/_UymBn','_blank')">카카오 채널 추가하기 →</button>
   </div>
   <div class="status-box" id="statusBox" style="display:none;"></div>
-  <div class="divider" data-noimg="1"></div>
-  <p data-noimg="1" style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:1rem;">더 알아보기</p>
-  <div class="cta-grid" data-noimg="1">
+  <div class="divider"></div>
+  <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:1rem;">더 알아보기</p>
+  <div class="cta-grid">
     <a class="cta-card" href="https://map.naver.com/p/entry/place/1256593955?placePath=/ticket" target="_blank"><div class="cc-icon">📅</div><div class="cc-title">1:1 상담 예약</div><div class="cc-desc">온라인/오프라인</div></a>
     <a class="cta-card" href="https://www.youtube.com/@hedgehogmykid" target="_blank"><div class="cc-icon">🎬</div><div class="cc-title">유튜브 채널</div><div class="cc-desc">영어 교육 콘텐츠</div></a>
     <a class="cta-card" href="https://blog.naver.com/herissons81" target="_blank"><div class="cc-icon">✍️</div><div class="cc-title">블로그</div><div class="cc-desc">학부모 영어 칼럼</div></a>
@@ -1225,25 +1225,46 @@ function _loadH2C(){
 }
 async function saveResultImage(){
   const btn=document.getElementById('saveImgBtn'); const old=btn.innerHTML; btn.disabled=true; btn.innerHTML='⏳ 결과지 사진 만드는 중…';
+  const el=document.getElementById('s7');
+  const hidden=[...el.querySelectorAll('[data-noimg]:not(#imgModal)')].map(n=>{const d=n.style.display;n.style.display='none';return [n,d];});
   try{
     const h2c=await _loadH2C();
-    const el=document.getElementById('s7');
-    const canvas=await h2c(el,{scale:3,backgroundColor:'#F7F4EE',useCORS:true,
-      ignoreElements:n=>!!(n.getAttribute&&n.getAttribute('data-noimg'))});
-    const url=canvas.toDataURL('image/png');
-    const name='헷지에듀_레벨테스트_'+(ans.studentName||'결과')+'.png';
-    document.getElementById('imgPreview').src=url;
+    const SC=3, MAXH=3600;   // 한 장 세로 최대 3600px(화면 1200px) — 휴대폰 사진첩·메신저가 줄이지 않는 크기
+    const canvas=await h2c(el,{scale:SC,backgroundColor:'#F7F4EE',useCORS:true});
+    // 자를 자리: 글자가 끊기지 않게 카드·문단(블록) 아래 경계에서
+    const top=el.getBoundingClientRect().top;
+    const cand=[...new Set([...el.querySelectorAll('*')].filter(n=>{const cs=getComputedStyle(n);return n.offsetHeight>0&&/^(block|flex|grid|list-item)$/.test(cs.display);})
+      .map(n=>Math.round((n.getBoundingClientRect().bottom-top)*SC)))].filter(y=>y>0&&y<canvas.height).sort((x,y)=>x-y);
+    const cuts=[0];
+    while(canvas.height-cuts[cuts.length-1]>MAXH){
+      const st=cuts[cuts.length-1], lim=st+MAXH;
+      const ok=cand.filter(y=>y>st+MAXH*0.45&&y<=lim);
+      cuts.push(ok.length?ok[ok.length-1]+Math.round(6*SC):lim);
+    }
+    cuts.push(canvas.height);
+    const parts=[];
+    for(let i=0;i<cuts.length-1;i++){
+      const h=cuts[i+1]-cuts[i]; if(h<10) continue;
+      const c=document.createElement('canvas'); c.width=canvas.width; c.height=h;
+      const x=c.getContext('2d'); x.fillStyle='#F7F4EE'; x.fillRect(0,0,c.width,h); x.drawImage(canvas,0,cuts[i],canvas.width,h,0,0,canvas.width,h);
+      parts.push(c.toDataURL('image/png'));
+    }
+    const base='헷지에듀_레벨테스트_'+(ans.studentName||'결과');
+    const names=parts.map((_,i)=>base+(parts.length>1?'_'+(i+1)+'of'+parts.length:'')+'.png');
+    document.getElementById('imgModalTitle').textContent='결과지 사진이 만들어졌어요'+(parts.length>1?' (총 '+parts.length+'장)':'');
+    document.getElementById('imgPreviews').innerHTML=parts.map((u,i)=>'<div style="font-size:.72rem;color:var(--muted);margin:.5rem 0 .2rem;">'+(i+1)+' / '+parts.length+'</div><img class="imgPart" src="'+u+'" alt="결과지 '+(i+1)+'" style="width:100%;height:auto;border:1px solid var(--border);border-radius:8px;display:block;">').join('');
+    window._resultParts=parts;
     document.getElementById('imgSaveBtn').onclick=async()=>{
       try{
-        const blob=await (await fetch(url)).blob(); const file=new File([blob],name,{type:'image/png'});
-        if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:'레벨테스트 결과지'}); return; }
+        const files=await Promise.all(parts.map(async(u,i)=>new File([await (await fetch(u)).blob()],names[i],{type:'image/png'})));
+        if(navigator.canShare&&navigator.canShare({files})){ await navigator.share({files,title:'레벨테스트 결과지'}); return; }
       }catch(e){ if(e&&e.name==='AbortError') return; }
-      const a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove();
+      for(let i=0;i<parts.length;i++){ const a=document.createElement('a'); a.href=parts[i]; a.download=names[i]; document.body.appendChild(a); a.click(); a.remove(); await new Promise(r=>setTimeout(r,400)); }
     };
     document.getElementById('imgModal').style.display='block';
   }catch(e){
     alert('사진을 만들지 못했어요. 화면을 캡처(스크린샷)해서 저장해 주세요.');
-  }finally{ btn.disabled=false; btn.innerHTML=old; }
+  }finally{ hidden.forEach(([n,d])=>{n.style.display=d;}); btn.disabled=false; btn.innerHTML=old; }
 }
 
 function savePDF() {
