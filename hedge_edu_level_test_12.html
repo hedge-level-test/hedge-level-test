@@ -291,8 +291,8 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
 <!-- SCREEN 3: 읽기 -->
 <div class="screen" id="s3">
   <div class="chip">STEP 3 · 읽기 (Reading)</div>
-  <h2 class="sec-title">지문을 읽고 빈칸을 채우세요</h2>
-  <p class="sec-desc">이야기를 읽고 문맥에 맞는 단어를 빈칸에 입력하세요.</p>
+  <h2 class="sec-title">지문을 읽고 물음에 답하세요</h2>
+  <p class="sec-desc">이야기를 끝까지 읽고 각 질문에 알맞은 답을 고르세요.</p>
   <div class="passage" id="readingPassage"></div>
   <div id="readingQs"></div>
   <div class="btn-row">
@@ -359,6 +359,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
     <div class="level-badge" id="levelBadge">기초 단계</div>
     <h2 class="result-title" id="resultTitle">진단 완료!</h2>
     <p class="result-desc" id="resultDesc"></p>
+    <p id="resultMeta" style="font-size:.75rem;color:var(--muted);margin-top:.5rem;"></p>
   </div>
   <div class="radar-wrap">
     <div class="radar-title">📊 5개 영역 종합 분석</div>
@@ -367,10 +368,25 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
   <div class="detail-card">
     <div class="detail-title">📈 영역별 점수</div>
     <div id="areaScores"></div>
+    <div id="areaSummary" style="margin-top:.75rem;font-size:.8rem;line-height:1.75;color:var(--mid);"></div>
   </div>
   <div class="detail-card">
     <div class="detail-title">✍️ 쓰기 번역 상세 결과</div>
     <div id="writingDetail"></div>
+  </div>
+
+  <!-- 2026-11-11 사장님 지시: 윤이연 대표 온라인 1:1 줌 상담 신청 (유료 · 온라인 30분) — 네이버 예약 상품 바로 연결 -->
+  <div class="consult-box" style="background:#fff;border:2px solid var(--sage);border-radius:var(--r);padding:1.25rem 1.125rem;margin-bottom:1.125rem;">
+    <p style="font-size:.95rem;font-weight:800;color:var(--sage);margin-bottom:.35rem;">🎥 윤이연 대표와 온라인 1:1 줌 상담 신청하기</p>
+    <p style="font-size:.78rem;font-weight:700;color:var(--accent);margin-bottom:.6rem;">유료 · 온라인(줌) 30분</p>
+    <p style="font-size:.8rem;color:var(--mid);line-height:1.75;margin-bottom:.9rem;">오늘 테스트 결과와 학부모님이 작성하신 학습 이력 설문을 바탕으로,<br>우리 아이에게 맞는 영어 학습 방향을 윤이연 대표가 직접 1:1로 상담해 드립니다.</p>
+    <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+      <div style="flex:0 0 auto;background:#fff;border:1px solid #E8E4DC;border-radius:10px;padding:.4rem;line-height:0;"><svg width="132" height="132" role="img" aria-label="줌 상담 예약 QR 코드" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39 39" shape-rendering="crispEdges"><path fill="#FFFFFF" d="M0 0h39v39H0z"/><path stroke="#1C1A17" d="M1 1.5h7m1 0h1m2 0h4m3 0h2m1 0h1m1 0h2m1 0h2m2 0h7M1 2.5h1m5 0h1m1 0h1m1 0h2m2 0h2m1 0h1m2 0h2m5 0h2m1 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h1m3 0h1m1 0h3m1 0h1m1 0h2m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m4 0h1m1 0h2m1 0h2m1 0h3m2 0h2m1 0h2m1 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h1m2 0h2m4 0h3m6 0h1m1 0h1m1 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m3 0h3m3 0h3m1 0h2m1 0h2m1 0h1m3 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M11 8.5h2m3 0h2m2 0h3m1 0h1m1 0h2M1 9.5h1m2 0h6m1 0h4m1 0h2m1 0h1m1 0h2m1 0h3m2 0h2m2 0h1m1 0h3M1 10.5h4m5 0h1m2 0h1m7 0h3m3 0h1m3 0h2m1 0h1m1 0h1M1 11.5h2m1 0h4m3 0h5m7 0h1m1 0h2m5 0h2m1 0h1m1 0h1M1 12.5h1m4 0h1m2 0h2m2 0h1m1 0h2m1 0h1m8 0h1m3 0h1m3 0h3M3 13.5h1m2 0h3m1 0h1m1 0h3m4 0h3m3 0h1m1 0h1m1 0h4m2 0h1m1 0h1M1 14.5h1m2 0h2m2 0h7m1 0h4m4 0h6m3 0h2M1 15.5h1m2 0h2m1 0h1m2 0h2m1 0h1m1 0h2m1 0h1m1 0h4m1 0h1m1 0h2m4 0h3m1 0h1M4 16.5h1m3 0h2m1 0h2m4 0h5m2 0h3m1 0h3m1 0h1m1 0h3M1 17.5h2m1 0h1m2 0h2m1 0h1m2 0h1m1 0h1m1 0h2m1 0h3m1 0h1m1 0h2m1 0h1m3 0h1m1 0h3M2 18.5h1m1 0h1m1 0h1m5 0h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h3m4 0h1m3 0h1M1 19.5h3m1 0h1m1 0h1m8 0h1m4 0h2m1 0h1m3 0h1m4 0h3m1 0h1M3 20.5h3m2 0h7m8 0h1m1 0h4m4 0h1m3 0h1M1 21.5h1m5 0h3m1 0h3m2 0h4m3 0h1m3 0h1m1 0h5m1 0h1M1 22.5h5m2 0h2m1 0h3m1 0h2m3 0h1m1 0h3m2 0h2m4 0h1m1 0h2M1 23.5h1m2 0h2m1 0h1m1 0h1m1 0h1m1 0h2m1 0h1m1 0h2m3 0h2m1 0h1m1 0h3m1 0h1m1 0h1m2 0h1M1 24.5h1m1 0h4m3 0h1m1 0h1m1 0h1m1 0h3m1 0h5m1 0h3m1 0h1m1 0h4m1 0h1M2 25.5h2m1 0h1m1 0h3m1 0h1m2 0h6m2 0h1m1 0h4m3 0h2m4 0h1M1 26.5h1m1 0h1m1 0h1m2 0h1m5 0h2m1 0h1m2 0h3m6 0h3m2 0h2M1 27.5h2m1 0h2m1 0h1m2 0h1m1 0h1m1 0h1m2 0h1m1 0h3m2 0h2m1 0h2m2 0h1m2 0h4M1 28.5h1m2 0h2m2 0h2m2 0h1m2 0h2m4 0h1m2 0h1m2 0h1m1 0h1m2 0h2m2 0h2M1 29.5h1m1 0h3m1 0h1m2 0h1m1 0h1m2 0h1m3 0h1m1 0h1m1 0h1m1 0h2m2 0h6M9 30.5h1m5 0h2m3 0h2m1 0h1m5 0h1m3 0h1m1 0h2M1 31.5h7m1 0h2m1 0h1m1 0h3m3 0h1m1 0h4m1 0h1m1 0h1m1 0h1m1 0h1m3 0h1M1 32.5h1m5 0h1m1 0h2m1 0h8m3 0h2m1 0h1m1 0h2m3 0h1M1 33.5h1m1 0h3m1 0h1m1 0h1m3 0h2m7 0h2m1 0h2m1 0h6M1 34.5h1m1 0h3m1 0h1m1 0h1m3 0h1m3 0h1m1 0h1m5 0h1m2 0h1m1 0h2m2 0h1M1 35.5h1m1 0h3m1 0h1m3 0h7m1 0h3m2 0h2m1 0h1m1 0h2m2 0h2m1 0h2M1 36.5h1m5 0h1m2 0h1m1 0h3m2 0h2m1 0h2m1 0h3m1 0h3m3 0h1m1 0h3M1 37.5h7m1 0h3m1 0h5m1 0h1m1 0h1m2 0h1m3 0h2m1 0h2m1 0h2m1 0h1"/></svg></div>
+      <div style="flex:1 1 180px;min-width:180px;">
+        <a href="https://m.booking.naver.com/booking/13/bizes/1400239/items/6703050" target="_blank" rel="noopener" data-event="leveltest_zoom_consult_click" style="display:block;text-align:center;background:var(--sage);color:#fff;font-weight:800;font-size:.92rem;padding:.9rem;border-radius:10px;text-decoration:none;">줌 상담 신청하기 →</a>
+        <p style="font-size:.72rem;color:var(--muted);line-height:1.6;margin-top:.5rem;">버튼을 누르거나, 휴대폰 카메라로 QR을 찍으면 네이버 예약 화면으로 바로 연결됩니다.</p>
+      </div>
+    </div>
   </div>
 
   <!-- 무료 레벨테스트 신청/공유 안내 (2026-07 개편) -->
@@ -611,15 +627,7 @@ const surveyDef = [
   {id:'studyRefusal',label:'"학원 가기 싫다", "공부하기 싫다" 같은 말을 한 적 있나요?',required:true,type:'radio',opts:['자주 해요','가끔 해요','거의 없어요','전혀 없어요']},
   {id:'engStudyFreq',label:'한 주에 몇 회 이상 영어 공부를 하고 있나요?',required:true,type:'radio',opts:['주 1회','주 2~3회','주 4~5회','매일','거의 안 함']},
   {id:'mainConcern',label:'아이 학습에 대해 가장 고민하고 있는 내용은?',required:true,type:'textarea',placeholder:'자유롭게 자세히 적어주세요...'},
-  // ===== 2026-06-01 추가: 신규 등록 onboarding intake (스케줄·결제·연락처) =====
-  {id:'engName',label:'학생 영문 이름',required:true,type:'text',placeholder:'예) Minseo Kim',note:'여권/공식 영문명이 없으면 한글 이름을 영문 스펠링으로 적어주세요. (필수)'},
-  {id:'parentPhone',label:'보호자 연락처',required:true,type:'text',placeholder:'예) 010-1234-5678'},
-  {id:'payerName',label:'수강권 결제자 성함',required:true,type:'text',placeholder:'결제하신 분 성함'},
-  {id:'ticketType',label:'구매하신 수강권',required:true,type:'radio',opts:['정규수업 3회권','정규수업 10회권','정규수업 20회권','정규수업 50회권']},
-  {id:'preferDays',label:'원하는 수업 요일 (가능한 요일 모두 선택)',required:true,type:'chips',opts:['월','화','수','목','금','토','일']},
-  {id:'weeklyCount',label:'주당 희망 수업 횟수 (회당 30분 기준)',required:true,type:'radio',opts:['주 2회','주 3회','주 4회','주 5회'],note:'헷지에듀 주당 수업은 기본 주2회 이상으로 구성하셔야 합니다. (주1회 불가) 단, 주3회 미만으로 구성 시 단어 어플과 듣기 음원이 제공되지 않습니다. 원활한 쓰기 학습을 위해 주3회 이상을 권장합니다.'},
-  {id:'preferTime',label:'원하는 수업 시간대',required:true,type:'text',placeholder:'예) 평일 오후 4시~5시 사이',note:'오전 8시부터 저녁 10시 수업 종료까지 구성 가능합니다. (마지막 수업 시작 가능 시간: 21:30)'},
-  {id:'firstClassWish',label:'첫 수업을 시작하고 싶은 주',required:true,type:'text',placeholder:'예) 6월 셋째 주부터',note:'첫 수업 시작 가능일은 상담·강사배정 완료 시점에 따라 정해집니다 — 월요일까지 완료 시 금주 금요일 / 화·수요일 완료 시 다음주 월요일 / 목요일 완료 시 다음주 수요일 / 금요일 완료 시 다음주 목요일부터 시작 가능합니다.'},
+  // 2026-11-11 사장님 지시: 신규 등록 정보 8개(영문 이름·보호자 연락처·결제자·수강권·요일·주당 횟수·시간대·첫 수업 주) 삭제. 전송 칸은 빈 값으로 유지(노션 연동 보존)
   {id:'referrer',label:'추천인 성함',required:false,type:'text',placeholder:'없으면 비워두셔도 됩니다',note:'추천해주신 분이 있을 경우에만 작성해주세요. (선택)'},
 ];
 
@@ -1010,6 +1018,8 @@ function buildResult() {
   document.getElementById('levelBadge').textContent=level;
   document.getElementById('resultTitle').textContent=ans.studentName+' 학생 진단 완료! 🎉';
   document.getElementById('resultDesc').textContent=desc;
+  const gradeLabel={'초1':'초등 1학년','초2':'초등 2학년','초3':'초등 3학년','초4':'초등 4학년','초5':'초등 5학년','초6':'초등 6학년'}[ans.grade]||ans.grade||'';
+  document.getElementById('resultMeta').textContent=[ans.studentName, gradeLabel, '응시일 '+new Date().toLocaleDateString('ko-KR',{timeZone:'Asia/Seoul'})].filter(Boolean).join(' · ');
 
   const areas=[
     {name:'단어',p:vP,s:vS,t:vT},{name:'문법',p:gP,s:gS,t:gT},
@@ -1022,10 +1032,17 @@ function buildResult() {
       <span class="area-score">${a.s}/${a.t} (${a.p}%)</span>
     </div>`).join('');
 
+  // 2026-11-11: 강점·보완 영역 요약 (85% 이상 = 강점, 65% 미만 = 보완 필요 — 레벨 기준과 같은 경계)
+  const strong=areas.filter(a=>a.p>=85).map(a=>a.name), weakA=areas.filter(a=>a.p<65).map(a=>a.name);
+  document.getElementById('areaSummary').innerHTML=
+    '<div>💪 <b>강점 영역</b> — '+(strong.length?strong.join(', '):'아직 뚜렷한 강점 영역이 없어요')+'</div>'+
+    '<div>🌱 <b>보완이 필요한 영역</b> — '+(weakA.length?weakA.join(', '):'없어요. 고르게 잘하고 있어요')+'</div>';
+
   document.getElementById('writingDetail').innerHTML=trResults.map((r,i)=>`
     <div class="writing-row">
       <div class="writing-en">${i+1}. ${r.e} <span class="writing-tag ${r.correct?'tag-ok':'tag-ng'}">${r.correct?'✓ 정답':'△ 재확인'}</span></div>
       <div class="writing-ans">내 답: ${r.answer}</div>
+      ${r.correct?'':'<div class="writing-ans" style="color:var(--sage);">예시 답안: '+(writingData[i]&&writingData[i].a[0]||'')+'</div>'}
       <div style="font-size:.72rem;color:var(--muted);">${r.t}</div>
     </div>`).join('');
 
