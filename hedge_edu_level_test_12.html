@@ -1237,7 +1237,7 @@ async function saveResultImage(){
     const cand=[...new Set([...el.querySelectorAll('*')].filter(n=>{const cs=getComputedStyle(n);return n.offsetHeight>0&&/^(block|flex|grid|list-item)$/.test(cs.display);})
       .map(n=>Math.round((n.getBoundingClientRect().bottom-top)*SC)))].filter(y=>y>0&&y<canvas.height).sort((x,y)=>x-y);
     const cuts=[0];
-    while(canvas.height-cuts[cuts.length-1]>MAXH){
+    while(canvas.height-cuts[cuts.length-1]>MAXH*1.25){   // 끝에 조금 남으면 따로 자르지 않고 마지막 장에 붙인다
       const st=cuts[cuts.length-1], lim=st+MAXH;
       const ok=cand.filter(y=>y>st+MAXH*0.45&&y<=lim);
       cuts.push(ok.length?ok[ok.length-1]+Math.round(6*SC):lim);
