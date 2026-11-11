@@ -619,11 +619,12 @@ function goScreen(n) {
 
 function updateProg(n) {
   const pw = document.getElementById('progWrap');
-  if(n===0){pw.classList.remove('show');return;}
+  // 2026-11-11: 진행 막대는 문제 푸는 5단계(단어~쓰기)만. 결과 화면의 '결과 (7/7) 100%'가 점수로 오해되던 것 + 설문이 첫 페이지로 옮겨져 5/7→7/7로 건너뛰던 것
+  if(n===0||n>=6){pw.classList.remove('show');return;}
   pw.classList.add('show');
-  const labels=['','단어','문법','읽기','듣기','쓰기','학습 설문','결과'];
-  const pct = Math.round((n/7)*100);
-  document.getElementById('progLabel').textContent=(labels[n]||'')+' ('+n+'/7)';
+  const labels=['','단어','문법','읽기','듣기','쓰기'];
+  const pct = Math.round((n/5)*100);
+  document.getElementById('progLabel').textContent=(labels[n]||'')+' ('+n+'/5)';
   document.getElementById('progBar').style.width=pct+'%';
   document.getElementById('progPct').textContent=pct+'%';
 }
