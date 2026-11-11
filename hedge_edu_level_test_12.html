@@ -145,7 +145,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
   @page { margin: 1cm; size: A4 portrait; }
 
   /* 불필요 요소 모두 숨기기 */
-  #printBtns, .hdr, .prog-wrap, .kakao-box, .cta-grid,
+  #printBtns, #saveHelp, #imgModal, .hdr, .prog-wrap, .kakao-box, .cta-grid,
   .divider, .status-box, .btn-row, .email-confirm, .chip,
   #s0, #s1, #s2, #s3, #s4, #s5, #s6 { display:none !important; }
 
@@ -197,7 +197,7 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
 <div class="prog-wrap" id="progWrap">
   <span class="prog-label" id="progLabel"></span>
   <div class="prog-outer"><div class="prog-inner" id="progBar" style="width:0%"></div></div>
-  <span class="prog-pct" id="progPct">0%</span>
+  <span class="prog-pct" id="progPct" style="display:none;"></span>
 </div>
 
 <main class="main">
@@ -346,13 +346,28 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
   <div class="chip">진단 완료 · 결과 리포트</div>
 
   <!-- 인쇄/PDF 버튼 -->
-  <div style="display:flex;gap:.625rem;margin-bottom:.75rem;flex-wrap:wrap;" id="printBtns">
-    <button onclick="window.print()" style="display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--sage);color:white;border:none;padding:.8rem 1.5rem;border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.875rem;font-weight:700;cursor:pointer;width:100%;">
-      🖨️ 결과지 인쇄 / PDF 저장
+  <div style="display:flex;flex-direction:column;gap:.5rem;margin-bottom:.75rem;" id="printBtns" data-noimg="1">
+    <button id="saveImgBtn" onclick="saveResultImage()" style="display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:var(--sage);color:white;border:none;padding:.85rem 1.5rem;border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.9rem;font-weight:800;cursor:pointer;width:100%;">
+      📷 결과지 이미지로 저장
+    </button>
+    <button onclick="window.print()" style="display:inline-flex;align-items:center;justify-content:center;gap:.5rem;background:#fff;color:var(--sage-d);border:1.5px solid var(--sage);padding:.75rem 1.5rem;border-radius:var(--rs);font-family:'Noto Sans KR',sans-serif;font-size:.85rem;font-weight:700;cursor:pointer;width:100%;">
+      🖨️ 인쇄 / PDF 저장 (컴퓨터)
     </button>
   </div>
-  <div style="background:var(--accent-l);border:1px solid #E8D4BC;border-radius:var(--rs);padding:.75rem 1rem;margin-bottom:1.25rem;font-size:.78rem;color:var(--mid);line-height:1.7;">
-    📌 <strong>PDF로 저장하는 방법:</strong> 위 버튼 클릭 → 인쇄 창에서 대상(프린터) 선택 → <strong>"PDF로 저장"</strong> 선택 → 저장
+  <div id="saveHelp" data-noimg="1" style="background:var(--accent-l);border:1px solid #E8D4BC;border-radius:var(--rs);padding:.75rem 1rem;margin-bottom:1.25rem;font-size:.78rem;color:var(--mid);line-height:1.7;">
+    📌 <strong>휴대폰</strong> — "결과지 이미지로 저장"을 누르면 결과지 사진이 만들어집니다. 저장 버튼을 누르거나, 사진을 길게 눌러 사진첩에 저장하세요.<br>
+    📌 <strong>컴퓨터</strong> — "인쇄 / PDF 저장" → 인쇄 창의 대상에서 <strong>"PDF로 저장"</strong>을 고르면 PDF 파일로 저장됩니다.
+  </div>
+  <div id="imgModal" data-noimg="1" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9999;overflow:auto;padding:16px;">
+    <div style="max-width:520px;margin:0 auto;background:#fff;border-radius:12px;padding:14px;">
+      <p style="font-size:.85rem;font-weight:800;color:var(--sage-d);margin:0 0 .4rem;">결과지 사진이 만들어졌어요</p>
+      <p style="font-size:.75rem;color:var(--mid);line-height:1.6;margin:0 0 .6rem;">아래 <b>저장하기</b>를 누르거나, 사진을 <b>길게 눌러</b> 사진첩에 저장하세요.</p>
+      <div style="display:flex;gap:.5rem;margin-bottom:.6rem;">
+        <button id="imgSaveBtn" style="flex:1;background:var(--sage);color:#fff;border:none;padding:.7rem;border-radius:8px;font-weight:800;font-size:.85rem;cursor:pointer;">저장하기</button>
+        <button onclick="document.getElementById('imgModal').style.display='none'" style="flex:0 0 auto;background:#fff;color:var(--mid);border:1px solid var(--border);padding:.7rem 1rem;border-radius:8px;font-weight:700;font-size:.85rem;cursor:pointer;">닫기</button>
+      </div>
+      <img id="imgPreview" alt="결과지" style="width:100%;height:auto;border:1px solid var(--border);border-radius:8px;display:block;">
+    </div>
   </div>
 
   <div class="result-hero">
@@ -360,6 +375,10 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
     <h2 class="result-title" id="resultTitle">진단 완료!</h2>
     <p class="result-desc" id="resultDesc"></p>
     <p id="resultMeta" style="font-size:.75rem;color:var(--muted);margin-top:.5rem;"></p>
+  </div>
+  <div class="detail-card">
+    <div class="detail-title">🪜 진단 단계 (총 4단계)</div>
+    <div id="levelScale"></div>
   </div>
   <div class="radar-wrap">
     <div class="radar-title">📊 5개 영역 종합 분석</div>
@@ -381,15 +400,15 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--cream);color:var(--d
     <div id="areaAnalysis"></div>
   </div>
 
-  <div class="kakao-box">
+  <div class="kakao-box" data-noimg="1">
     <div class="kakao-title">💛 헷지에듀 카카오 채널</div>
     <div class="kakao-desc">헷지에듀의 소식과 이벤트 혜택을 받아보시려면<br>카카오 채널을 추가해 주세요.</div>
     <button class="kakao-btn" onclick="window.open('http://pf.kakao.com/_UymBn','_blank')">카카오 채널 추가하기 →</button>
   </div>
   <div class="status-box" id="statusBox" style="display:none;"></div>
-  <div class="divider"></div>
-  <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:1rem;">더 알아보기</p>
-  <div class="cta-grid">
+  <div class="divider" data-noimg="1"></div>
+  <p data-noimg="1" style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:1rem;">더 알아보기</p>
+  <div class="cta-grid" data-noimg="1">
     <a class="cta-card" href="https://map.naver.com/p/entry/place/1256593955?placePath=/ticket" target="_blank"><div class="cc-icon">📅</div><div class="cc-title">1:1 상담 예약</div><div class="cc-desc">온라인/오프라인</div></a>
     <a class="cta-card" href="https://www.youtube.com/@hedgehogmykid" target="_blank"><div class="cc-icon">🎬</div><div class="cc-title">유튜브 채널</div><div class="cc-desc">영어 교육 콘텐츠</div></a>
     <a class="cta-card" href="https://blog.naver.com/herissons81" target="_blank"><div class="cc-icon">✍️</div><div class="cc-title">블로그</div><div class="cc-desc">학부모 영어 칼럼</div></a>
@@ -624,9 +643,9 @@ function updateProg(n) {
   pw.classList.add('show');
   const labels=['','단어','문법','읽기','듣기','쓰기'];
   const pct = Math.round((n/5)*100);
-  document.getElementById('progLabel').textContent=(labels[n]||'')+' ('+n+'/5)';
+  document.getElementById('progLabel').textContent=(labels[n]||'')+' · '+n+'/5단계';
   document.getElementById('progBar').style.width=pct+'%';
-  document.getElementById('progPct').textContent=pct+'%';
+  document.getElementById('progPct').textContent='';
 }
 
 // ===== 학년 선택 =====
@@ -1008,6 +1027,15 @@ function buildResult() {
   else if(total>=40){level='기초 단계';desc='영어의 기초가 시작되고 있어요. 체계적인 학습으로 더 빠르게 성장할 수 있습니다.';}
   else{level='입문 단계';desc='영어 학습의 시작 단계입니다. 헷지에듀 Level 1부터 차근차근 익혀나가는 과정을 권장합니다.';}
   ans.level=level;
+  // 2026-11-11: 4단계 중 어디인지 — 5개 영역 평균 점수(총점) 기준
+  const LV=[{n:'입문 단계',r:'0~39점'},{n:'기초 단계',r:'40~64점'},{n:'초급 단계',r:'65~84점'},{n:'심화 단계',r:'85~100점'}];
+  const cur=LV.findIndex(x=>x.n===level);
+  document.getElementById('levelScale').innerHTML=
+    '<div style="font-size:.8rem;color:var(--mid);margin-bottom:.6rem;">5개 영역 평균 점수(총점) <b style="color:var(--dark)">'+total+'점</b> → 4단계 중 <b style="color:var(--sage-d)">'+(cur+1)+'단계 '+level+'</b></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.35rem;">'+LV.map((x,i)=>'<div style="text-align:center;border-radius:8px;padding:.5rem .2rem;'+(i===cur?'border:2px solid var(--sage);background:var(--sage-l)':'border:1px solid var(--border);background:#fff')+';">'+
+      '<div style="font-size:.68rem;color:var(--muted);">'+(i+1)+'단계</div><div style="font-size:.8rem;font-weight:800;color:'+(i===cur?'var(--sage-d)':'var(--mid)')+';">'+x.n.replace(' 단계','')+'</div>'+
+      '<div style="font-size:.66rem;color:var(--muted);">'+x.r+'</div>'+(i===cur?'<div style="font-size:.66rem;font-weight:700;color:var(--sage-d);margin-top:.15rem;">◀ 현재</div>':'')+'</div>').join('')+'</div>'+
+    '<div style="font-size:.72rem;color:var(--muted);margin-top:.5rem;line-height:1.6;">입문 → 기초 → 초급 → 심화 순으로 올라갑니다.</div>';
 
   document.getElementById('levelBadge').textContent=level;
   document.getElementById('resultTitle').textContent=ans.studentName+' 학생 진단 완료! 🎉';
@@ -1054,7 +1082,7 @@ function buildResult() {
 
   document.getElementById('writingDetail').innerHTML=trResults.map((r,i)=>`
     <div class="writing-row">
-      <div class="writing-en">${i+1}. ${r.e} <span class="writing-tag ${r.correct?'tag-ok':'tag-ng'}">${r.correct?'✓ 정답':'△ 재확인'}</span></div>
+      <div class="writing-en">${i+1}. ${r.e} <span class="writing-tag ${r.correct?'tag-ok':'tag-ng'}">${r.correct?'✓ 맞음':'✗ 틀림'}</span></div>
       <div class="writing-ans">내 답: ${r.answer}</div>
       ${r.correct?'':'<div class="writing-ans" style="color:var(--sage);">예시 답안: '+(writingData[i]&&writingData[i].a[0]||'')+'</div>'}
       <div style="font-size:.72rem;color:var(--muted);">${r.t}</div>
@@ -1160,6 +1188,35 @@ async function sendData() {
   } catch (e) {
     console.error('데이터 전송 실패:', e);
   }
+}
+
+// 2026-11-11: 결과지 이미지 저장 — 휴대폰(카카오톡 안 브라우저 포함)에서는 인쇄가 안 되는 경우가 많아 사진으로 저장
+function _loadH2C(){
+  return new Promise((res,rej)=>{ if(window.html2canvas) return res(window.html2canvas);
+    const sc=document.createElement('script'); sc.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+    sc.onload=()=>res(window.html2canvas); sc.onerror=()=>rej(new Error('load')); document.head.appendChild(sc); });
+}
+async function saveResultImage(){
+  const btn=document.getElementById('saveImgBtn'); const old=btn.innerHTML; btn.disabled=true; btn.innerHTML='⏳ 결과지 사진 만드는 중…';
+  try{
+    const h2c=await _loadH2C();
+    const el=document.getElementById('s7');
+    const canvas=await h2c(el,{scale:Math.min(2,(window.devicePixelRatio||1)+0.5),backgroundColor:'#F7F4EE',useCORS:true,
+      ignoreElements:n=>!!(n.getAttribute&&n.getAttribute('data-noimg'))});
+    const url=canvas.toDataURL('image/png');
+    const name='헷지에듀_레벨테스트_'+(ans.studentName||'결과')+'.png';
+    document.getElementById('imgPreview').src=url;
+    document.getElementById('imgSaveBtn').onclick=async()=>{
+      try{
+        const blob=await (await fetch(url)).blob(); const file=new File([blob],name,{type:'image/png'});
+        if(navigator.canShare&&navigator.canShare({files:[file]})){ await navigator.share({files:[file],title:'레벨테스트 결과지'}); return; }
+      }catch(e){ if(e&&e.name==='AbortError') return; }
+      const a=document.createElement('a'); a.href=url; a.download=name; document.body.appendChild(a); a.click(); a.remove();
+    };
+    document.getElementById('imgModal').style.display='block';
+  }catch(e){
+    alert('사진을 만들지 못했어요. 화면을 캡처(스크린샷)해서 저장해 주세요.');
+  }finally{ btn.disabled=false; btn.innerHTML=old; }
 }
 
 function savePDF() {
