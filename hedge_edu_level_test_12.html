@@ -1065,7 +1065,7 @@ function buildResult() {
 
   // 2026-11-11: 영역별 분석 — 무엇을 봤는지 · 결과 한 줄 · 틀린 문항과 정답
   const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const verdict=p=>p>=90?'잘 이해하고 있어요.':p>=75?'기본은 갖췄어요.':'보완이 필요해요.';
+  const verdict=p=>p>=90?'잘 이해하고 있어요.':p>=75?'조금 더 연습이 필요해요.':'보완이 필요해요.';
   const tagsOf=arr=>[...new Set((arr||[]).filter(x=>!x.ok&&x.tag).map(x=>x.tag))];
   const wTags=[...new Set(trResults.filter(r=>!r.correct).map(r=>r.t))];
   // 2026-11-11: 문제·정답을 나열하지 않고, 결과로 파악한 '아는 것 / 더 키울 것'만 쓴다
