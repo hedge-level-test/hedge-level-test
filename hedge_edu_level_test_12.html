@@ -1086,7 +1086,7 @@ function buildResult() {
   // 종합: 진단 단계 + 그 단계의 학년 범위를 총점으로 등분 (입문 0~24 초1·25~49 초2 / 기초 50~66 초3·67~83 초4·84~ 초5 / 초급 84~89 초6·90~94 중1 / 심화 중2 이상)
   const overallLabel=p=>level==='심화 단계'?'중학교 2학년 이상 수준':level==='초급 단계'?(p>=90?'중학교 1학년 수준':'초등 6학년 수준'):level==='기초 단계'?(p>=84?'초등 5학년 수준':p>=67?'초등 4학년 수준':'초등 3학년 수준'):(p>=25?'초등 2학년 수준':'초등 1학년 수준');
   const blocks=[
-    {n:'단어',p:vP,s:vS,t:vT,what:(gNo?gNo+'학년 ':'')+'평균 수준의 영어 단어 뜻을 알고 있는지 봤어요.',
+    {n:'단어',p:vP,s:vS,t:vT,what:(gNo?gNo+'학년 ':'')+'평균 수준의 영어 단어'+((ans.vocabDetail||[]).length?'(예: '+(ans.vocabDetail||[]).slice(0,4).map(x=>esc(x.w)).join(', ')+')':'')+' 뜻을 알고 있는지 봤어요.',
       body:'<div style="margin-top:.3rem;">'+(vMiss===0?'✓ '+(gNo?gNo+'학년':'학년')+' 수준 단어를 모두 알고 있어요.':vS>=vT-1?'✓ '+(gNo?gNo+'학년':'학년')+' 수준 단어를 대부분 알고 있어요.':vS>=Math.ceil(vT/2)?'△ '+(gNo?gNo+'학년':'학년')+' 수준 단어 중 절반 정도를 알고 있어요. 단어량을 더 늘려야 해요.':'△ '+(gNo?gNo+'학년':'학년')+' 수준 단어를 아직 많이 모르고 있어요. 아래 학년 단어부터 차근차근 익혀야 해요.')+'</div>'},
     {n:'문법',p:gP,s:gS,t:gT,what:'동사의 시제(현재·과거·진행·미래)와 조동사·의문문 형태를 고를 수 있는지 봤어요.',
       body:two([],g=>'',tagsOf(ans.grammarDetail),g=>'아직 헷갈려하는 문법: <b>'+g.join(', ')+'</b>')},
@@ -1127,12 +1127,13 @@ function buildResult() {
           data:vals,
           backgroundColor:'rgba(107,143,113,0.38)',
           borderColor:'#4A6B4F',borderWidth:3,
-          pointBackgroundColor:ptColors,pointBorderColor:'#fff',pointBorderWidth:2,
-          pointRadius:7,pointHoverRadius:9,
+          pointBackgroundColor:ptColors,pointBorderColor:'#fff',pointBorderWidth:1.5,
+          pointRadius:3.5,pointHoverRadius:5,
         }]
       },
       options:{
         animation:false,
+        devicePixelRatio:Math.max(3,window.devicePixelRatio||1),   // 2026-11-11: 결과지 사진·인쇄에서도 선명하게(화면 해상도로만 그리면 사진에서 뭉개짐)
         scales:{r:{beginAtZero:true,min:0,max:100,ticks:{stepSize:25,font:{size:10},color:'#8C8880',backdropColor:'rgba(0,0,0,0)'},
           pointLabels:{font:{size:12,weight:'bold',family:'Noto Sans KR'},color:(c)=>ptColors[c.index]||'#1C1A17'},
           grid:{color:'rgba(0,0,0,0.12)'},angleLines:{color:'rgba(0,0,0,0.12)'},}},
@@ -1225,7 +1226,7 @@ async function saveResultImage(){
   try{
     const h2c=await _loadH2C();
     const el=document.getElementById('s7');
-    const canvas=await h2c(el,{scale:Math.min(2,(window.devicePixelRatio||1)+0.5),backgroundColor:'#F7F4EE',useCORS:true,
+    const canvas=await h2c(el,{scale:3,backgroundColor:'#F7F4EE',useCORS:true,
       ignoreElements:n=>!!(n.getAttribute&&n.getAttribute('data-noimg'))});
     const url=canvas.toDataURL('image/png');
     const name='헷지에듀_레벨테스트_'+(ans.studentName||'결과')+'.png';
