@@ -1229,25 +1229,23 @@ async function saveResultImage(){
   const hidden=[...el.querySelectorAll('[data-noimg]:not(#imgModal)')].map(n=>{const d=n.style.display;n.style.display='none';return [n,d];});
   try{
     const h2c=await _loadH2C();
-    const SC=3, MAXH=3600;   // 한 장 세로 최대 3600px(화면 1200px) — 휴대폰 사진첩·메신저가 줄이지 않는 크기
+    const SC=3;
     // 2026-11-11: 복사본에서 화면 등장 효과(투명→진하게 0.4초)가 다시 시작돼 반투명하게 찍히던 것 → 효과 끄고 찍는다
     const canvas=await h2c(el,{scale:SC,backgroundColor:'#F7F4EE',useCORS:true,onclone:doc=>{const st=doc.createElement('style');st.textContent='*,*::before,*::after{animation:none!important;transition:none!important}#s7{opacity:1!important;transform:none!important}';doc.head.appendChild(st);}});
     // 자를 자리: 글자가 끊기지 않게 카드·문단(블록) 아래 경계에서
+    // 2026-11-11 사장님 지시: 자르는 자리 = 영역 경계. ①처음~영역별 점수 ②쓰기 번역 상세 결과 ③영역별 분석 ④카카오 채널부터 끝까지
     const top=el.getBoundingClientRect().top;
-    const cand=[...new Set([...el.querySelectorAll('*')].filter(n=>{const cs=getComputedStyle(n);return n.offsetHeight>0&&/^(block|flex|grid|list-item)$/.test(cs.display);})
-      .map(n=>Math.round((n.getBoundingClientRect().bottom-top)*SC)))].filter(y=>y>0&&y<canvas.height).sort((x,y)=>x-y);
+    const Y=n=>n?Math.round((n.getBoundingClientRect().top-top)*SC):null;
+    const marks=[Y(document.getElementById('writingDetail').closest('.detail-card')),Y(document.getElementById('areaAnalysis').closest('.detail-card')),Y(el.querySelector('.kakao-box'))];
     const cuts=[0];
-    while(canvas.height-cuts[cuts.length-1]>MAXH*1.25){   // 끝에 조금 남으면 따로 자르지 않고 마지막 장에 붙인다
-      const st=cuts[cuts.length-1], lim=st+MAXH;
-      const ok=cand.filter(y=>y>st+MAXH*0.45&&y<=lim);
-      cuts.push(ok.length?ok[ok.length-1]+Math.round(6*SC):lim);
-    }
+    marks.forEach(y=>{ if(y!=null&&y>cuts[cuts.length-1]+20*SC&&y<canvas.height-20*SC) cuts.push(y); });
     cuts.push(canvas.height);
-    const parts=[];
+    const parts=[], PAD=Math.round(16*SC);   // 2장부터는 위에 여백
     for(let i=0;i<cuts.length-1;i++){
       const h=cuts[i+1]-cuts[i]; if(h<10) continue;
-      const c=document.createElement('canvas'); c.width=canvas.width; c.height=h;
-      const x=c.getContext('2d'); x.fillStyle='#F7F4EE'; x.fillRect(0,0,c.width,h); x.drawImage(canvas,0,cuts[i],canvas.width,h,0,0,canvas.width,h);
+      const pad=i===0?0:PAD;
+      const c=document.createElement('canvas'); c.width=canvas.width; c.height=h+pad;
+      const x=c.getContext('2d'); x.fillStyle='#F7F4EE'; x.fillRect(0,0,c.width,c.height); x.drawImage(canvas,0,cuts[i],canvas.width,h,0,pad,canvas.width,h);
       parts.push(c.toDataURL('image/png'));
     }
     const base='헷지에듀_레벨테스트_'+(ans.studentName||'결과');
