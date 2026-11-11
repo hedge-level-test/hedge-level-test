@@ -1046,29 +1046,36 @@ function buildResult() {
       <div style="font-size:.72rem;color:var(--muted);">${r.t}</div>
     </div>`).join('');
 
+  // 2026-11-11: 그래프 — 진한 색, 영역마다 다른 색 점, 영역 이름 옆 점수(%), 애니메이션 끔(캡처·인쇄 때 빈 그래프로 찍히던 것)
   setTimeout(()=>{
-    const ctx=document.getElementById('radarChart').getContext('2d');
-    new Chart(ctx,{
+    const cv=document.getElementById('radarChart');
+    const old=Chart.getChart(cv); if(old) old.destroy();
+    const vals=[vP,gP,rP,lP,wP], names=['단어','문법','읽기','듣기','쓰기'];
+    const ptColors=['#E07A5F','#3D85C6','#6B8F71','#9B59B6','#F2A900'];
+    window._radar=new Chart(cv.getContext('2d'),{
       type:'radar',
       data:{
-        labels:['단어','문법','읽기','듣기','쓰기'],
+        labels:names.map((n,i)=>n+' '+vals[i]+'%'),
         datasets:[{
           label:ans.studentName+' 학생',
-          data:[vP,gP,rP,lP,wP],
-          backgroundColor:'rgba(107,143,113,0.2)',
-          borderColor:'#6B8F71',borderWidth:2,
-          pointBackgroundColor:'#6B8F71',pointRadius:5,
+          data:vals,
+          backgroundColor:'rgba(107,143,113,0.38)',
+          borderColor:'#4A6B4F',borderWidth:3,
+          pointBackgroundColor:ptColors,pointBorderColor:'#fff',pointBorderWidth:2,
+          pointRadius:7,pointHoverRadius:9,
         }]
       },
       options:{
-        scales:{r:{beginAtZero:true,max:100,ticks:{stepSize:25,font:{size:10},color:'#8C8880'},
-          pointLabels:{font:{size:12,family:'Noto Sans KR'},color:'#1C1A17'},
-          grid:{color:'rgba(0,0,0,0.08)'},angleLines:{color:'rgba(0,0,0,0.08)'},}},
+        animation:false,
+        scales:{r:{beginAtZero:true,min:0,max:100,ticks:{stepSize:25,font:{size:10},color:'#8C8880',backdropColor:'rgba(0,0,0,0)'},
+          pointLabels:{font:{size:12,weight:'bold',family:'Noto Sans KR'},color:(c)=>ptColors[c.index]||'#1C1A17'},
+          grid:{color:'rgba(0,0,0,0.12)'},angleLines:{color:'rgba(0,0,0,0.12)'},}},
         plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>`${ctx.raw}%`}}}
       }
     });
   },300);
 }
+window.addEventListener('beforeprint',()=>{ try{ if(window._radar) window._radar.resize(); }catch(e){} });
 
 // ===== 데이터 전송 =====
 async function sendData() {
