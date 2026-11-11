@@ -1067,7 +1067,7 @@ function buildResult() {
   const tagsOf=arr=>[...new Set((arr||[]).filter(x=>!x.ok&&x.tag).map(x=>x.tag))];
   const wTags=[...new Set(trResults.filter(r=>!r.correct).map(r=>r.t))];
   const blocks=[
-    {n:'단어',p:vP,s:vS,t:vT,what:'학년 수준의 영어 단어 뜻을 알고 있는지 봤어요.',body:wrongList(ans.vocabDetail,x=>'<b>'+esc(x.w)+'</b> — 정답: '+esc(x.ans)+(x.pick?' <span style="color:var(--muted)">(고른 답: '+esc(x.pick)+')</span>':' <span style="color:var(--muted)">(답 안 함)</span>'))},
+    {n:'단어',p:vP,s:vS,t:vT,what:((String(ans.grade||'').match(/[1-6]/)||[''])[0]?(String(ans.grade).match(/[1-6]/)[0]+'학년 '):'')+'평균 수준의 영어 단어 뜻을 알고 있는지 봤어요. (단, 객관식 문항이라 정확하지 않을 수 있습니다)',body:wrongList(ans.vocabDetail,x=>'<b>'+esc(x.w)+'</b> — 정답: '+esc(x.ans)+(x.pick?' <span style="color:var(--muted)">(고른 답: '+esc(x.pick)+')</span>':' <span style="color:var(--muted)">(답 안 함)</span>'))},
     {n:'문법',p:gP,s:gS,t:gT,what:'동사의 시제(현재·과거·진행·미래)와 조동사·의문문 형태를 고를 수 있는지 봤어요.',body:(tagsOf(ans.grammarDetail).length?'<div style="margin-top:.3rem;">더 연습할 문법: <b>'+tagsOf(ans.grammarDetail).join(', ')+'</b></div>':'')+wrongList(ans.grammarDetail,x=>esc(x.q)+' → 정답: <b>'+esc(x.ans)+'</b>')},
     {n:'읽기',p:rP,s:rS,t:rT,what:'짧은 이야기를 읽고 내용 일치·세부 내용·인물의 성격을 파악하는지 봤어요.',body:(tagsOf(ans.readingDetail).length?'<div style="margin-top:.3rem;">놓친 문항 유형: <b>'+tagsOf(ans.readingDetail).join(', ')+'</b></div>':'')+wrongList(ans.readingDetail,x=>esc(x.q)+' → 정답: '+esc(x.ans))},
     {n:'듣기',p:lP,s:lS,t:lT,what:'영어 문장을 듣고 언제·무엇을 하는지(시제와 내용)를 알아듣는지 봤어요.',body:(tagsOf(ans.listeningDetail).length?'<div style="margin-top:.3rem;">놓친 문장의 시제: <b>'+tagsOf(ans.listeningDetail).join(', ')+'</b></div>':'')+wrongList(ans.listeningDetail,x=>'"'+esc(x.s)+'" — '+esc(x.q)+' 정답: '+esc(x.ans))},
