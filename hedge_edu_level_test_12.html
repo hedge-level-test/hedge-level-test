@@ -1062,23 +1062,42 @@ function buildResult() {
 
   // 2026-11-11: 영역별 분석 — 무엇을 봤는지 · 결과 한 줄 · 틀린 문항과 정답
   const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const verdict=p=>p>=85?'잘 이해하고 있어요.':p>=65?'기본은 갖췄어요. 아래 틀린 문항 유형을 한 번 더 보면 좋아요.':'이 영역은 보완이 필요해요. 아래 틀린 문항부터 다시 익혀 주세요.';
-  const wrongList=(arr,fmt)=>{const w=(arr||[]).filter(x=>!x.ok);return w.length?'<ul style="margin:.35rem 0 0;padding-left:1.1rem;">'+w.map(x=>'<li>'+fmt(x)+'</li>').join('')+'</ul>':'<div style="margin-top:.3rem;color:var(--sage);">✓ 모든 문항을 맞혔어요.</div>';};
+  const verdict=p=>p>=85?'잘 이해하고 있어요.':p>=65?'기본은 갖췄어요.':'보완이 필요해요.';
   const tagsOf=arr=>[...new Set((arr||[]).filter(x=>!x.ok&&x.tag).map(x=>x.tag))];
   const wTags=[...new Set(trResults.filter(r=>!r.correct).map(r=>r.t))];
+  // 2026-11-11: 문제·정답을 나열하지 않고, 결과로 파악한 '아는 것 / 더 키울 것'만 쓴다
+  const gNo=(String(ans.grade||'').match(/[1-6]/)||[''])[0];
+  const okTags=arr=>[...new Set((arr||[]).filter(x=>x.ok&&x.tag).map(x=>x.tag))].filter(t=>!tagsOf(arr).includes(t));
+  const two=(good,goodTxt,bad,badTxt)=>
+    (good.length?'<div style="margin-top:.3rem;">✓ '+goodTxt(good)+'</div>':'')+
+    (bad.length?'<div style="margin-top:.15rem;">△ '+badTxt(bad)+'</div>':'');
+  // 읽기: 문항 유형 → 읽기 힘
+  const rSkill={'내용 일치':'글 전체 내용을 기억하고 맞는지 판단하는 힘','세부 내용':'글에 나온 사실(무엇·어디·어떤 상태)을 찾아내는 힘','추론':'글에 직접 쓰지 않은 인물의 성격을 미루어 아는 힘'};
+  const rKey=t=>/^추론/.test(t)?'추론':/^세부/.test(t)?'세부 내용':'내용 일치';
+  const rBad=[...new Set(tagsOf(ans.readingDetail).map(rKey))], rGood=[...new Set((ans.readingDetail||[]).filter(x=>x.ok&&x.tag).map(x=>rKey(x.tag)))].filter(k=>!rBad.includes(k));
+  const vMiss=(ans.vocabDetail||[]).filter(x=>!x.ok).length;
+  // 점수 → 초등 학년·학기 환산: 초3 1학기(0)~초6 2학기(7) 8칸에 고르게 대응 (0점 = 초3 1학기 수준에 못 미침, 100점 = 초6 2학기 이상)
+  const semIdx=p=>Math.max(0,Math.min(7,Math.round(p/100*7)));
+  const semLabel=p=>p<=0?'초등 3학년 1학기 수준에 아직 못 미치는':p>=100?'초등 6학년 2학기 이상':'초등 '+(3+Math.floor(semIdx(p)/2))+'학년 '+(semIdx(p)%2+1)+'학기';
+  const overallLabel=p=>p<=0?'초등 3학년 수준에 아직 못 미치는 것':p>=100?'초등 6학년 이상 수준':'초등 '+(3+Math.floor(semIdx(p)/2))+'학년 수준';
   const blocks=[
-    {n:'단어',p:vP,s:vS,t:vT,what:((String(ans.grade||'').match(/[1-6]/)||[''])[0]?(String(ans.grade).match(/[1-6]/)[0]+'학년 '):'')+'평균 수준의 영어 단어 뜻을 알고 있는지 봤어요. (단, 객관식 문항이라 정확하지 않을 수 있습니다)',body:wrongList(ans.vocabDetail,x=>'<b>'+esc(x.w)+'</b> — 정답: '+esc(x.ans)+(x.pick?' <span style="color:var(--muted)">(고른 답: '+esc(x.pick)+')</span>':' <span style="color:var(--muted)">(답 안 함)</span>'))},
-    {n:'문법',p:gP,s:gS,t:gT,what:'동사의 시제(현재·과거·진행·미래)와 조동사·의문문 형태를 고를 수 있는지 봤어요.',body:(tagsOf(ans.grammarDetail).length?'<div style="margin-top:.3rem;">더 연습할 문법: <b>'+tagsOf(ans.grammarDetail).join(', ')+'</b></div>':'')+wrongList(ans.grammarDetail,x=>esc(x.q)+' → 정답: <b>'+esc(x.ans)+'</b>')},
-    {n:'읽기',p:rP,s:rS,t:rT,what:'짧은 이야기를 읽고 내용 일치·세부 내용·인물의 성격을 파악하는지 봤어요.',body:(tagsOf(ans.readingDetail).length?'<div style="margin-top:.3rem;">놓친 문항 유형: <b>'+tagsOf(ans.readingDetail).join(', ')+'</b></div>':'')+wrongList(ans.readingDetail,x=>esc(x.q)+' → 정답: '+esc(x.ans))},
-    {n:'듣기',p:lP,s:lS,t:lT,what:'영어 문장을 듣고 언제·무엇을 하는지(시제와 내용)를 알아듣는지 봤어요.',body:(tagsOf(ans.listeningDetail).length?'<div style="margin-top:.3rem;">놓친 문장의 시제: <b>'+tagsOf(ans.listeningDetail).join(', ')+'</b></div>':'')+wrongList(ans.listeningDetail,x=>'"'+esc(x.s)+'" — '+esc(x.q)+' 정답: '+esc(x.ans))},
-    {n:'쓰기',p:wP,s:wS,t:wT,what:'같은 동사(cook)로 시제·조동사만 바꾼 영어 문장을 우리말 어미로 정확히 옮기는지 봤어요.',body:wTags.length?'<div style="margin-top:.3rem;">다시 확인할 시제·표현: <b>'+wTags.join(', ')+'</b> <span style="color:var(--muted)">(문항별 예시 답안은 아래 쓰기 상세 결과)</span></div>':'<div style="margin-top:.3rem;color:var(--sage);">✓ 모든 문장을 정확히 옮겼어요.</div>'},
+    {n:'단어',p:vP,s:vS,t:vT,what:(gNo?gNo+'학년 ':'')+'평균 수준의 영어 단어 뜻을 알고 있는지 봤어요. (단, 객관식 문항이라 정확하지 않을 수 있습니다)',
+      body:'<div style="margin-top:.3rem;">'+(vMiss===0?'✓ '+(gNo?gNo+'학년':'학년')+' 수준 단어를 모두 알고 있어요.':vS>=vT-1?'✓ '+(gNo?gNo+'학년':'학년')+' 수준 단어를 대부분 알고 있어요.':vS>=Math.ceil(vT/2)?'△ '+(gNo?gNo+'학년':'학년')+' 수준 단어 중 절반 정도를 알고 있어요. 단어량을 더 늘려야 해요.':'△ '+(gNo?gNo+'학년':'학년')+' 수준 단어를 아직 많이 모르고 있어요. 아래 학년 단어부터 차근차근 익혀야 해요.')+'</div>'},
+    {n:'문법',p:gP,s:gS,t:gT,what:'동사의 시제(현재·과거·진행·미래)와 조동사·의문문 형태를 고를 수 있는지 봤어요.',
+      body:two(okTags(ans.grammarDetail),g=>'잘 알고 있는 문법: <b>'+g.join(', ')+'</b>',tagsOf(ans.grammarDetail),g=>'아직 헷갈려하는 문법: <b>'+g.join(', ')+'</b>')},
+    {n:'읽기',p:rP,s:rS,t:rT,what:'짧은 이야기를 읽고 내용 일치·세부 내용·인물의 성격을 파악하는지 봤어요.',
+      body:two(rGood,g=>'잘하는 것: '+g.map(k=>rSkill[k]).join(', '),rBad,g=>'더 키워야 할 것: '+g.map(k=>rSkill[k]).join(', '))},
+    {n:'듣기',p:lP,s:lS,t:lT,what:'영어 문장을 듣고 언제·무엇을 하는지(시제와 내용)를 알아듣는지 봤어요.',
+      body:(tagsOf(ans.listeningDetail).length?'<div style="margin-top:.3rem;">놓친 문장의 시제: <b>'+tagsOf(ans.listeningDetail).join(', ')+'</b></div>':'')+
+        '<div style="margin-top:.3rem;">'+(gNo?gNo+'학년인 ':'')+esc(ans.studentName||'')+' 학생의 듣기 수준은 초등 평균 수준에서 <b>'+semLabel(lP)+'</b> 정도의 결과가 나왔어요.</div>'},
   ];
   document.getElementById('areaAnalysis').innerHTML=blocks.map(b=>
     '<div style="padding:.75rem 0;border-bottom:1px solid var(--border);font-size:.8rem;line-height:1.7;color:var(--mid);">'+
       '<div style="display:flex;justify-content:space-between;gap:.5rem;"><b style="color:var(--dark);font-size:.88rem;">'+b.n+'</b><span style="font-weight:700;color:'+(b.p>=85?'var(--sage)':b.p>=65?'var(--accent)':'var(--err)')+'">'+b.s+'/'+b.t+' ('+b.p+'%)</span></div>'+
       '<div style="color:var(--muted);font-size:.74rem;">'+b.what+'</div>'+
       '<div style="margin-top:.25rem;">'+verdict(b.p)+'</div>'+b.body+
-    '</div>').join('');
+    '</div>').join('')+
+    '<div style="margin-top:.75rem;padding:.75rem .9rem;background:var(--sage-l);border-radius:8px;font-size:.84rem;line-height:1.7;color:var(--dark);">📌 쓰기, 단어, 문법, 읽기, 듣기 종합 평가 결과 <b>'+overallLabel(total)+'</b>으로 평가됩니다.</div>';
 
   document.getElementById('writingDetail').innerHTML=trResults.map((r,i)=>`
     <div class="writing-row">
